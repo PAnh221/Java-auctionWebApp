@@ -8,16 +8,16 @@
     Categories
   </h4>
   <div class="list-group list-group-flush">
-<%--    <c:forEach items="${categoriesWithDetails}" var="c">--%>
-<%--      <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.catID}" class="list-group-item list-group-item-action">--%>
-<%--        <i class="fa fa-caret-right" aria-hidden="true"></i>--%>
-<%--        ${c.catName}--%>
-<%--      </a>--%>
-<%--    </c:forEach>--%>
+    <c:forEach items="${categoriesWithDetails}" var="c">
+      <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.catID}" class="list-group-item list-group-item-action">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        ${c.catName}
+      </a>
+    </c:forEach>
 
-    <%--<a href="#" class="list-group-item list-group-item-action active" aria-current="true">--%>
-    <%--  The current link item--%>
-    <%--</a>--%>
+    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+      The current link item
+    </a>
   </div>
 </div>
 
