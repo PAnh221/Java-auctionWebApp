@@ -16,7 +16,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
-            path = "/Index";
+            path = "/Product/Index";
         }
 
         switch (path) {
@@ -25,6 +25,9 @@ public class AdminServlet extends HttpServlet {
                 // System.out.println(session.getAttribute("auth"));
                 // System.out.println(session.getAttribute("authUser"));
 
+                ServletUtils.forward("/views/vwAdmin/login.jsp", request, response);
+                break;
+            case "/Product/Detail":
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
                 break;
             case "/Product/Add":
@@ -41,6 +44,25 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getPathInfo();
+        if (path == null || path.equals("/")) {
+            path = "/Product/Index";
+        }
 
+        switch (path) {
+            case "/Product/Login":
+                String username = request.getParameter("user");
+                String pass = request.getParameter("pass");
+                if(username.equals("admin") & pass.equals("admin"))
+                {
+                    ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                }
+                ServletUtils.redirect("/Admin",request,response);
+                break;
+
+            default:
+                ServletUtils.forward("/views/404.jsp", request, response);
+                break;
+        }
     }
 }

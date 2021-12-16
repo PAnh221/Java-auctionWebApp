@@ -125,7 +125,7 @@
                             <button type="submit" class="btn btn-outline-success" style="padding: 5px 40px; font-size: 20px">
                                 Thêm sản phẩm
                             </button>
-                            <a href="${pageContext.request.contextPath}/Admin/Product/Index" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px; margin-left: 10px;">
+                            <a href="${pageContext.request.contextPath}/Admin/Product/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px; margin-left: 10px;">
                                 Danh sách sản phẩm
                             </a>
                         </div>

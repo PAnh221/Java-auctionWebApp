@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="collapse" id="collapseExample">
-                        <a href="#">Log out</a>
+                        <a href="${pageContext.request.contextPath}/Admin/Product/Index">Log out</a>
                     </div>
                 </div>
             </div>

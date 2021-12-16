@@ -129,7 +129,7 @@
                             <button type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/Admin/Product/Delete" style="padding: 5px 40px; font-size: 20px">
                                 Xóa sản phẩm
                             </button>
-                            <a href="${pageContext.request.contextPath}/Admin/Product/Index" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px">
+                            <a href="${pageContext.request.contextPath}/Admin/Product/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px">
                                 Danh sách sản phẩm
                             </a>
                         </div>
