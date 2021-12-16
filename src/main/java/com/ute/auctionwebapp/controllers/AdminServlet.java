@@ -20,15 +20,18 @@ public class AdminServlet extends HttpServlet {
         }
 
         switch (path) {
-            case "/Index":
+            case "/Product/Index":
                 // HttpSession session = request.getSession();
                 // System.out.println(session.getAttribute("auth"));
                 // System.out.println(session.getAttribute("authUser"));
 
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
                 break;
-            case "/About":
-//                ServletUtils.forward("/views/vwHome/About.jsp", request, response);
+            case "/Product/Add":
+                ServletUtils.forward("/views/vwAdmin/addProduct.jsp", request, response);
+                break;
+            case "/Product/Edit":
+                ServletUtils.forward("/views/vwAdmin/editProduct.jsp", request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);

@@ -63,7 +63,7 @@
                     </div>
                     <div class="collapse" id="3">
                         <div>
-                            <a href="${pageContext.request.contextPath}/Admin/Product/Add">Add Category</a>
+                            <a href="${pageContext.request.contextPath}/Admin/Product/add">Add Category</a>
                         </div>
                         <a href="#">Delete Category</a>
                     </div>
@@ -90,46 +90,47 @@
         </div>
 
         <div class="col l-10 admin_right">
-            <div class="row admin_product_title">
-                <div>
-                    Category:
-                </div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Add" class="btn btn-success addProduct" role="button">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add Product
-                </a>
-            </div>
             <div class="row">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td><a href="${pageContext.request.contextPath}/Admin/Product/Edit">Edit</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="form" id="frmProduct" style="width: 100%">
+                    <form action="" class="form_accounts" method="post" style="width: 100%">
+                        <div class="input-form">
+                            <span>Mã Sản Phẩm</span>
+                            <input type="text" name="masp">
+                        </div>
+                        <div class="input-form">
+                            <span>Tên Sản Phẩm</span>
+                            <input type="text" name="tensp">
+                        </div>
+                        <div class="input-form">
+                            <span>Loại Sản Phẩm</span>
+                            <input type="text" name="loaisp">
+                        </div>
+                        <div class="input-form">
+                            <span>Màu Sắc</span>
+                            <input type="text" name="mausac">
+                        </div>
+                        <div class="input-form">
+                            <span>Chất liệu</span>
+                            <input type="text" name="chatlieu">
+                        </div>
+                        <div class="input-form">
+                            <span>Size Sản phẩm</span>
+                            <input type="text" name="size">
+                        </div>
+                        <div class="input-form">
+                            <span>Số Lượng</span>
+                            <input type="text" name="soluong">
+                        </div>
+                        <div class="input-form">
+                            <button type="submit" class="btn btn-outline-success" style="padding: 5px 40px; font-size: 20px">
+                                Thêm sản phẩm
+                            </button>
+                            <a href="${pageContext.request.contextPath}/Admin/Product/Index" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px; margin-left: 10px;">
+                                Danh sách sản phẩm
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

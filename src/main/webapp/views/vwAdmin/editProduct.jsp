@@ -63,7 +63,7 @@
                     </div>
                     <div class="collapse" id="3">
                         <div>
-                            <a href="${pageContext.request.contextPath}/Admin/Product/Add">Add Category</a>
+                            <a href="${pageContext.request.contextPath}/Admin/Product/add">Add Category</a>
                         </div>
                         <a href="#">Delete Category</a>
                     </div>
@@ -90,46 +90,51 @@
         </div>
 
         <div class="col l-10 admin_right">
-            <div class="row admin_product_title">
-                <div>
-                    Category:
-                </div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Add" class="btn btn-success addProduct" role="button">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add Product
-                </a>
-            </div>
             <div class="row">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td><a href="${pageContext.request.contextPath}/Admin/Product/Edit">Edit</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="form" id="frmProduct" style="width: 100%">
+                    <form action="" class="form_accounts" method="post" style="width: 100%">
+                        <div class="input-form">
+                            <span>Mã Sản Phẩm</span>
+                            <input type="text" name="masp" value="${product.maSP}" >
+                        </div>
+                        <div class="input-form">
+                            <span>Tên Sản Phẩm</span>
+                            <input type="text" name="tensp" value="${product.tenSP}" >
+                        </div>
+                        <div class="input-form">
+                            <span>Loại Sản Phẩm</span>
+                            <input type="text" name="loaisp" value="${product.loaiSP}" >
+                        </div>
+                        <div class="input-form">
+                            <span>Màu Sắc</span>
+                            <input type="text" name="mausac" value="${product.mauSP}">
+                        </div>
+                        <div class="input-form">
+                            <span>Chất liệu</span>
+                            <input type="text" name="chatlieu" value="${product.maChatlieu}" >
+                        </div>
+                        <div class="input-form">
+                            <span>Size sản phẩm:</span>
+                            <input type="text" name="size" value="${product.sizeSP}" >
+                        </div>
+                        <div class="input-form">
+                            <span>Số Lượng</span>
+                            <input type="text" name="soluong" value="${product.soLuong}" >
+                        </div>
+
+                        <div class="input-form">
+                            <button type="submit" class="btn btn-outline-success" formaction="${pageContext.request.contextPath}/Admin/Product/Update" style="padding: 5px 40px; font-size: 20px">
+                                Lưu lại
+                            </button>
+                            <button type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/Admin/Product/Delete" style="padding: 5px 40px; font-size: 20px">
+                                Xóa sản phẩm
+                            </button>
+                            <a href="${pageContext.request.contextPath}/Admin/Product/Index" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px">
+                                Danh sách sản phẩm
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
