@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%--<jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.ute.ecwebapp.beans.Category>"/>--%>
+<jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Category>"/>
 
 <div class="card">
   <h4 class="card-header">
@@ -10,7 +10,7 @@
   <div class="list-group list-group-flush">
     <c:forEach items="${categoriesWithDetails}" var="c">
       <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.catID}" class="list-group-item list-group-item-action">
-        <i class="fa fa-caret-right" aria-hidden="true"></i>
+<%--        <i class="fa fa-caret-right" aria-hidden="true"></i>--%>
         ${c.catName}
       </a>
     </c:forEach>

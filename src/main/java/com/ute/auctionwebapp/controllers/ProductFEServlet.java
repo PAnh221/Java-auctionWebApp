@@ -18,6 +18,13 @@ public class ProductFEServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String path = request.getPathInfo();
     switch (path) {
+      case "/Watchlist":
+        int catId1 = Integer.parseInt(request.getParameter("id"));
+        List<Product> list1 = ProductModel.findByCatId(catId1);
+        request.setAttribute("products", list1);
+        ServletUtils.forward("/views/vwProduct/Watchlist.jsp", request, response);
+        break;
+
       case "/ByCat":
         int catId = Integer.parseInt(request.getParameter("id"));
         List<Product> list = ProductModel.findByCatId(catId);
