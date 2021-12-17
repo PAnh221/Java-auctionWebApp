@@ -3,7 +3,7 @@
 
 <jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Category>"/>
 
-<div class="card">
+<div class="card" style="width: 15rem;">
   <h4 class="card-header">
     Categories
   </h4>
@@ -15,23 +15,20 @@
       </a>
     </c:forEach>
 
-    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-      The current link item
-    </a>
   </div>
 </div>
 
-<div class="card mt-3">
-  <h4 class="card-header">
-    Featured
-  </h4>
-  <div class="list-group list-group-flush">
-    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-      The current link item (edited)
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-  </div>
-</div>
+<%--<div class="card mt-3">--%>
+<%--  <h4 class="card-header">--%>
+<%--    Featured--%>
+<%--  </h4>--%>
+<%--  <div class="list-group list-group-flush">--%>
+<%--    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">--%>
+<%--      The current link item (edited)--%>
+<%--    </a>--%>
+<%--    <a href="#" class="list-group-item list-group-item-action">A second link item</a>--%>
+<%--    <a href="#" class="list-group-item list-group-item-action">A third link item</a>--%>
+<%--    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>--%>
+<%--    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>--%>
+<%--  </div>--%>
+<%--</div>--%>

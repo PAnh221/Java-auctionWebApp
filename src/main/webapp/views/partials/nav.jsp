@@ -2,7 +2,7 @@
 
 <%--<jsp:useBean id="authUser" scope="session" type="com.ute.ecwebapp.beans.User" />--%>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
   <a class="navbar-brand" href="#">
     <i class="fa fa-home fa-2x" aria-hidden="true"></i>
   </a>
@@ -16,7 +16,7 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Watchlist?id=2">My watchlist</a>
+        <a class="nav-link" href="#">My Watchlist</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +35,9 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
     </form>
     <ul class="navbar-nav">
 <%--      <c:choose>--%>

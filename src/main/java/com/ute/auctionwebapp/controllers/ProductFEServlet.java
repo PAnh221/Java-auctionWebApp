@@ -1,8 +1,12 @@
 package com.ute.auctionwebapp.controllers;
 
 import com.ute.auctionwebapp.Utils.ServletUtils;
+import com.ute.auctionwebapp.beans.Category;
 import com.ute.auctionwebapp.beans.Product;
+import com.ute.auctionwebapp.beans.Watchlist;
+import com.ute.auctionwebapp.models.CategoryModel;
 import com.ute.auctionwebapp.models.ProductModel;
+import com.ute.auctionwebapp.models.WatchlistModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,12 +21,14 @@ public class ProductFEServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String path = request.getPathInfo();
+    if (path == null || path.equals("/")) {
+      path = "/Index";
+    }
     switch (path) {
-      case "/Watchlist":
-        int catId1 = Integer.parseInt(request.getParameter("id"));
-        List<Product> list1 = ProductModel.findByCatId(catId1);
-        request.setAttribute("products", list1);
-        ServletUtils.forward("/views/vwProduct/Watchlist.jsp", request, response);
+      case "/Index":
+        List<Product> listP = ProductModel.findAll();
+        request.setAttribute("products", listP);
+        ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;
 
       case "/ByCat":
@@ -51,6 +57,24 @@ public class ProductFEServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String path = request.getPathInfo();
+    switch (path) {
+      case "/ByCat?id=2":
+        addWatchlist(request, response);
+        break;
 
+      default:
+        ServletUtils.forward("/views/404.jsp", request, response);
+        break;
+    }
+  }
+
+  private void addWatchlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//    int proid = Integer.parseInt(request.getParameter("proid"));
+    int userid = 1;
+    int proid = 1;
+    Watchlist w = new Watchlist(proid, userid);
+    WatchlistModel.add(w);
+    ServletUtils.forward("views/vwProduct/ByCat?id=2", request, response);
   }
 }
