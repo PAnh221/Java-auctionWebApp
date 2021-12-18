@@ -25,6 +25,14 @@ public class ProductFEServlet extends HttpServlet {
       path = "/Index";
     }
     switch (path) {
+      case "/AddWatchlist":
+        int id_user = 1;
+        int id_product = Integer.parseInt(request.getParameter("proid"));
+        Watchlist w = new Watchlist(id_product, id_user);
+        WatchlistModel.add(w);
+//        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
+
+
       case "/Index":
         List<Product> listP = ProductModel.findAll();
         request.setAttribute("products", listP);

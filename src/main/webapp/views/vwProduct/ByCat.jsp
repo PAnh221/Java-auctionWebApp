@@ -32,7 +32,7 @@
 <%--                        <p class="card-text">${c.tinyDes}</p>--%>
                       </div>
                       <div class="card-footer text-muted">
-                        <a class="btn btn-sm btn-outline-danger" href="#" role="button">
+                        <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?proid=${c.proID}" role="button">
                           <i class="fa fa-heart" aria-hidden="true"></i>
                         </a>
 
