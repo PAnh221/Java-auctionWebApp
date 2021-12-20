@@ -3,7 +3,9 @@ package com.ute.auctionwebapp.controllers;
 
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Category;
+import com.ute.auctionwebapp.beans.SubCategory;
 import com.ute.auctionwebapp.models.CategoryModel;
+import com.ute.auctionwebapp.models.SubCategoryModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,6 +60,34 @@ public class AdminServlet extends HttpServlet {
                 }
                 break;
 
+
+            case "/SubCategory/Add":
+                List<Category> listCate = CategoryModel.findAll();
+                request.setAttribute("categories", listCate);
+                ServletUtils.forward("/views/vwAdmin/addSubCat.jsp", request, response);
+                break;
+            case "/SubCategory/Detail":
+                List<SubCategory> list2 = SubCategoryModel.findAll();
+                request.setAttribute("categories", list2);
+                ServletUtils.forward("/views/vwAdmin/indexSubCat.jsp", request, response);
+                break;
+            case "/SubCategory/Edit":
+                int id2 = Integer.parseInt(request.getParameter("id"));
+                SubCategory c2 = SubCategoryModel.findById(id2);
+                List<Category> listCat = CategoryModel.findAll();
+                if (c2 == null)
+                {
+                    ServletUtils.forward("/views/vwAdmin/indexSubCat.jsp", request, response);
+                }
+                else
+                {
+                    request.setAttribute("categories", listCat);
+                    request.setAttribute("category", c2);
+                    ServletUtils.forward("/views/vwAdmin/editSubCat.jsp", request, response);
+                }
+                break;
+
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -90,6 +120,16 @@ public class AdminServlet extends HttpServlet {
             case "/Category/Delete":
                 deleteCategory(request, response);
                 break;
+
+            case "/SubCategory/Add":
+                addSubCategory(request, response);
+                break;
+            case "/SubCategory/Update":
+                updateSubCategory(request, response);
+                break;
+            case "/SubCategory/Delete":
+                deleteSubCategory(request, response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -117,5 +157,30 @@ public class AdminServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("catid"));
         CategoryModel.delete(id);
         ServletUtils.redirect("/Admin/Category/Detail", request, response);
+    }
+
+    private void addSubCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int subcatid = Integer.parseInt(request.getParameter("subcatid"));
+        String subcatname = request.getParameter("subcatname");
+        int catid = Integer.parseInt(request.getParameter("catid"));
+
+        SubCategory c = new SubCategory(subcatid, subcatname, catid, null);
+        SubCategoryModel.add(c);
+        ServletUtils.redirect("/Admin/SubCategory/Add", request, response);
+    }
+
+    private void updateSubCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int subcatid = Integer.parseInt(request.getParameter("subcatid"));
+        String subcatname = request.getParameter("subcatname");
+        int catid = Integer.parseInt(request.getParameter("catid"));
+        SubCategory c = new SubCategory(subcatid, subcatname, catid, null);
+        SubCategoryModel.update(c);
+        ServletUtils.redirect("/Admin/SubCategory/Detail", request, response);
+    }
+
+    private void deleteSubCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("subcatid"));
+        SubCategoryModel.delete(id);
+        ServletUtils.redirect("/Admin/SubCategory/Detail", request, response);
     }
 }
