@@ -15,7 +15,7 @@
 <div class="main grid">
     <div class="row">
         <div class="col l-2 admin_left">
-            <jsp:include page="../../views/partials/leftAdmin.jsp"/>
+            <jsp:include page="../../partials/leftAdmin.jsp"/>
         </div>
 
         <div class="col l-10 admin_right">

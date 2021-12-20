@@ -26,37 +26,39 @@ public class AdminServlet extends HttpServlet {
 
         switch (path) {
             case "/Product/Index":
-                ServletUtils.forward("/views/vwAdmin/login.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/Product/login.jsp", request, response);
                 break;
             case "/Product/Detail":
-                ServletUtils.forward("/views/vwAdmin/indexProduct.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/Product/indexProduct.jsp", request, response);
                 break;
             case "/Product/Add":
-                ServletUtils.forward("/views/vwAdmin/addProduct.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
                 break;
             case "/Product/Edit":
-                ServletUtils.forward("/views/vwAdmin/editProduct.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/Product/editProduct.jsp", request, response);
                 break;
 
+
+//              CATEGORY ==================================
             case "/Category/Add":
-                ServletUtils.forward("/views/vwAdmin/addCategory.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/Category/addCategory.jsp", request, response);
                 break;
             case "/Category/Detail":
                 List<Category> list = CategoryModel.findAll();
                 request.setAttribute("categories", list);
-                ServletUtils.forward("/views/vwAdmin/indexCategory.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/Category/indexCategory.jsp", request, response);
                 break;
             case "/Category/Edit":
                 int id = Integer.parseInt(request.getParameter("id"));
                 Category c = CategoryModel.findById(id);
                 if (c == null)
                 {
-                    ServletUtils.forward("/views/vwAdmin/indexCategory.jsp", request, response);
+                    ServletUtils.forward("/views/vwAdmin/Category/indexCategory.jsp", request, response);
                 }
                 else
                 {
                     request.setAttribute("category", c);
-                    ServletUtils.forward("/views/vwAdmin/editCategory.jsp", request, response);
+                    ServletUtils.forward("/views/vwAdmin/Category/editCategory.jsp", request, response);
                 }
                 break;
 
@@ -64,12 +66,12 @@ public class AdminServlet extends HttpServlet {
             case "/SubCategory/Add":
                 List<Category> listCate = CategoryModel.findAll();
                 request.setAttribute("categories", listCate);
-                ServletUtils.forward("/views/vwAdmin/addSubCat.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/SubCategory/addSubCat.jsp", request, response);
                 break;
             case "/SubCategory/Detail":
                 List<SubCategory> list2 = SubCategoryModel.findAll();
                 request.setAttribute("categories", list2);
-                ServletUtils.forward("/views/vwAdmin/indexSubCat.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/SubCategory/indexSubCat.jsp", request, response);
                 break;
             case "/SubCategory/Edit":
                 int id2 = Integer.parseInt(request.getParameter("id"));
@@ -77,13 +79,13 @@ public class AdminServlet extends HttpServlet {
                 List<Category> listCat = CategoryModel.findAll();
                 if (c2 == null)
                 {
-                    ServletUtils.forward("/views/vwAdmin/indexSubCat.jsp", request, response);
+                    ServletUtils.forward("/views/vwAdmin/SubCategory/indexSubCat.jsp", request, response);
                 }
                 else
                 {
                     request.setAttribute("categories", listCat);
                     request.setAttribute("category", c2);
-                    ServletUtils.forward("/views/vwAdmin/editSubCat.jsp", request, response);
+                    ServletUtils.forward("/views/vwAdmin/SubCategory/editSubCat.jsp", request, response);
                 }
                 break;
 
@@ -107,7 +109,7 @@ public class AdminServlet extends HttpServlet {
                 String pass = request.getParameter("pass");
                 if(username.equals("admin") & pass.equals("admin"))
                 {
-                    ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                    ServletUtils.forward("/views/vwAdmin/Product/index.jsp", request, response);
                 }
                 ServletUtils.redirect("/Admin",request,response);
                 break;
@@ -141,7 +143,7 @@ public class AdminServlet extends HttpServlet {
 
         Category c = new Category(catid, catname);
         CategoryModel.add(c);
-        ServletUtils.forward("/views/vwAdmin/addCategory.jsp", request, response);
+        ServletUtils.forward("/views/vwAdmin/Category/addCategory.jsp", request, response);
     }
 
     private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

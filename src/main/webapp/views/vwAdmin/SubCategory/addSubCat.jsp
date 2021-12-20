@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="category" scope="request" type="com.ute.auctionwebapp.beans.SubCategory"/>
 <jsp:useBean id="categories" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Category>" />
 
 <html>
@@ -15,49 +14,45 @@
 <div class="main grid">
     <div class="row">
         <div class="col l-2 admin_left">
-            <jsp:include page="../../views/partials/leftAdmin.jsp"/>
+            <jsp:include page="../../partials/leftAdmin.jsp"/>
         </div>
 
         <div class="col l-10 admin_right">
             <div class="row">
-                <div class="form" id="frmCategory" style="width: 100%">
+                <div class="form" id="frmSubCategory" style="width: 100%">
                     <form action="" class="form_accounts" method="post" style="width: 100%">
                         <div class="input-form">
-                            <span>#</span><br>
-                            <input type="text" name="subcatid" value="${category.subCatID}" >
+                            <span>#</span> <br>
+                            <input type="text" name="subcatid">
                         </div>
                         <div class="input-form">
                             <span>Sub Category</span>
-                            <input type="text" name="subcatname" value="${category.subCatName}" >
+                            <input type="text" name="subcatname">
                         </div>
                         <div class="input-form">
                             <span>Category</span><br>
                             <select id="catid" name="catid" style="width: 94%;
-    padding: 6.5px 10px;
-    outline: none;
-    border: 1px solid #607d8b;
-    font-size: 16px;
-    letter-spacing: 1px;
-    background: transparent;
-    border-radius: 3px;
-    margin-bottom: 5px;">
+                                                                    padding: 6.5px 10px;
+                                                                    outline: none;
+                                                                    border: 1px solid #607d8b;
+                                                                    font-size: 16px;
+                                                                    letter-spacing: 1px;
+                                                                    background: transparent;
+                                                                    border-radius: 3px;
+                                                                    margin-bottom: 5px;">
                                 <c:forEach items="${categories}" var="c">
                                     <option value="${c.catID}">${c.catName}</option>
                                 </c:forEach>
                             </select>
 
-<%--                            <input type="text" name="catid" value="${category.catID}" >--%>
+                            <%--                            <input type="text" name="catid" value="${category.catID}" >--%>
                         </div>
-
                         <div class="input-form">
-                            <button type="submit" class="btn btn-outline-success" formaction="${pageContext.request.contextPath}/Admin/SubCategory/Update" style="padding: 5px 40px; font-size: 20px">
-                                Save
+                            <button type="submit" class="btn btn-outline-success" style="padding: 5px 40px; font-size: 20px">
+                                Add
                             </button>
-                            <button type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/Admin/SubCategory/Delete" style="padding: 5px 40px; font-size: 20px">
-                                Delete
-                            </button>
-                            <a href="${pageContext.request.contextPath}/Admin/SubCategory/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px">
-                                Sub Category List
+                            <a href="${pageContext.request.contextPath}/Admin/SubCategory/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px; margin-left: 10px;">
+                                List Sub Category
                             </a>
                         </div>
                     </form>
