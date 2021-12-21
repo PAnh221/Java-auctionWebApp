@@ -1,48 +1,65 @@
 package com.ute.auctionwebapp.beans;
 
+import java.math.BigInteger;
+import java.util.Date;
+
 public class Product {
-  private int ProID;
-  private String ProName, TinyDes, FullDes;
-  private int Price, Quantity, CatID;
+  private int proID;
+  private String proName, tinyDes, fullDes;
+  private int subcatID, sellerID, catID, imgindex;
+  private Date uploaddate;
+  private BigInteger bin;
 
   public Product() {
   }
 
-  public Product(int proID, String proName, String tinyDes, String fullDes, int price, int quantity, int catID) {
-    ProID = proID;
-    ProName = proName;
-    TinyDes = tinyDes;
-    FullDes = fullDes;
-    Price = price;
-    Quantity = quantity;
-    CatID = catID;
+  public Product(int proID, String proName, String tinyDes, String fullDes, Date uploaddate, BigInteger bin) {
+    this.proID = proID;
+    this.proName = proName;
+    this.tinyDes = tinyDes;
+    this.fullDes = fullDes;
+    this.uploaddate = uploaddate;
+    this.bin = bin;
   }
 
   public int getProID() {
-    return ProID;
+    return proID;
   }
 
   public String getProName() {
-    return ProName;
+    return proName;
   }
 
   public String getTinyDes() {
-    return TinyDes;
+    return tinyDes;
   }
 
   public String getFullDes() {
-    return FullDes;
+    return fullDes;
   }
 
-  public int getPrice() {
-    return Price;
+  public Date getUploaddate() {
+    return uploaddate;
   }
 
-  public int getQuantity() {
-    return Quantity;
+  public BigInteger getBin() {
+    return bin;
+  }
+
+
+  public int getSubcatID() {
+    return subcatID;
+  }
+
+  public int getSellerID() {
+    return sellerID;
   }
 
   public int getCatID() {
-    return CatID;
+    return catID;
+  }
+
+  public int getImgindex() {
+    return imgindex;
   }
 }

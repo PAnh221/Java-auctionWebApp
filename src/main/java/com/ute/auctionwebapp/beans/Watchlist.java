@@ -1,20 +1,25 @@
 package com.ute.auctionwebapp.beans;
 
 public class Watchlist {
-    int id_product, id_user;
+    int proID, userID;
 
-    public Watchlist(int id_product, int id_user) {
-        this.id_product = id_product;
-        this.id_user = id_user;
+
+    public Watchlist(int proID, int userID) {
+        this.proID = proID;
+        this.userID = userID;
     }
+
+    public int getProID() {
+        return proID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+
 
     public Watchlist() {}
 
-    public int getId_product() {
-        return id_product;
-    }
 
-    public int getId_user() {
-        return id_user;
-    }
 }

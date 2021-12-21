@@ -8,6 +8,14 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class SubCategoryModel {
+  public static List<SubCategory> findAllSubCat() {
+    final String query = "select * from subcategory";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .executeAndFetch(SubCategory.class);
+    }
+  }
+
   public static List<SubCategory> findAll() {
     final String query = "select subcategory.SubCatID, subcategory.SubCatName, subcategory.CatID, category.CatName from subcategory, category where subcategory.CatID = category.CatID";
     try (Connection con = DbUtils.getConnection()) {
@@ -61,4 +69,6 @@ public class SubCategoryModel {
         .executeUpdate();
     }
   }
+
+
 }
