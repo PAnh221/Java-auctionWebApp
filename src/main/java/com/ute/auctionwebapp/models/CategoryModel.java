@@ -27,11 +27,11 @@ public class CategoryModel {
     }
   }
 
-  public static Category findById(int id) {
+  public static Category findById(int CatID) {
     final String query = "select * from category where CatID = :CatID";
     try (Connection con = DbUtils.getConnection()) {
       List<Category> list = con.createQuery(query)
-        .addParameter("CatID", id)
+        .addParameter("CatID", CatID)
         .executeAndFetch(Category.class);
 
       if (list.size() == 0) {

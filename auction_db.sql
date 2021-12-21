@@ -183,8 +183,8 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'sumels', 'Thắng', '123456789', '', 'dnqthang8@gmail.com', '2001-09-01', 0, 10);
-INSERT INTO `user` VALUES (2, 'dycaooo', 'Vy', '987654321', '', 'nntvy8@gmail.com', '2000-03-13', 0, 10);
+INSERT INTO `user` VALUES (1, 'user1', 'Mylie Hodges', '123456789', '', 'user1@gmail.com', '1995-09-01', 0, 10);
+INSERT INTO `user` VALUES (2, 'user2', 'Maiya Bannister', '987654321', '', 'user2@gmail.com', '1999-03-13', 0, 10);
 
 -- watchlist
 DROP TABLE IF EXISTS `watchlist`;

@@ -5,11 +5,11 @@ import org.sql2o.Connection;
 
 public class WatchlistModel {
     public static void add(Watchlist w) {
-        String insertSql = "INSERT INTO watchlist (proID, userID) VALUES (:id_product,:id_user)";
+        String insertSql = "INSERT INTO watchlist (ProID, UserID) VALUES (:ProID,:UserID)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(insertSql)
-                    .addParameter("id_product", w.getProID())
-                    .addParameter("id_user", w.getUserID())
+                    .addParameter("ProID", w.getProID())
+                    .addParameter("UserID", w.getUserID())
                     .executeUpdate();
         }
     }

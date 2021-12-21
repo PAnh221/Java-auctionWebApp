@@ -4,62 +4,64 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public class Product {
-  private int proID;
-  private String proName, tinyDes, fullDes;
-  private int subcatID, sellerID, catID, imgindex;
-  private Date uploaddate;
-  private BigInteger bin;
+  private int ProID;
+  private String ProName, TinyDes, FullDes;
+  private int SubCatID, SellerID, CatID, ImgIndex;
+  private Date UploadDate;
+  private BigInteger Bin;
 
-  public Product() {
-  }
+  public Product() {}
 
-  public Product(int proID, String proName, String tinyDes, String fullDes, Date uploaddate, BigInteger bin) {
-    this.proID = proID;
-    this.proName = proName;
-    this.tinyDes = tinyDes;
-    this.fullDes = fullDes;
-    this.uploaddate = uploaddate;
-    this.bin = bin;
+  public Product(int proID, String proName, String tinyDes, String fullDes, int subCatID, int sellerID, int catID, int imgIndex, Date uploadDate, BigInteger bin) {
+    ProID = proID;
+    ProName = proName;
+    TinyDes = tinyDes;
+    FullDes = fullDes;
+    SubCatID = subCatID;
+    SellerID = sellerID;
+    CatID = catID;
+    ImgIndex = imgIndex;
+    UploadDate = uploadDate;
+    Bin = bin;
   }
 
   public int getProID() {
-    return proID;
+    return ProID;
   }
 
   public String getProName() {
-    return proName;
+    return ProName;
   }
 
   public String getTinyDes() {
-    return tinyDes;
+    return TinyDes;
   }
 
   public String getFullDes() {
-    return fullDes;
+    return FullDes;
   }
 
-  public Date getUploaddate() {
-    return uploaddate;
-  }
-
-  public BigInteger getBin() {
-    return bin;
-  }
-
-
-  public int getSubcatID() {
-    return subcatID;
+  public int getSubCatID() {
+    return SubCatID;
   }
 
   public int getSellerID() {
-    return sellerID;
+    return SellerID;
   }
 
   public int getCatID() {
-    return catID;
+    return CatID;
   }
 
-  public int getImgindex() {
-    return imgindex;
+  public int getImgIndex() {
+    return ImgIndex;
+  }
+
+  public Date getUploadDate() {
+    return UploadDate;
+  }
+
+  public BigInteger getBin() {
+    return Bin;
   }
 }

@@ -25,7 +25,7 @@
         </p>
 <%--        <p class="card-text">Tồn kho: ${product.quantity}</p>--%>
         <p class="card-text">${product.fullDes}</p>
-        <p class="card-text"><i>Ngày được đăng bán:</i> ${product.uploaddate}</p>
+        <p class="card-text"><i>Ngày được đăng bán:</i> ${product.uploadDate}</p>
 
         <h4 class="mt-5">Lịch sử đấu giá</h4>
         <table class="table table-striped">
