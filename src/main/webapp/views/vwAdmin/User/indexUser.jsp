@@ -53,13 +53,13 @@
                             <td>${u.name}</td>
                             <td>${u.address}</td>
                             <td>${u.email}</td>
-                            <td>${u.email}</td>
+                            <td>${u.dob}</td>
                             <td>${u.permission}</td>
                             <td>${u.rating}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${u.userName}">Edit</a>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userName}">Upgrade to Bidder</a>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Degrade?id=${u.userName}">Degrade to Seller</a>
+                                <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${u.userID}">Edit |</a>
+                                <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">UpBidder |</a>
+                                <a href="${pageContext.request.contextPath}/Admin/User/Degrade?id=${u.userID}">DeSeller</a>
                             </td>
                         </tr>
                     </c:forEach>

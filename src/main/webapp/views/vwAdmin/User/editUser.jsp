@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/admin.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <div class="main grid">
@@ -34,23 +40,27 @@
                             <input type="text" name="password" value="${user.password}" >
                         </div>
                         <div class="input-form">
+                            <span>Name</span><br>
+                            <input type="text" name="name" value="${user.name}" >
+                        </div>
+                        <div class="input-form">
                             <span>Address</span>
                             <input type="text" name="address" value="${user.address}" >
                         </div>
                         <div class="input-form">
-                            <span>Email</span>
+                            <span>Email</span><br>
                             <input type="text" name="email" value="${user.email}" >
                         </div>
                         <div class="input-form">
-                            <span>Date of birth</span>
-                            <input type="text" name="dob" value="${user.dob}" >
+                            <span>Date of Birth</span>
+                            <input type="text" name="dob" id="txtDOB" value="${user.dob}">
                         </div>
                         <div class="input-form">
-                            <span>Permission</span>
+                            <span>Permission</span><br>
                             <input type="text" name="permission" value="${user.permission}" >
                         </div>
                         <div class="input-form">
-                            <span>Rating</span>
+                            <span>Rating</span><br>
                             <input type="text" name="rating" value="${user.rating}" >
                         </div>
                         <div class="input-form">
@@ -60,8 +70,8 @@
                             <button type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/Admin/User/Delete" style="padding: 5px 40px; font-size: 20px">
                                 Delete
                             </button>
-                            <a href="${pageContext.request.contextPath}/Admin/SubCategory/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px">
-                                Sub Category List
+                            <a href="${pageContext.request.contextPath}/Admin/User/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px">
+                                User List
                             </a>
                         </div>
                     </form>
@@ -71,8 +81,36 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $('#txtDOB').datetimepicker(
+        {
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true
+        }
+    );
+    $('#frmUser').on('submit', function (e) {
+        e.preventDefault();
+        const username = $('#username').val();
+        if(username.length ===0)
+        {
+            alert("Mời bạn điền đầy đủ thông tin!");
+            return;
+        };
+
+        <%--$.getJSON('${pageContext.request.contextPath}/Admin/User/IsAvailable?user=' + username, function (data) {--%>
+        <%--    if (data ==true)--%>
+        <%--    {--%>
+        <%--        $('#frmUser').off('submit').submit();--%>
+        <%--        alert("Đăng ký thành công!");--%>
+        <%--    }--%>
+        <%--    else--%>
+        <%--    {--%>
+        <%--        alert("Tên người dùng đã tồn tại!")--%>
+        <%--    }--%>
+        <%--});--%>
+        $('#frmUser').off('submit').submit();
+    });
+</script>
 </body>
 </html>

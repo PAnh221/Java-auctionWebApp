@@ -114,10 +114,19 @@ public class AdminServlet extends HttpServlet {
                 else
                 {
                     request.setAttribute("user", user);
-                    ServletUtils.forward("/views/vwAdmin/User/editCategory.jsp", request, response);
+                    ServletUtils.forward("/views/vwAdmin/User/editUser.jsp", request, response);
                 }
                 break;
-
+            case "/User/Upgrade":
+                int useridu = Integer.parseInt(request.getParameter("id"));
+                UserModel.upgradeBidder(useridu);
+                ServletUtils.redirect("/Admin/User/Detail", request, response);
+                break;
+            case "/User/Degrade":
+                int useridd = Integer.parseInt(request.getParameter("id"));
+                UserModel.degradeSeller(useridd);
+                ServletUtils.redirect("/Admin/User/Detail", request, response);
+                break;
 
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -254,8 +263,8 @@ public class AdminServlet extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String bd = request.getParameter("dob");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yyyy");
+        String bd = request.getParameter("dob")+" 00:00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dob = LocalDateTime.parse(bd, df);
         int permission = Integer.parseInt(request.getParameter("permission"));
         int rating = Integer.parseInt(request.getParameter("rating"));
