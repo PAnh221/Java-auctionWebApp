@@ -84,4 +84,13 @@ public class ProductModel {
         .executeUpdate();
     }
   }
+
+  //Top 5 select
+  public static List<Product> Top5HighestPrice() {
+    final String query = "select * from product order by bin desc limit 5";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .executeAndFetch(Product.class);
+    }
+  }
 }

@@ -31,8 +31,6 @@ public class ProductFEServlet extends HttpServlet {
         Watchlist w = new Watchlist(id_product, id_user);
         WatchlistModel.add(w);
 //        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
-
-
       case "/Index":
         List<Product> listP = ProductModel.findAll();
         request.setAttribute("products", listP);
@@ -50,6 +48,15 @@ public class ProductFEServlet extends HttpServlet {
         int subcatId = Integer.parseInt(request.getParameter("id"));
         List<Product> listsubcat = ProductModel.findBySubCatId(subcatId);
         request.setAttribute("products", listsubcat);
+        ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
+        break;
+
+      case "/ByRank":
+        int rankingId = Integer.parseInt(request.getParameter("rankingid"));
+        if(rankingId == 1) {
+          List<Product> top5HighestPrice = ProductModel.Top5HighestPrice();
+          request.setAttribute("products", top5HighestPrice);
+        }
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;
 
