@@ -1,11 +1,14 @@
 package com.ute.auctionwebapp.controllers;
 
 
+//import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Category;
 import com.ute.auctionwebapp.beans.SubCategory;
+import com.ute.auctionwebapp.beans.User;
 import com.ute.auctionwebapp.models.CategoryModel;
 import com.ute.auctionwebapp.models.SubCategoryModel;
+import com.ute.auctionwebapp.models.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet(name = "AdminServlet", value = "/Admin/*")
@@ -39,7 +45,7 @@ public class AdminServlet extends HttpServlet {
                 break;
 
 
-//              CATEGORY ==================================
+//              CATEGORY <=============================================================
             case "/Category/Add":
                 ServletUtils.forward("/views/vwAdmin/Category/addCategory.jsp", request, response);
                 break;
@@ -62,7 +68,7 @@ public class AdminServlet extends HttpServlet {
                 }
                 break;
 
-
+//             SUB CATEGORY <==================================================
             case "/SubCategory/Add":
                 List<Category> listCate = CategoryModel.findAll();
                 request.setAttribute("categories", listCate);
@@ -86,6 +92,29 @@ public class AdminServlet extends HttpServlet {
                     request.setAttribute("categories", listCat);
                     request.setAttribute("category", c2);
                     ServletUtils.forward("/views/vwAdmin/SubCategory/editSubCat.jsp", request, response);
+                }
+                break;
+
+//              USER <====================================================================
+            case "/User/Add":
+                ServletUtils.forward("/views/vwAdmin/User/addUser.jsp", request, response);
+                break;
+            case "/User/Detail":
+                List<User> listUser = UserModel.findAll();
+                request.setAttribute("users", listUser);
+                ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
+                break;
+            case "/User/Edit":
+                int userid = Integer.parseInt(request.getParameter("id"));
+                User user = UserModel.findById(userid);
+                if (user == null)
+                {
+                    ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
+                }
+                else
+                {
+                    request.setAttribute("user", user);
+                    ServletUtils.forward("/views/vwAdmin/User/editCategory.jsp", request, response);
                 }
                 break;
 
@@ -131,6 +160,19 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/SubCategory/Delete":
                 deleteSubCategory(request, response);
+                break;
+
+            case "/User/Add":
+                addUser(request, response);
+                break;
+            case "/User/Isavailable":
+                isAvailable(request, response);
+                break;
+            case "/User/Update":
+                updateUser(request, response);
+                break;
+            case "/User/Delete":
+                deleteUser(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -184,5 +226,68 @@ public class AdminServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("subcatid"));
         SubCategoryModel.delete(id);
         ServletUtils.redirect("/Admin/SubCategory/Detail", request, response);
+    }
+
+    private void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userid = Integer.parseInt(request.getParameter("userid"));
+        String username = request.getParameter("username");
+        String pass = request.getParameter("password");
+//        String bcryptHashString = BCrypt.withDefaults().hashToString(12, pass.toCharArray());
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String bd = request.getParameter("dob")+" 00:00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dob = LocalDateTime.parse(bd, df);
+        int permission = Integer.parseInt(request.getParameter("permission"));
+        int rating = Integer.parseInt(request.getParameter("rating"));
+
+        User user = new User(userid, permission, rating, username, name, pass, address, email, dob);
+        UserModel.add(user);
+        ServletUtils.forward("/views/vwAdmin/User/addUser.jsp", request, response);
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userid = Integer.parseInt(request.getParameter("userid"));
+        String username = request.getParameter("username");
+        String pass = request.getParameter("password");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String bd = request.getParameter("dob");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yyyy");
+        LocalDateTime dob = LocalDateTime.parse(bd, df);
+        int permission = Integer.parseInt(request.getParameter("permission"));
+        int rating = Integer.parseInt(request.getParameter("rating"));
+
+        User user = new User(userid, permission, rating, username, name, pass, address, email, dob);
+        UserModel.update(user);
+        ServletUtils.redirect("/Admin/User/Detail", request, response);
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userid = Integer.parseInt(request.getParameter("userid"));
+        UserModel.delete(userid);
+        ServletUtils.redirect("/Admin/User/Detail", request, response);
+    }
+
+
+    private void isAvailable (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("user");
+        User user = UserModel.findById(1);
+        Boolean available;
+        if (user == null)
+        {
+            available = true;
+        }
+        else {
+            available = false;
+        }
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+
+        out.print(available);
+        out.flush();
     }
 }
