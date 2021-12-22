@@ -33,6 +33,15 @@ public class ProductModel {
     }
   }
 
+  public static List<Product> findRelevantProductByProID(int ProID) {
+    final String query = "select * from product where SubCatID = (select SubCatID from product where ProID = :ProID) and ProID != :ProID";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("ProID", ProID)
+              .executeAndFetch(Product.class);
+    }
+  }
+
   public static Product findById(int ProID) {
     final String query = "select * from product where ProID = :ProID";
     try (Connection con = DbUtils.getConnection()) {
@@ -45,6 +54,8 @@ public class ProductModel {
       return list.get(0);
     }
   }
+
+
 
 //  public static void add(Product p) {
 //    String insertSql = "INSERT INTO products (ProName, TinyDes, FullDes, Price, CatID, Quantity) VALUES (:proname,:tinydes,:fulldes,:price,:catid,:quantity)";

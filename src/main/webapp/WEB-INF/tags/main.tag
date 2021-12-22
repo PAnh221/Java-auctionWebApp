@@ -15,10 +15,10 @@
 <jsp:include page="../../views/partials/nav.jsp" />
 <div class="container-fluid mt-4 mb-3">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <jsp:include page="../../views/partials/left.jsp" />
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             <jsp:doBody />
         </div>
     </div>

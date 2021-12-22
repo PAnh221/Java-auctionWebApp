@@ -20,7 +20,7 @@
             <div class="card-body">
               <div class="row">
                 <c:forEach items="${products}" var="c">
-                  <div class="col-sm-4 mb-2">
+                  <div class="col-sm-3 mb-2">
                     <div class="card h-100">
 <%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
                       <div class="card-body">
@@ -48,6 +48,5 @@
           </c:otherwise>
         </c:choose>
       </div>
-    </form>
   </jsp:body>
 </t:main>

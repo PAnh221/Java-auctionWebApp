@@ -53,7 +53,7 @@ public class ProductFEServlet extends HttpServlet {
 
       case "/ByRank":
         int rankingId = Integer.parseInt(request.getParameter("rankingid"));
-        if(rankingId == 1) {
+        if(rankingId == 1) { //by price
           List<Product> top5HighestPrice = ProductModel.Top5HighestPrice();
           request.setAttribute("products", top5HighestPrice);
         }
@@ -63,10 +63,12 @@ public class ProductFEServlet extends HttpServlet {
       case "/Detail":
         int proId = Integer.parseInt(request.getParameter("id"));
         Product product = ProductModel.findById(proId);
+        List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId);
         if (product == null) {
           ServletUtils.redirect("/Home", request, response);
         } else {
           request.setAttribute("product", product);
+          request.setAttribute("relevantProducts", list_relevant);
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
         break;
