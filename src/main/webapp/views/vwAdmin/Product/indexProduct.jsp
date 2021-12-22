@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<jsp:useBean id="products" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
+
 <html>
 <head>
     <title>Admin Page</title>
@@ -12,87 +15,13 @@
 <div class="main grid">
     <div class="row">
         <div class="col l-2 admin_left">
-            <div class="row">
-                <img src="${pageContext.request.contextPath}/public/imgs/admin/logo3.jpg" alt="" style="width: 84%; margin-top: 25px">
-                <div class="admin_title">4. ADMINISTRATOR</div>
-            </div>
-            <div class="row">
-                <div class="admin_login">
-                    <!-- <img src="./imgs/icon-yahoo.png" alt="" class="admin_login_avt"> -->
-                    <div class="admin_login_info">
-                        <i class="fas fa-user"></i>
-                        Welcome Admin
-                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="arrow down"></i>
-                        </a>
-                    </div>
-
-                    <div class="collapse" id="collapseExample">
-                        <a href="${pageContext.request.contextPath}/Admin/Product/Index">Log out</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="admin_category">
-                    <div class="admin_login_info">
-                        <i class="fal fa-books"></i>
-                        Manage Category
-                        <a data-toggle="collapse" href="#2" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="arrow down"></i>
-                        </a>
-                    </div>
-                    <div class="collapse" id="2">
-                        <div>
-                            <a href="#">Add Category</a>
-                        </div>
-                        <a href="#">Delete Category</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="admin_product">
-                    <div class="admin_login_info">
-                        <i class="fal fa-boxes"></i>
-                        Manage Product
-                        <a data-toggle="collapse" href="#3" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="arrow down"></i>
-                        </a>
-                    </div>
-                    <div class="collapse" id="3">
-                        <div>
-                            <a href="${pageContext.request.contextPath}/Admin/Product/Add">Add Category</a>
-                        </div>
-                        <a href="#">Delete Category</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="admin_user">
-                    <div class="admin_login_info">
-                        <i class="far fa-users"></i>
-                        Manage User
-                        <a data-toggle="collapse" href="#4" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="arrow down"></i>
-                        </a>
-                    </div>
-                    <div class="collapse" id="4">
-                        <div>
-                            <a href="#">Add User</a>
-                        </div>
-                        <a href="#">Delete Category</a>
-                    </div>
-                </div>
-            </div>
-
+            <jsp:include page="../../partials/leftAdmin.jsp"/>
         </div>
 
         <div class="col l-10 admin_right">
             <div class="row admin_product_title">
                 <div>
-                    Category:
+                    Products:
                 </div>
                 <a href="${pageContext.request.contextPath}/Admin/Product/Add" class="btn btn-success addProduct" role="button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
@@ -103,34 +32,42 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">#</th> <br>
+                        <th scope="col">Name </th>
+                        <th scope="col">SubCat ID</th>
+                        <th scope="col">Seller ID</th>
+                        <th scope="col">Tiny Des</th>
+                        <th scope="col">Full Des</th>
+                        <th scope="col">Bin</th>
+                        <th scope="col">Upload Date</th>
+                        <th scope="col">CatID</th>
+                        <th scope="col">Img Index</th>
                         <th scope="col">Handle</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td><a href="${pageContext.request.contextPath}/Admin/Product/Edit">Edit</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    <c:forEach items="${products}" var="p">
+                        <tr>
+                            <th scope="row">${p.proID}</th>
+                            <td>${p.proName}</td>
+                            <td>${p.subCatID}</td>
+                            <td>${p.sellerID}</td>
+                            <td>${p.tinyDes}</td>
+                            <td>${p.fullDes}</td>
+                            <td>${p.bin}</td>
+                            <td>${p.uploadDate}</td>
+                            <td>${p.catID}</td>
+                            <td>${p.imgIndex}</td>
+                            <td style="width: 9%">
+                                <a href="${pageContext.request.contextPath}/Admin/Product/CreateAution?id=${p.proID}">New Aution</a><br>
+                                <a href="${pageContext.request.contextPath}/Admin/Product/Edit?id=${p.proID}">Edit</a><br>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
 </div>

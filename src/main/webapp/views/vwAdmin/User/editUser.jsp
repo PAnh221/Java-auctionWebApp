@@ -25,7 +25,7 @@
 
         <div class="col l-10 admin_right">
             <div class="row">
-                <div class="form" id="frmCategory" style="width: 100%">
+                <div class="form" id="frmUser" style="width: 100%">
                     <form action="" class="form_accounts" method="post" style="width: 100%">
                         <div class="input-form">
                             <span>#</span><br>
@@ -82,13 +82,15 @@
 </div>
 
 <script>
-    $('#txtDOB').datetimepicker(
-        {
-            format: 'd/m/Y',
-            timepicker: false,
-            mask: true
-        }
-    );
+    $('#txtDOB').click(function(){
+        $('#txtDOB').datetimepicker(
+            {
+                format: 'd/m/Y',
+                timepicker: false,
+                mask: true
+            }
+        );
+    });
     $('#frmUser').on('submit', function (e) {
         e.preventDefault();
         const username = $('#username').val();
