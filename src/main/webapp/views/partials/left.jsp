@@ -6,7 +6,7 @@
 
 <div class="card" style="width: 15rem;">
   <h4 class="card-header">
-    Categories
+    Danh mục
   </h4>
   <div class="list-group list-group-flush">
     <c:forEach items="${categoriesWithDetails}" var="c">
@@ -21,7 +21,7 @@
 
 <div class="card mt-2" style="width: 15rem;">
   <h4 class="card-header">
-    SubCategories
+    Danh mục con
   </h4>
   <div class="list-group list-group-flush">
     <c:forEach items="${subcategoriesWithDetails}" var="s">

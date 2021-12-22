@@ -54,6 +54,10 @@
           </tr>
           </tbody>
         </table>
+        <a class="btn btn-sm btn-outline-success" href="#" role="button">
+          <i class="fa fa-gavel" aria-hidden="true"></i>
+          Ra giá
+        </a>
       </div>
     </div>
   </jsp:body>
