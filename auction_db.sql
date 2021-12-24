@@ -111,7 +111,7 @@ CREATE TABLE `product`  (
   `TinyDes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `FullDes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Bin` bigint NOT NULL COMMENT 'giá mua ngay',
-  `UploadDate` date NOT NULL,
+  `UploadDate` datetime NOT NULL,
   `CatID` int NOT NULL,
   `ImgIndex` int NULL DEFAULT NULL,
   PRIMARY KEY (`ProID`) USING BTREE,
@@ -174,7 +174,7 @@ CREATE TABLE `user`  (
   `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Dob` date NOT NULL,
+  `Dob` datetime NOT NULL,
   `Permission` int NOT NULL,
   `Rating` int NOT NULL,
   PRIMARY KEY (`UserID`) USING BTREE
