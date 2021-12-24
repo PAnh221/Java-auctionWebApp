@@ -5,9 +5,9 @@
 <jsp:useBean id="subcategoriesWithDetails" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.SubCategory>"/>
 
 <div class="card" style="width: 15rem;">
-  <h4 class="card-header">
+  <h5 class="card-header">
     Danh mục
-  </h4>
+  </h5>
   <div class="list-group list-group-flush">
     <c:forEach items="${categoriesWithDetails}" var="c">
       <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.catID}" class="list-group-item list-group-item-action">
@@ -20,9 +20,9 @@
 </div>
 
 <div class="card mt-2" style="width: 15rem;">
-  <h4 class="card-header">
+  <h5 class="card-header">
     Danh mục con
-  </h4>
+  </h5>
   <div class="list-group list-group-flush">
     <c:forEach items="${subcategoriesWithDetails}" var="s">
       <a href="${pageContext.request.contextPath}/Product/BySubCat?id=${s.subCatID}" class="list-group-item list-group-item-action">

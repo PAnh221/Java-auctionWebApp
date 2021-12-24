@@ -3,9 +3,11 @@ package com.ute.auctionwebapp.controllers;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Category;
 import com.ute.auctionwebapp.beans.Product;
+import com.ute.auctionwebapp.beans.User;
 import com.ute.auctionwebapp.beans.Watchlist;
 import com.ute.auctionwebapp.models.CategoryModel;
 import com.ute.auctionwebapp.models.ProductModel;
+import com.ute.auctionwebapp.models.UserModel;
 import com.ute.auctionwebapp.models.WatchlistModel;
 
 import javax.servlet.ServletException;
@@ -25,12 +27,12 @@ public class ProductFEServlet extends HttpServlet {
       path = "/Index";
     }
     switch (path) {
-      case "/AddWatchlist":
-        int id_user = 1;
-        int id_product = Integer.parseInt(request.getParameter("proid"));
-        Watchlist w = new Watchlist(id_product, id_user);
-        WatchlistModel.add(w);
-//        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
+//      case "/AddWatchlist":
+//        int id_user = 1;
+//        int id_product = Integer.parseInt(request.getParameter("proid"));
+//        Watchlist w = new Watchlist(id_product, id_user);
+//        WatchlistModel.add(w);
+////        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
       case "/Index":
         List<Product> listP = ProductModel.findAll();
         request.setAttribute("products", listP);
@@ -63,12 +65,22 @@ public class ProductFEServlet extends HttpServlet {
       case "/Detail":
         int proId = Integer.parseInt(request.getParameter("id"));
         Product product = ProductModel.findById(proId);
-        List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId);
+        List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId); //danh sach sp cung subcat
+
+//        int sID = product.getSellerID();
+        try {
+          User s = UserModel.findById(1);
+        }
+        catch (IllegalArgumentException i) {
+          System.out.println("notgud");
+        }
+
         if (product == null) {
           ServletUtils.redirect("/Home", request, response);
         } else {
           request.setAttribute("product", product);
           request.setAttribute("relevantProducts", list_relevant);
+//          request.setAttribute("seller", s);
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
         break;

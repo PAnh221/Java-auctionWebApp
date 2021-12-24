@@ -5,6 +5,7 @@
 
 <jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product" />
 <jsp:useBean id="relevantProducts" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
+<%--<jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />--%>
 
 <t:main>
   <jsp:body>
@@ -14,7 +15,7 @@
       </h4>
 
       <div class="card-body">
-        <img src="${pageContext.request.contextPath}/public/imgs/sp/1/main.jpg" alt="${product.proName}" title="${product.proName}">
+<%--        <img src="${pageContext.request.contextPath}/public/imgs/sp/1/main.jpg" alt="${product.proName}" title="${product.proName}">--%>
         <div class="mt-3">
           <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?proid=${c.proID}" role="button">
             <i class="fa fa-heart" aria-hidden="true"></i>
@@ -67,7 +68,7 @@
           Ra giá
         </button>
         <div class="alert alert-primary mt-3" role="alert">
-          Người bán: ...
+<%--          Người bán: ${sellerInfomation.name}--%>
         </div>
       </div>
     </div>

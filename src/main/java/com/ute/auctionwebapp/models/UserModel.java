@@ -1,6 +1,7 @@
 package com.ute.auctionwebapp.models;
 
 import com.ute.auctionwebapp.Utils.DbUtils;
+import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.beans.User;
 import org.sql2o.Connection;
 
@@ -25,7 +26,6 @@ public class UserModel {
       if (list.size() == 0) {
         return null;
       }
-
       return list.get(0);
     }
   }

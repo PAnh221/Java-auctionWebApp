@@ -1,7 +1,7 @@
 package com.ute.auctionwebapp.beans;
 
 public class Watchlist {
-    int ProID, UserID;
+    private int ProID, UserID;
 
     public Watchlist(int proID, int userID) {
         ProID = proID;
