@@ -29,9 +29,22 @@ public class UserModel {
       return list.get(0);
     }
   }
+  public static User findByUsername(String username) {
+    final String query = "select * from user where UserName = :UserName";
+    try (Connection con = DbUtils.getConnection()) {
+      List<User> list = con.createQuery(query)
+              .addParameter("UserName", username)
+              .executeAndFetch(User.class);
+
+      if (list.size() == 0) {
+        return null;
+      }
+      return list.get(0);
+    }
+  }
 
   public static void add(User c) {
-    String insertSql = "INSERT INTO user (UserID, UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
+    String insertSql = "INSERT INTO user (UserID,UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
               .addParameter("userid", c.getUserID())
