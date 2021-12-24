@@ -45,16 +45,21 @@
     <div class="admin_product">
         <div class="admin_login_info">
             <i class="fal fa-boxes"></i>
-            Manage Product
+            Manage Auction
             <a data-toggle="collapse" href="#3" aria-expanded="false" aria-controls="collapseExample">
                 <i class="arrow down"></i>
             </a>
         </div>
         <div class="collapse" id="3">
             <div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Add Category</a>
+                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Product List</a>
             </div>
-            <a href="#">Delete Category</a>
+            <div>
+                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Live Auction</a>
+            </div>
+            <div>
+                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Won Auction</a>
+            </div>
         </div>
     </div>
 </div>
@@ -68,10 +73,11 @@
             </a>
         </div>
         <div class="collapse" id="4">
+            <a href="#">Seller</a><br>
+            <a href="#">Bidder</a><br>
             <div>
-                <a href="#">Add User</a>
+                <a href="#">List User</a>
             </div>
-            <a href="#">Delete Category</a>
         </div>
     </div>
 </div>

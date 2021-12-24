@@ -4,11 +4,10 @@ package com.ute.auctionwebapp.controllers;
 //import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Category;
+import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.beans.SubCategory;
 import com.ute.auctionwebapp.beans.User;
-import com.ute.auctionwebapp.models.CategoryModel;
-import com.ute.auctionwebapp.models.SubCategoryModel;
-import com.ute.auctionwebapp.models.UserModel;
+import com.ute.auctionwebapp.models.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,23 +27,13 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
-            path = "/Product/Index";
+            path = "/Index";
         }
 
         switch (path) {
-            case "/Product/Index":
-                ServletUtils.forward("/views/vwAdmin/Product/login.jsp", request, response);
+            case "/Index":
+                ServletUtils.forward("/views/vwAdmin/login.jsp", request, response);
                 break;
-            case "/Product/Detail":
-                ServletUtils.forward("/views/vwAdmin/Product/indexProduct.jsp", request, response);
-                break;
-            case "/Product/Add":
-                ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
-                break;
-            case "/Product/Edit":
-                ServletUtils.forward("/views/vwAdmin/Product/editProduct.jsp", request, response);
-                break;
-
 
 //              CATEGORY <=============================================================
             case "/Category/Add":
@@ -128,6 +118,29 @@ public class AdminServlet extends HttpServlet {
                 ServletUtils.redirect("/Admin/User/Detail", request, response);
                 break;
 
+            //              PRODUCT <====================================================================
+            case "/Product/Add":
+                ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
+                break;
+            case "/Product/Detail":
+                List<Product> products = ProductModelAdmin.findAll();
+                request.setAttribute("products", products);
+                ServletUtils.forward("/views/vwAdmin/Product/indexProduct.jsp", request, response);
+                break;
+            case "/Product/Edit":
+                int proid = Integer.parseInt(request.getParameter("id"));
+                Product prod = ProductModelAdmin.findById(proid);
+                if (prod == null)
+                {
+                    ServletUtils.forward("/views/vwAdmin/Product/indexProduct.jsp", request, response);
+                }
+                else
+                {
+                    request.setAttribute("product", prod);
+                    ServletUtils.forward("/views/vwAdmin/Product/editProduct.jsp", request, response);
+                }
+                break;
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -145,11 +158,20 @@ public class AdminServlet extends HttpServlet {
             case "/Product/Login":
                 String username = request.getParameter("user");
                 String pass = request.getParameter("pass");
-                if(username.equals("admin") & pass.equals("admin"))
-                {
-                    ServletUtils.forward("/views/vwAdmin/Product/index.jsp", request, response);
+                try {
+                    if(username.equals("admin") & pass.equals("admin"))
+                    {
+                        ServletUtils.redirect("/Admin/Category/Detail", request, response);
+                    }
+                    else
+                    {
+                        ServletUtils.redirect("/Admin",request,response);
+                    }
                 }
-                ServletUtils.redirect("/Admin",request,response);
+                catch (Exception e)
+                {
+                    ServletUtils.redirect("/Admin",request,response);
+                }
                 break;
             case "/Category/Add":
                 addCategory(request, response);
@@ -183,6 +205,18 @@ public class AdminServlet extends HttpServlet {
             case "/User/Delete":
                 deleteUser(request, response);
                 break;
+
+//                PRODUCT <===========================================================
+            case "/Product/Add":
+                addProduct(request, response);
+                break;
+            case "/Product/Update":
+                updateProduct(request, response);
+                break;
+            case "/Product/Delete":
+                deleteProduct(request, response);
+                break;
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -278,6 +312,51 @@ public class AdminServlet extends HttpServlet {
         int userid = Integer.parseInt(request.getParameter("userid"));
         UserModel.delete(userid);
         ServletUtils.redirect("/Admin/User/Detail", request, response);
+    }
+
+
+    private void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int imgindex = Integer.parseInt(request.getParameter("imgindex"));
+        int catid = Integer.parseInt(request.getParameter("catid"));
+        String proname = request.getParameter("proname");
+        int bin = Integer.parseInt(request.getParameter("bin"));
+        String fulldes = request.getParameter("fulldes");
+        String tinydes = request.getParameter("tinydes");
+        String bd = request.getParameter("uploaddate")+" 00:00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime uploaddate = LocalDateTime.parse(bd, df);
+        int sellerid = Integer.parseInt(request.getParameter("sellerid"));
+        int subcatid = Integer.parseInt(request.getParameter("subcatid"));
+        int proid = Integer.parseInt(request.getParameter("proid"));
+
+        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, catid, imgindex, uploaddate, bin);
+        ProductModelAdmin.add(prod);
+        ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
+    }
+//(ImgIndex, CatID, UploadDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, ProID)
+    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int imgindex = Integer.parseInt(request.getParameter("imgindex"));
+        int catid = Integer.parseInt(request.getParameter("catid"));
+        String proname = request.getParameter("proname");
+        int bin = Integer.parseInt(request.getParameter("bin"));
+        String fulldes = request.getParameter("fulldes");
+        String tinydes = request.getParameter("tinydes");
+        String bd = request.getParameter("uploaddate")+" 00:00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime uploaddate = LocalDateTime.parse(bd, df);
+        int sellerid = Integer.parseInt(request.getParameter("sellerid"));
+        int subcatid = Integer.parseInt(request.getParameter("subcatid"));
+        int proid = Integer.parseInt(request.getParameter("proid"));
+
+        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, catid, imgindex, uploaddate, bin);
+        ProductModelAdmin.update(prod);
+        ServletUtils.redirect("/Admin/Product/Detail", request, response);
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int proid = Integer.parseInt(request.getParameter("proid"));
+        ProductModelAdmin.delete(proid);
+        ServletUtils.redirect("/Admin/Product/Detail", request, response);
     }
 
 
