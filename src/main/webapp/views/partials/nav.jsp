@@ -61,10 +61,7 @@
 <%--        </c:when>--%>
 <%--        <c:otherwise>--%>
           <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/Account/Login">Login</a>
           </li>
 <%--        </c:otherwise>--%>
 <%--      </c:choose>--%>
