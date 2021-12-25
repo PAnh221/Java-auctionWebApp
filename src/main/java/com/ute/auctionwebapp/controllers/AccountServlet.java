@@ -96,7 +96,11 @@ public class AccountServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", true);
                 session.setAttribute("authUser", user);
-                ServletUtils.redirect("/Home", request, response);
+
+                String url = String.valueOf(session.getAttribute("retUrl"));
+                if(url==null)
+                    url = "/Home";
+                ServletUtils.redirect(url, request, response);
             } else {
                 request.setAttribute("hasError", true);
                 request.setAttribute("errorMessage", "Invalid login.");

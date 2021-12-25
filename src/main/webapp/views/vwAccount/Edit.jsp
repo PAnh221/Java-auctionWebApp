@@ -20,11 +20,25 @@
         <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
             <div class="card p-3">
                 <div class="e-navlist e-navlist--active-bg">
-                    <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post"></form>
+                    <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout"
+                          method="post"></form>
                     <ul class="nav">
-                        <li class="nav-item"><a class="nav-link px-2 active" href="${pageContext.request.contextPath}/Home">
+                        <li class="nav-item"><a class="nav-link px-2 active"
+                                                href="${pageContext.request.contextPath}/Home">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <span>Home</span>
+                        </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link px-2 active"
+                                                href="${pageContext.request.contextPath}/Account/Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                 fill="currentColor" class="bi bi-person-square"
+                                 viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path
+                                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                            </svg>
+                            <span>Profile</span>
                         </a>
                         </li>
                         <li class="nav-item">
@@ -84,14 +98,16 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Full Name</label>
-                                                                <input class="form-control" type="text" name="name" placeholder="John Smith"
+                                                                <input class="form-control" type="text" name="name"
+                                                                       placeholder="John Smith"
                                                                        value="John Smith">
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Username</label>
-                                                                <input class="form-control" type="text" name="username" placeholder="johnny.s"
+                                                                <input class="form-control" type="text" name="username"
+                                                                       placeholder="johnny.s"
                                                                        value="johnny.s" disabled>
                                                             </div>
                                                         </div>
@@ -100,7 +116,8 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Email</label>
-                                                                <input class="form-control" type="text" placeholder="user@example.com">
+                                                                <input class="form-control" type="text"
+                                                                       placeholder="user@example.com">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -108,7 +125,8 @@
                                                         <div class="col mb-3">
                                                             <div class="form-group">
                                                                 <label>About</label>
-                                                                <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
+                                                                <textarea class="form-control" rows="5"
+                                                                          placeholder="My Bio"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -121,7 +139,8 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Current Password</label>
-                                                                <input class="form-control" type="password" placeholder="••••••">
+                                                                <input class="form-control" type="password"
+                                                                       placeholder="••••••">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -129,15 +148,18 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>New Password</label>
-                                                                <input class="form-control" type="password" placeholder="••••••">
+                                                                <input class="form-control" type="password"
+                                                                       placeholder="••••••">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                <input class="form-control" type="password" placeholder="••••••">
+                                                                <label>Confirm <span
+                                                                        class="d-none d-xl-inline">Password</span></label>
+                                                                <input class="form-control" type="password"
+                                                                       placeholder="••••••">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -149,19 +171,25 @@
                                                             <label>Email Notifications</label>
                                                             <div class="custom-controls-stacked px-2">
                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="notifications-blog"
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                           id="notifications-blog"
                                                                            checked="">
-                                                                    <label class="custom-control-label" for="notifications-blog">Blog posts</label>
+                                                                    <label class="custom-control-label"
+                                                                           for="notifications-blog">Blog posts</label>
                                                                 </div>
                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="notifications-news"
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                           id="notifications-news"
                                                                            checked="">
-                                                                    <label class="custom-control-label" for="notifications-news">Newsletter</label>
+                                                                    <label class="custom-control-label"
+                                                                           for="notifications-news">Newsletter</label>
                                                                 </div>
                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="notifications-offers"
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                           id="notifications-offers"
                                                                            checked="">
-                                                                    <label class="custom-control-label" for="notifications-offers">Personal
+                                                                    <label class="custom-control-label"
+                                                                           for="notifications-offers">Personal
                                                                         Offers</label>
                                                                 </div>
                                                             </div>
