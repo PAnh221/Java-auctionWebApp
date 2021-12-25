@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebFilter(filterName = "LayoutFilter")
+@WebFilter(filterName = "AuthFilter")
 public class AuthFilter implements Filter {
   public void init(FilterConfig config) throws ServletException {
   }

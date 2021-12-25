@@ -38,7 +38,7 @@
         <%-- <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">--%>
         <%-- <i class="fa fa-search" aria-hidden="true"></i>--%>
         <%-- </button>--%>
-        </form>
+<%--        </form>--%>
         <ul class="navbar-nav">
             <c:choose>
                 <c:when test="${auth}">
