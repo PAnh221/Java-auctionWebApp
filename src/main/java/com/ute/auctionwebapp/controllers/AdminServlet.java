@@ -96,7 +96,18 @@ public class AdminServlet extends HttpServlet {
                     ServletUtils.forward("/views/vwAdmin/SubCategory/editSubCat.jsp", request, response);
                 }
                 break;
+            case "/SubCategory/IsAvailable":
+                int subcatid = Integer.parseInt(request.getParameter("id"));
+                Product checkpr = ProductModelAdmin.findBySubCat(subcatid);
+                Boolean isAvailabl = (checkpr == null);
 
+                PrintWriter outt = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                outt.print(isAvailabl);
+                outt.flush();
+                break;
 //              USER <====================================================================
             case "/User/Add":
                 ServletUtils.forward("/views/vwAdmin/User/addUser.jsp", request, response);
