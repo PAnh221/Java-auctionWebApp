@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
@@ -57,7 +58,18 @@ public class AdminServlet extends HttpServlet {
                     ServletUtils.forward("/views/vwAdmin/Category/editCategory.jsp", request, response);
                 }
                 break;
+            case "/Category/IsAvailable":
+                int catid = Integer.parseInt(request.getParameter("id"));
+                Product checkp = ProductModelAdmin.findByCat(catid);
+                Boolean isAvai = (checkp == null);
 
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                out.print(isAvai);
+                out.flush();
+                break;
 //             SUB CATEGORY <==================================================
             case "/SubCategory/Add":
                 List<Category> listCate = CategoryModel.findAll();
@@ -72,14 +84,14 @@ public class AdminServlet extends HttpServlet {
             case "/SubCategory/Edit":
                 int id2 = Integer.parseInt(request.getParameter("id"));
                 SubCategory c2 = SubCategoryModel.findById(id2);
-                List<Category> listCat = CategoryModel.findAll();
+                List<Category> listCat2 = CategoryModel.findAll();
                 if (c2 == null)
                 {
                     ServletUtils.forward("/views/vwAdmin/SubCategory/indexSubCat.jsp", request, response);
                 }
                 else
                 {
-                    request.setAttribute("categories", listCat);
+                    request.setAttribute("categories", listCat2);
                     request.setAttribute("category", c2);
                     ServletUtils.forward("/views/vwAdmin/SubCategory/editSubCat.jsp", request, response);
                 }
@@ -257,8 +269,16 @@ public class AdminServlet extends HttpServlet {
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("catid"));
-        CategoryModel.delete(id);
-        ServletUtils.redirect("/Admin/Category/Detail", request, response);
+        Product pro = ProductModelAdmin.findByCat(id);
+        if (pro != null)
+        {
+            ServletUtils.redirect("/Admin/Category/Edit?id="+id, request, response);
+        }
+        else
+        {
+            CategoryModel.delete(id);
+            ServletUtils.redirect("/Admin/Category/Detail", request, response);
+        }
     }
 
     private void addSubCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -282,8 +302,16 @@ public class AdminServlet extends HttpServlet {
 
     private void deleteSubCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("subcatid"));
-        SubCategoryModel.delete(id);
-        ServletUtils.redirect("/Admin/SubCategory/Detail", request, response);
+        Product pro = ProductModelAdmin.findBySubCat(id);
+        if (pro != null)
+        {
+            ServletUtils.redirect("/Admin/SubCategory/Edit?id="+id, request, response);
+        }
+        else
+        {
+            SubCategoryModel.delete(id);
+            ServletUtils.redirect("/Admin/SubCategory/Detail", request, response);
+        }
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

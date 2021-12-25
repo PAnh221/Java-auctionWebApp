@@ -2,6 +2,7 @@ package com.ute.auctionwebapp.models;
 
 import com.ute.auctionwebapp.beans.Category;
 import com.ute.auctionwebapp.Utils.DbUtils;
+import com.ute.auctionwebapp.beans.Product;
 import org.sql2o.Connection;
 
 import java.util.List;
@@ -39,6 +40,21 @@ public class CategoryModel {
       }
 
       return list.get(0);
+    }
+  }
+
+  public static Boolean findByIdPro(int CatID) {
+    final String query = "select * from product where CatID = :CatID";
+    try (Connection con = DbUtils.getConnection()) {
+      List<Product> list = con.createQuery(query)
+              .addParameter("CatID", CatID)
+              .executeAndFetch(Product.class);
+
+      if (list.size() == 0) {
+        return false;
+      }
+
+      return true;
     }
   }
 
