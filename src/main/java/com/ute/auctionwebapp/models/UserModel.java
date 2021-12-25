@@ -29,6 +29,24 @@ public class UserModel {
       return list;
     }
   }
+
+  public static List<User> findBy2Permission(int id, int id2) {
+    final String query = "select * from user where Permission = :Permission or Permission = :Permission2";
+    try (Connection con = DbUtils.getConnection()) {
+      List<User> list = con.createQuery(query)
+              .addParameter("Permission", id)
+              .addParameter("Permission2", id2)
+              .executeAndFetch(User.class);
+
+      if (list.size() == 0) {
+        return null;
+      }
+
+      return list;
+    }
+  }
+
+
   public static User findById(int id) {
     final String query = "select * from user where UserID = :UserID";
     try (Connection con = DbUtils.getConnection()) {
@@ -100,7 +118,7 @@ public class UserModel {
   }
 
   public static void upgradeBidder(int id) {
-    String sql = "UPDATE user SET  Permission = 1 WHERE UserID = :userid and Rating > 9\n";
+    String sql = "UPDATE user SET  Permission = 2 WHERE UserID = :userid and Rating > 9\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", id)
@@ -108,7 +126,7 @@ public class UserModel {
     }
   }
   public static void degradeSeller(int id) {
-    String sql = "UPDATE user SET  Permission = 2 WHERE UserID = :userid \n";
+    String sql = "UPDATE user SET  Permission = 1 WHERE UserID = :userid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", id)

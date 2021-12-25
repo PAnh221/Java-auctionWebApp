@@ -120,10 +120,10 @@ public class AdminServlet extends HttpServlet {
             case "/User/UpgradeBidder":
                 List<User> listUpgrade = UserModel.findByPermission(0);
                 request.setAttribute("users", listUpgrade);
-                ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/User/indexUpgradeUser.jsp", request, response);
                 break;
             case "/User/Seller":
-                List<User> listSeller = UserModel.findByPermission(1);
+                List<User> listSeller = UserModel.findBy2Permission(1, 0);
                 request.setAttribute("users", listSeller);
                 ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
                 break;
