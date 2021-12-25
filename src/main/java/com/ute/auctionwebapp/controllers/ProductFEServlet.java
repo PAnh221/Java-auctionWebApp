@@ -67,20 +67,16 @@ public class ProductFEServlet extends HttpServlet {
         Product product = ProductModel.findById(proId);
         List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId); //danh sach sp cung subcat
 
-//        int sID = product.getSellerID();
-        try {
-          User s = UserModel.findById(1);
-        }
-        catch (IllegalArgumentException i) {
-          System.out.println("notgud");
-        }
+        int sID = product.getSellerID();
+        User s = UserModel.findById(sID);
+
 
         if (product == null) {
           ServletUtils.redirect("/Home", request, response);
         } else {
           request.setAttribute("product", product);
           request.setAttribute("relevantProducts", list_relevant);
-//          request.setAttribute("seller", s);
+          request.setAttribute("seller", s);
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
         break;

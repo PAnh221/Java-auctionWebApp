@@ -5,7 +5,7 @@
 
 <jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product" />
 <jsp:useBean id="relevantProducts" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
-<%--<jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />--%>
+<jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />
 
 <t:main>
   <jsp:body>
@@ -68,7 +68,9 @@
           Ra giá
         </button>
         <div class="alert alert-primary mt-3" role="alert">
-<%--          Người bán: ${sellerInfomation.name}--%>
+          <p><i class="fa fa-id-badge mr-2" aria-hidden="true"></i>${seller.name}</p>
+          <p><i class="fa fa-envelope mr-1" aria-hidden="true"></i>${seller.email}</p>
+<%--          <p><i class="fa fa-star mr-1" aria-hidden="true"></i>${seller.rating}</p>--%>
         </div>
       </div>
     </div>
