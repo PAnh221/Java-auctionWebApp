@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -168,12 +170,18 @@ public class AdminServlet extends HttpServlet {
             case "/Product/Edit":
                 int proid = Integer.parseInt(request.getParameter("id"));
                 Product prod = ProductModelAdmin.findById(proid);
+                List<Category> pro_listCat = CategoryModel.findAll();
+                List<SubCategory> pro_listSub = SubCategoryModel.findAll();
+                List<User> pro_listUser = UserModel.findAll();
                 if (prod == null)
                 {
                     ServletUtils.forward("/views/vwAdmin/Product/indexProduct.jsp", request, response);
                 }
                 else
                 {
+                    request.setAttribute("categories", pro_listCat);
+                    request.setAttribute("subcategories", pro_listSub);
+                    request.setAttribute("users", pro_listUser);
                     request.setAttribute("product", prod);
                     ServletUtils.forward("/views/vwAdmin/Product/editProduct.jsp", request, response);
                 }
@@ -234,7 +242,7 @@ public class AdminServlet extends HttpServlet {
             case "/User/Add":
                 addUser(request, response);
                 break;
-            case "/User/Isavailable":
+            case "/User/IsAvailable":
                 isAvailable(request, response);
                 break;
             case "/User/Update":
@@ -351,7 +359,11 @@ public class AdminServlet extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String bd = request.getParameter("dob")+" 00:00";
+        String year = request.getParameter("dob").substring(0,4);
+        String month = request.getParameter("dob").substring(5,7);
+        String day = request.getParameter("dob").substring(8,10);
+
+        String bd = day+"/"+month+ "/"+ year +" 00:00";
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dob = LocalDateTime.parse(bd, df);
         int permission = Integer.parseInt(request.getParameter("permission"));
@@ -395,7 +407,8 @@ public class AdminServlet extends HttpServlet {
         int bin = Integer.parseInt(request.getParameter("bin"));
         String fulldes = request.getParameter("fulldes");
         String tinydes = request.getParameter("tinydes");
-        String bd = request.getParameter("uploaddate")+" 00:00";
+//        LocalDate.now() //Định dạng là dd/MM/yyyy thì db mới nhận
+        String bd = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+" 00:00";
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime uploaddate = LocalDateTime.parse(bd, df);
         int sellerid = Integer.parseInt(request.getParameter("sellerid"));

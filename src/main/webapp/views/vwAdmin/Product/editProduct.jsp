@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product"/>
+<jsp:useBean id="categories" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Category>" />
+<jsp:useBean id="subcategories" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.SubCategory>" />
+<jsp:useBean id="users" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.User>" />
 
 <html>
 <head>
@@ -43,26 +46,66 @@
                             <span>Full Des</span><br>
                             <input type="text" name="fulldes" value="${product.fullDes}">
                         </div>
+
                         <div class="input-form">
-                            <span>Cat ID</span><br>
-                            <input type="text" name="catid" value="${product.catID}">
+                            <span>Category</span><br>
+                            <select id="catid" name="catid"  style="width: 94%;
+                                                                    padding: 6.5px 10px;
+                                                                    outline: none;
+                                                                    border: 1px solid #607d8b;
+                                                                    font-size: 16px;
+                                                                    letter-spacing: 1px;
+                                                                    background: transparent;
+                                                                    border-radius: 3px;
+                                                                    margin-bottom: 5px;">
+                                <c:forEach items="${categories}" var="c">
+                                    <option value="${c.catID}">${c.catName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
+
                         <div class="input-form">
-                            <span>Subcat ID</span>
-                            <input type="text" name="subcatid" value="${product.subCatID}">
+                            <span>Sub Category</span><br>
+                            <select id="subcatid" name="subcatid"  style="width: 94%;
+                                                                    padding: 6.5px 10px;
+                                                                    outline: none;
+                                                                    border: 1px solid #607d8b;
+                                                                    font-size: 16px;
+                                                                    letter-spacing: 1px;
+                                                                    background: transparent;
+                                                                    border-radius: 3px;
+                                                                    margin-bottom: 5px;">
+                                <c:forEach items="${subcategories}" var="c">
+                                    <option value="${c.subCatID}">${c.subCatName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
+
                         <div class="input-form">
-                            <span>Seller ID</span><br>
-                            <input type="text" name="sellerid" value="${product.sellerID}">
+                            <span>User</span><br>
+                            <select id="sellerid" name="sellerid"  style="width: 94%;
+                                                                    padding: 6.5px 10px;
+                                                                    outline: none;
+                                                                    border: 1px solid #607d8b;
+                                                                    font-size: 16px;
+                                                                    letter-spacing: 1px;
+                                                                    background: transparent;
+                                                                    border-radius: 3px;
+                                                                    margin-bottom: 5px;">
+                                <c:forEach items="${users}" var="c">
+                                    <option value="${c.userID}">${c.userName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
+
                         <div class="input-form">
                             <span>Index Img</span><br>
                             <input type="text" name="imgindex" value="${product.imgIndex}">
                         </div>
-                        <div class="input-form">
-                            <span>Upload Date</span>
-                            <input type="text" name="uploaddate" id="txtUploadDate" value="${product.uploadDate}">
-                        </div>
+<%--                        <div class="input-form">--%>
+<%--                            <span>Upload Date</span>--%>
+<%--                            <input type="text" name="uploaddate" id="txtUploadDate" value="${product.uploadDate}">--%>
+<%--                        </div>--%>
                         <div class="input-form">
                             <span>Bin</span><br>
                             <input type="text" name="bin" value="${product.bin}">
@@ -86,6 +129,7 @@
 </div>
 
 <script>
+    const dates = $('#txtUploadDate').val();
     $('#txtUploadDate').datetimepicker(
         {
             format: 'd/m/Y',
@@ -93,6 +137,7 @@
             mask: true
         }
     );
+    $('#txtUploadDate').value = dates;
     $('#frmProduct').on('submit', function (e) {
         e.preventDefault();
         const proname = $('#productname').val();

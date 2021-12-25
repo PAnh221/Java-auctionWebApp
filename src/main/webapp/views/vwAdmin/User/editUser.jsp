@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="user" scope="request" type="com.ute.auctionwebapp.beans.User"/>
 
 <html>
@@ -91,28 +92,17 @@
             }
         );
     });
-    $('#frmUser').on('submit', function (e) {
-        e.preventDefault();
-        const username = $('#username').val();
-        if(username.length ===0)
-        {
-            alert("Mời bạn điền đầy đủ thông tin!");
-            return;
-        };
-
-        <%--$.getJSON('${pageContext.request.contextPath}/Admin/User/IsAvailable?user=' + username, function (data) {--%>
-        <%--    if (data ==true)--%>
-        <%--    {--%>
-        <%--        $('#frmUser').off('submit').submit();--%>
-        <%--        alert("Đăng ký thành công!");--%>
-        <%--    }--%>
-        <%--    else--%>
-        <%--    {--%>
-        <%--        alert("Tên người dùng đã tồn tại!")--%>
-        <%--    }--%>
-        <%--});--%>
-        $('#frmUser').off('submit').submit();
-    });
+    // $('#frmUser').on('submit', function (e) {
+    //     e.preventDefault();
+    //     const username = $('#username').val();
+    //     if(username.length ===0)
+    //     {
+    //         alert("Mời bạn điền đầy đủ thông tin!");
+    //         return;
+    //     };
+    //
+    //     $('#frmUser').off('submit').submit();
+    // });
 </script>
 </body>
 </html>
