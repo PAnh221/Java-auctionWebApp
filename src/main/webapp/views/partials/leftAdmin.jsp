@@ -34,9 +34,9 @@
         </div>
         <div class="collapse" id="2">
             <div>
-                <a href="#">Category</a>
+                <a href="${pageContext.request.contextPath}/Admin/Category/Detail">Category</a>
             </div>
-            <a href="#">Sub Category</a>
+            <a href="${pageContext.request.contextPath}/Admin/SubCategory/Detail">Sub Category</a>
         </div>
     </div>
 </div>
@@ -52,13 +52,13 @@
         </div>
         <div class="collapse" id="3">
             <div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Product List</a>
+                <a href="${pageContext.request.contextPath}/Admin/Product/Detail">Product List</a>
             </div>
             <div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Live Auction</a>
+                <a href="${pageContext.request.contextPath}/Admin/Product/Live">Live Auction</a>
             </div>
             <div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Add">Won Auction</a>
+                <a href="${pageContext.request.contextPath}/Admin/Product/Won">Won Auction</a>
             </div>
         </div>
     </div>
@@ -73,10 +73,11 @@
             </a>
         </div>
         <div class="collapse" id="4">
-            <a href="#">Seller</a><br>
-            <a href="#">Bidder</a><br>
+            <a href="${pageContext.request.contextPath}/Admin/User/UpgradeBidder">Upgrade Bidder</a><br>
+            <a href="${pageContext.request.contextPath}/Admin/User/Seller">Seller</a><br>
+            <a href="${pageContext.request.contextPath}/Admin/User/Bidder">Bidder</a><br>
             <div>
-                <a href="#">List User</a>
+                <a href="${pageContext.request.contextPath}/Admin/User/Detail">List User</a>
             </div>
         </div>
     </div>

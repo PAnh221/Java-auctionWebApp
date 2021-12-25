@@ -15,7 +15,20 @@ public class UserModel {
         .executeAndFetch(User.class);
     }
   }
+  public static List<User> findByPermission(int id) {
+    final String query = "select * from user where Permission = :Permission";
+    try (Connection con = DbUtils.getConnection()) {
+      List<User> list = con.createQuery(query)
+              .addParameter("Permission", id)
+              .executeAndFetch(User.class);
 
+      if (list.size() == 0) {
+        return null;
+      }
+
+      return list;
+    }
+  }
   public static User findById(int id) {
     final String query = "select * from user where UserID = :UserID";
     try (Connection con = DbUtils.getConnection()) {
@@ -29,9 +42,22 @@ public class UserModel {
       return list.get(0);
     }
   }
+  public static User findByUsername(String username) {
+    final String query = "select * from user where UserName = :UserName";
+    try (Connection con = DbUtils.getConnection()) {
+      List<User> list = con.createQuery(query)
+              .addParameter("UserName", username)
+              .executeAndFetch(User.class);
+
+      if (list.size() == 0) {
+        return null;
+      }
+      return list.get(0);
+    }
+  }
 
   public static void add(User c) {
-    String insertSql = "INSERT INTO user (UserID, UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
+    String insertSql = "INSERT INTO user (UserID,UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
               .addParameter("userid", c.getUserID())
