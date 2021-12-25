@@ -15,7 +15,20 @@ public class UserModel {
         .executeAndFetch(User.class);
     }
   }
+  public static List<User> findByPermission(int id) {
+    final String query = "select * from user where Permission = :Permission";
+    try (Connection con = DbUtils.getConnection()) {
+      List<User> list = con.createQuery(query)
+              .addParameter("Permission", id)
+              .executeAndFetch(User.class);
 
+      if (list.size() == 0) {
+        return null;
+      }
+
+      return list;
+    }
+  }
   public static User findById(int id) {
     final String query = "select * from user where UserID = :UserID";
     try (Connection con = DbUtils.getConnection()) {

@@ -94,6 +94,21 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("users", listUser);
                 ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
                 break;
+            case "/User/UpgradeBidder":
+                List<User> listUpgrade = UserModel.findByPermission(0);
+                request.setAttribute("users", listUpgrade);
+                ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
+                break;
+            case "/User/Seller":
+                List<User> listSeller = UserModel.findByPermission(1);
+                request.setAttribute("users", listSeller);
+                ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
+                break;
+            case "/User/Bidder":
+                List<User> listBidder = UserModel.findByPermission(2);
+                request.setAttribute("users", listBidder);
+                ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
+                break;
             case "/User/Edit":
                 int userid = Integer.parseInt(request.getParameter("id"));
                 User user = UserModel.findById(userid);
