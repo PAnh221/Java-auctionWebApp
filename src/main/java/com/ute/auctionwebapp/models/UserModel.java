@@ -75,9 +75,10 @@ public class UserModel {
   }
 
   public static void add(User c) {
-    String insertSql = "INSERT INTO user (UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
+    String insertSql = "INSERT INTO user (UserID,UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
+              .addParameter("userid", c.getUserID())
               .addParameter("username", c.getUserName())
               .addParameter("name", c.getName())
               .addParameter("password", c.getPassword())
