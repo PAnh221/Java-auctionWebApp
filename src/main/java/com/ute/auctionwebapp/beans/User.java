@@ -10,6 +10,16 @@ public class User {
   public User() {
   }
 
+  public User(int permission, int rating, String userName, String name, String password, String address, String email, LocalDateTime dob) {
+    Permission = permission;
+    Rating = rating;
+    UserName = userName;
+    Name = name;
+    Password = password;
+    Address = address;
+    Email = email;
+    Dob = dob;
+  }
 
   public User(int userID, int permission, int rating, String userName, String name, String password, String address, String email, LocalDateTime dob) {
     UserID = userID;

@@ -81,7 +81,7 @@
                                     </span>
                     </label>
                 </div>
-                <a id="forgot-password-link" href="#">Forgot Password?</a>
+                <a id="forgot-password-link" href="${pageContext.request.contextPath}/Account/ForgetPass">Forgot Password?</a>
             </div>
         </div>
 
