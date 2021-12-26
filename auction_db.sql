@@ -168,7 +168,7 @@ INSERT INTO `subcategory` VALUES (14, 'Phương tiện loại 2', 7);
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `UserID` int NOT NULL,
+  `UserID` int NOT NULL AUTO_INCREMENT,
   `UserName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
