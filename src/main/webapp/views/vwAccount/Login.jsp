@@ -70,8 +70,7 @@
                                 <label class="custom-control-label" for="customCheck">Remember me</label>
                             </div>
                             <div class="forgot float-right">
-                                <a href="http://localhost:8080/forgetpass.html" id="forgot-link">Forgot
-                                    Password?</a>
+                                <a href="${pageContext.request.contextPath}/Account/ForgetPass" id="forgot-link">Forgot Password?</a>
                             </div>
                         </div>
                         <div class="form-group">
