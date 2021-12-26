@@ -1,5 +1,6 @@
 package com.ute.auctionwebapp.controllers;
 
+import com.mysql.cj.Session;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Category;
 import com.ute.auctionwebapp.beans.Product;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,13 +28,35 @@ public class ProductFEServlet extends HttpServlet {
     if (path == null || path.equals("/")) {
       path = "/Index";
     }
+
+    HttpSession session = request.getSession();
+    String state = String.valueOf(session.getAttribute("auth"));
     switch (path) {
-//      case "/AddWatchlist":
-//        int id_user = 1;
-//        int id_product = Integer.parseInt(request.getParameter("proid"));
-//        Watchlist w = new Watchlist(id_product, id_user);
-//        WatchlistModel.add(w);
-////        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
+      case "/Watchlist":
+        if (state == "false") {
+          ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+          break;
+        }
+
+      case "/AddWatchlist":
+        if (state == "false") {
+          ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+          break;
+        }
+
+        int id_user = Integer.parseInt(request.getParameter("UserID"));
+        int id_product = Integer.parseInt(request.getParameter("ProID"));
+        List<Watchlist> watchlists = WatchlistModel.findAllbyUserID(id_user);
+        for (int i = 0; i < watchlists.size(); i++) {
+          if (id_product == watchlists.get(i).getProID()) {
+            ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
+            break;
+          }
+        }
+        Watchlist w = new Watchlist(id_product, id_user);
+        WatchlistModel.add(w);
+        break;
+//        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
       case "/Index":
         List<Product> listP = ProductModel.findAll();
         request.setAttribute("products", listP);

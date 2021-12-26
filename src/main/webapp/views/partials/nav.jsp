@@ -16,9 +16,9 @@
             <%-- <a class="nav-link" href="${pageContext.request.contextPath}/Product/Index">Home <span
                     class="sr-only">(current)</span></a>--%>
             <%-- </li>--%>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Watchlist</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Product/Watchlist?UserID=${authUser.userID}">Watchlist</a>
+                </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
