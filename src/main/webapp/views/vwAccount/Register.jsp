@@ -1,81 +1,116 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/Login-Box-En.css">
-<%--    <link rel="stylesheet" href="assets\css\Login-Box-En.css">--%>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Login, Registration & Forgot Form Design</title>
+    <!-- Bootstrap 4 CSS CDN -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/style.css" />
 </head>
 
-<body>
-
-<div class="d-flex flex-column justify-content-center" id="login-box">
-    <div class="login-box-header">
-        <h4 style="color:rgb(139,139,139);margin-bottom:0px;font-weight:400;font-size:27px;">Register</h4>
+<body class="bg-info">
+<div class="container">
+    <div class="row justify-content-center wrapper" id="register-box">
+        <div class="col-lg-10 my-auto myShadow">
+            <div class="row">
+                <div class="col-lg-5 d-flex flex-column justify-content-center myColor p-4">
+                    <h1 class="text-center font-weight-bold text-white">Welcome Back!</h1>
+                    <hr class="my-4 bg-light myHr" />
+                    <p class="text-center font-weight-bolder text-light lead">To keep connected with us please login
+                        with your personal info.</p>
+                    <a href="${pageContext.request.contextPath}/Account/Login"
+                       class="btn btn-outline-light btn-lg font-weight-bolder mt-4 align-self-center myLinkBtn"
+                       id="login-link" role="button">Sign In</a>
+                    <a class="btn btn-outline-light btn-lg align-self-center font-weight-bolder mt-4 myLinkBtn"
+                       role="button" href="${pageContext.request.contextPath}/Home/">
+                        Back home
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="col-lg-7 bg-white p-4">
+                    <h1 class="text-center font-weight-bold text-primary">Create Account</h1>
+                    <hr class="my-3" />
+                    <form action="#" method="post" class="px-3" id="frmRegister">
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0">
+                                        <i class="fa fa-user-secret fa-lg fa-fw" aria-hidden="true"></i>
+                                    </span>
+                            </div>
+                            <input type="text" class="form-control rounded-0" placeholder="Username" name="username"
+                                   id="txtUsername" required="" autofocus/>
+                        </div>
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0"><i
+                                            class="far fa-user fa-lg fa-fw"></i></span>
+                            </div>
+                            <input type="text" name="fullname" id="txtFullname" class="form-control rounded-0"
+                                   placeholder="Full Name" required />
+                        </div>
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0">
+                                        <i class="fa fa-birthday-cake fa-lg fa-fw" aria-hidden="true"></i>
+                                    </span>
+                            </div>
+                            <input type="date" name="dob" id="txtDoB" class="form-control rounded-0"
+                                   placeholder="Full Name" required />
+                        </div>
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0">
+                                        <i class="fa fa-address-card fa-lg fa-fw" aria-hidden="true"></i>
+                                    </span>
+                            </div>
+                            <input type="text" name="address" id="txtAddress" class="form-control rounded-0"
+                                   placeholder="Address" required="" />
+                        </div>
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0"><i
+                                            class="far fa-envelope fa-lg fa-fw"></i></span>
+                            </div>
+                            <input type="email" name="email" id="txtEmail" class="form-control rounded-0"
+                                   placeholder="E-Mail" required />
+                        </div>
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0"><i
+                                            class="fas fa-key fa-lg fa-fw"></i></span>
+                            </div>
+                            <input type="password" name="rawpass" id="txtPassword" class="form-control rounded-0"
+                                   minlength="5" placeholder="Password" required />
+                        </div>
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0"><i
+                                            class="fas fa-key fa-lg fa-fw"></i></span>
+                            </div>
+                            <input type="password" id="txtConfirmPass" class="form-control rounded-0" minlength="5"
+                                   placeholder="Confirm Password" required />
+                        </div>
+                        <div class="form-group">
+                            <div id="passError" class="text-danger font-weight-bolder"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id="register-btn" value="Sign Up"
+                                   class="btn btn-primary btn-lg btn-block myBtn" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <form action="" method="post" id="frmRegister">
-        <div class="username-login" style="background-color:#ffffff;">
-            <input type="text" class="email-input form-control" style="margin-top:10px;" required=""
-                   placeholder="User Name" minlength="6" name="username" id="txtUsername" autofocus>
-            <input type="text" class="email-input form-control" style="margin-top:10px;" required=""
-                   placeholder="Full Name" minlength="6" name="fullname" id="txtFullname">
-            <input type="date" class="email-input form-control" name="dob" id="txtDoB"
-                   style="width: 460px;height: 46px;margin: 10px 0px 0px;padding: 10px 12px;color: rgb(41, 48, 59);border-width: 1px;">
-            <input type="text" class="email-input form-control" style="margin-top:10px;" required=""
-                   placeholder="Address" minlength="6" name="address" id="txtAddress">
-            <input type="email" class="email-input form-control" style="margin-top:10px;" required=""
-                   placeholder="Email" minlength="6" name="email" id="txtEmail">
-            <input type="password" class="password-input form-control" style="margin-top:10px;" required=""
-                   placeholder="Password" minlength="6" name="rawpass" id="txtPassword">
-            <input type="password" class="password-input form-control" style="margin-top:10px;" required=""
-                   placeholder="Confirm Password" id="txtConfirmPass" minlength="6">
-        </div>
-        <div class="submit-row" style="margin-bottom:8px;padding-top:0px;">
-            <button class="btn btn-primary btn-block box-shadow" id="submit-id-submit" type="submit">
-                Registor
-            </button>
-            <div class="d-flex justify-content-between"></div>
-        </div>
-    </form>
 </div>
-<script>
-    $('#txtPassword #txtConfirmPass').on('keyup', function () {
-        if ($('#txtPassword').val() === $('#txtConfirmPass').val()) {
-            $('#txtConfirmPass').html('Matching').css('color', 'green');
-        } else
-            $('#txtConfirmPass').html('Not Matching').css('color', 'red');
-    });
-</script>
-<script>
-    $('#frmRegister').on('submit',function (e){
-        e.preventDefault();
-        const pass = $('#txtPassword').val();
-        const confirmpass = $('txtConfirmPass').val();
-        if ($('#txtPassword').val() === $('#txtConfirmPass').val()) {
-            $('#txtConfirmPass').html('Matching').css('color', 'green');
-        } else
-        {
-            $('#txtConfirmPass').html('Not Matching').css('color', 'red');
-            alert("Password isn't matching!");
-            return;
-        }
-        $('#frmRegister').off('submit').submit();
-    });
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
