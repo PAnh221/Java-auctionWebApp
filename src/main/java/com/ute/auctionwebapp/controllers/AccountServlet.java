@@ -2,9 +2,11 @@ package com.ute.auctionwebapp.controllers;
 
 //import at.favre.lib.crypto.bcrypt.BCrypt;
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.ute.auctionwebapp.Utils.GoogleRecaptcha;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.User;
 import com.ute.auctionwebapp.models.UserModel;
+import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.beans.JavaBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.http.HttpHeaders;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -72,6 +76,13 @@ public class AccountServlet extends HttpServlet {
         String path = request.getPathInfo();
         switch (path) {
             case "/Register":
+                boolean verified = false;
+                String gRecaptchaReponse = request.getParameter("g-recaptcha-response");
+                try {
+                    verified = GoogleRecaptcha.isValid(gRecaptchaReponse);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 registerUser(request, response);
                 break;
             case "/Login":
