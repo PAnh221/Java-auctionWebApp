@@ -36,7 +36,6 @@
                         <th scope="col">Email</th>
                         <th scope="col">Date of birth</th>
                         <th scope="col">Permission</th>
-                        <th scope="col">Rating</th>
                         <th scope="col">Handle</th>
                     </tr>
                     </thead>
@@ -51,7 +50,6 @@
                             <td>${u.email}</td>
                             <td>${u.dob}</td>
                             <td>${u.permission}</td>
-                            <td>${u.rating}</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${u.userID}">Edit |</a>
                                 <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">Accept </a>

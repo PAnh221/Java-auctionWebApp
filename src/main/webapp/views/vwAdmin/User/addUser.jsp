@@ -59,10 +59,6 @@
                             <input type="text" name="permission">
                         </div>
                         <div class="input-form">
-                            <span>Rating</span><br>
-                            <input type="text" name="rating">
-                        </div>
-                        <div class="input-form">
                             <button type="submit" class="btn btn-outline-success" style="padding: 5px 40px; font-size: 20px">
                                 Add
                             </button>

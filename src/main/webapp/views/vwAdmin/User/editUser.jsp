@@ -61,10 +61,6 @@
                             <input type="text" name="permission" value="${user.permission}" >
                         </div>
                         <div class="input-form">
-                            <span>Rating</span><br>
-                            <input type="text" name="rating" value="${user.rating}" >
-                        </div>
-                        <div class="input-form">
                             <button type="submit" class="btn btn-outline-success" formaction="${pageContext.request.contextPath}/Admin/User/Update" style="padding: 5px 40px; font-size: 20px">
                                 Save
                             </button>
