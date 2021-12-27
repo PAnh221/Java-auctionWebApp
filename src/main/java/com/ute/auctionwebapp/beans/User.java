@@ -3,16 +3,15 @@ package com.ute.auctionwebapp.beans;
 import java.time.LocalDateTime;
 
 public class User {
-  private int UserID, Permission, Rating;
+  private int UserID, Permission;
   private String UserName, Name, Password, Address, Email;
   private LocalDateTime Dob;
 
   public User() {
   }
 
-  public User(int permission, int rating, String userName, String name, String password, String address, String email, LocalDateTime dob) {
+  public User(int permission, String userName, String name, String password, String address, String email, LocalDateTime dob) {
     Permission = permission;
-    Rating = rating;
     UserName = userName;
     Name = name;
     Password = password;
@@ -21,10 +20,9 @@ public class User {
     Dob = dob;
   }
 
-  public User(int userID, int permission, int rating, String userName, String name, String password, String address, String email, LocalDateTime dob) {
+  public User(int userID, int permission, String userName, String name, String password, String address, String email, LocalDateTime dob) {
     UserID = userID;
     Permission = permission;
-    Rating = rating;
     UserName = userName;
     Name = name;
     Password = password;
@@ -49,13 +47,13 @@ public class User {
     Permission = permission;
   }
 
-  public int getRating() {
-    return Rating;
-  }
+  //public int getRating() {
+  //  return Rating;
+  //}
 
-  public void setRating(int rating) {
-    Rating = rating;
-  }
+  //public void setRating(int rating) {
+  //  Rating = rating;
+  //}
 
   public String getUserName() {
     return UserName;

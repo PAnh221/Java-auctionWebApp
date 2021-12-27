@@ -2,7 +2,7 @@
 
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/Product/Index">
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/Home/Index">
         <i class="fa fa-gavel fa-2x" aria-hidden="true"></i>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

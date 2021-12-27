@@ -345,9 +345,9 @@ public class AdminServlet extends HttpServlet {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dob = LocalDateTime.parse(bd, df);
         int permission = Integer.parseInt(request.getParameter("permission"));
-        int rating = Integer.parseInt(request.getParameter("rating"));
+        //int rating = Integer.parseInt(request.getParameter("rating"));
 
-        User user = new User(userid, permission, rating, username, name, pass, address, email, dob);
+        User user = new User(userid, permission,/* rating,*/ username, name, pass, address, email, dob);
         UserModel.add(user);
         ServletUtils.forward("/views/vwAdmin/User/addUser.jsp", request, response);
     }
@@ -367,9 +367,9 @@ public class AdminServlet extends HttpServlet {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dob = LocalDateTime.parse(bd, df);
         int permission = Integer.parseInt(request.getParameter("permission"));
-        int rating = Integer.parseInt(request.getParameter("rating"));
+        //int rating = Integer.parseInt(request.getParameter("rating"));
 
-        User user = new User(userid, permission, rating, username, name, pass, address, email, dob);
+        User user = new User(userid, permission,/* rating,*/ username, name, pass, address, email, dob);
         UserModel.update(user);
         ServletUtils.redirect("/Admin/User/Detail", request, response);
     }

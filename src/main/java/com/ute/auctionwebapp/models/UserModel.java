@@ -75,10 +75,10 @@ public class UserModel {
   }
 
   public static void add(User c) {
-    String insertSql = "INSERT INTO user (UserID,UserName, Name, Password, Address, Email, Dob, Permission, Rating) VALUES (:userid,:username,:name,:password,:address,:email,:dob,:permission,:rating)\n";
+    String insertSql = "INSERT INTO user (UserName, Name, Password, Address, Email, Dob, Permission) VALUES (:username,:name,:password,:address,:email,:dob,:permission)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
-              .addParameter("userid", c.getUserID())
+              //.addParameter("userid", c.getUserID())
               .addParameter("username", c.getUserName())
               .addParameter("name", c.getName())
               .addParameter("password", c.getPassword())
@@ -86,13 +86,13 @@ public class UserModel {
               .addParameter("email", c.getEmail())
               .addParameter("dob", c.getDob())
               .addParameter("permission", c.getPermission())
-              .addParameter("rating", c.getRating())
+              //.addParameter("rating", c.getRating())
               .executeUpdate();
     }
   }
 
   public static void update(User c) {
-    String sql = "UPDATE user SET  UserName = :username, Name = :name, Password = :password, Address = :address, Email = :email, Dob = :dob, Permission = :permission, Rating = :rating WHERE UserID = :userid \n";
+    String sql = "UPDATE user SET  UserName = :username, Name = :name, Password = :password, Address = :address, Email = :email, Dob = :dob, Permission = :permission WHERE UserID = :userid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", c.getUserID())
@@ -103,7 +103,7 @@ public class UserModel {
               .addParameter("email", c.getEmail())
               .addParameter("dob", c.getDob())
               .addParameter("permission", c.getPermission())
-              .addParameter("rating", c.getRating())
+              //.addParameter("rating", c.getRating())
         .executeUpdate();
     }
   }
