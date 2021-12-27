@@ -15,8 +15,10 @@ public class ProductModelAdmin {
     }
   }
 
+  //Vĩ sửa sau khi sửa database
   public static List<Product> findByCatId(int CatID) {
-    final String query = "select * from product where CatID = :CatID";
+    //final String query = "select * from product where CatID = :CatID";
+    final String query = "SELECT * FROM product WHERE product.SubCatID IN (SELECT SubCatID FROM subcategory WHERE subcategory.CatID = :CatID";
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
         .addParameter("CatID", CatID)
@@ -24,8 +26,10 @@ public class ProductModelAdmin {
     }
   }
 
+  //Vĩ sửa sau khi sửa database
   public static Product findByCat(int CatID) {
-    final String query = "select * from product where CatID = :CatID";
+    //final String query = "select * from product where CatID = :CatID";
+    final String query = "SELECT * FROM product WHERE product.SubCatID IN (SELECT SubCatID FROM subcategory WHERE subcategory.CatID = :CatID";
     try (Connection con = DbUtils.getConnection()) {
       List<Product> list = con.createQuery(query)
               .addParameter("CatID", CatID)
@@ -72,12 +76,30 @@ public class ProductModelAdmin {
     }
   }
 
+  //Vĩ sửa sau khi sửa database
+  //public static void add(Product p) {
+  //  String insertSql = "INSERT INTO product (ImgIndex, CatID, UploadDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, ProID) VALUES (:imgindex,:catid,:uploaddate,:bin,:fulldes,:tinydes,:sellerid,:subcatid,:proname,:proid)\n";
+  //  try (Connection con = DbUtils.getConnection()) {
+  //    con.createQuery(insertSql)
+  //            .addParameter("imgindex", p.getImgIndex())
+  //            .addParameter("catid", p.getCatID())
+  //            .addParameter("uploaddate", p.getUploadDate())
+  //            .addParameter("bin", p.getBin())
+  //            .addParameter("fulldes", p.getFullDes())
+  //            .addParameter("tinydes", p.getTinyDes())
+  //            .addParameter("sellerid", p.getSellerID())
+  //            .addParameter("subcatid", p.getSubCatID())
+  //            .addParameter("proname", p.getProName())
+  //            .addParameter("proid", p.getProID())
+  //      .executeUpdate();
+  //  }
+  //}
+
   public static void add(Product p) {
-    String insertSql = "INSERT INTO product (ImgIndex, CatID, UploadDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, ProID) VALUES (:imgindex,:catid,:uploaddate,:bin,:fulldes,:tinydes,:sellerid,:subcatid,:proname,:proid)\n";
+    String insertSql = "INSERT INTO product (ImgIndex, UploadDate, EndDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, ProID, StartPrice, StepPrice, Status) VALUES (:imgindex,:uploaddate, :enddate, :bin,:fulldes,:tinydes,:sellerid,:subcatid,:proname,:proid,:startprice,:stepprice,:status)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
               .addParameter("imgindex", p.getImgIndex())
-              .addParameter("catid", p.getCatID())
               .addParameter("uploaddate", p.getUploadDate())
               .addParameter("bin", p.getBin())
               .addParameter("fulldes", p.getFullDes())
@@ -86,16 +108,21 @@ public class ProductModelAdmin {
               .addParameter("subcatid", p.getSubCatID())
               .addParameter("proname", p.getProName())
               .addParameter("proid", p.getProID())
-        .executeUpdate();
+
+              //Vĩ thêm sau khi sửa database
+              .addParameter("startprice", p.getStartPrice())
+              .addParameter("stepprice", p.getStepPrice())
+              .addParameter("enddate", p.getEndDate())
+              .addParameter("status", p.getStatus())
+              .executeUpdate();
     }
   }
 
   public static void update(Product p) {
-    String sql = "UPDATE product SET  ImgIndex = :imgindex, CatID = :catid, UploadDate = :uploaddate, Bin = :bin, FullDes = :fulldes, TinyDes = :tinydes, SellerID = :sellerid, SubCatID = :subcatid, ProName = :proname WHERE ProID = :proid \n";
+    String sql = "UPDATE product SET  ImgIndex = :imgindex, CatID = :catid, UploadDate = :uploaddate, EndDate = :enddate, Bin = :bin, FullDes = :fulldes, TinyDes = :tinydes, SellerID = :sellerid, SubCatID = :subcatid, ProName = :proname, StartPrice = :startprice, StepPrice = :stepprice WHERE ProID = :proid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("imgindex", p.getImgIndex())
-              .addParameter("catid", p.getCatID())
               .addParameter("uploaddate", p.getUploadDate())
               .addParameter("bin", p.getBin())
               .addParameter("fulldes", p.getFullDes())
@@ -104,6 +131,13 @@ public class ProductModelAdmin {
               .addParameter("subcatid", p.getSubCatID())
               .addParameter("proname", p.getProName())
               .addParameter("proid", p.getProID())
+              //.addParameter("catid", p.getCatID())
+
+              //Vĩ thêm sau khi sửa database
+              .addParameter("enddate", p.getUploadDate().plusDays(7))
+              .addParameter("stepprice", p.getStepPrice())
+              .addParameter("startprice", p.getStartPrice())
+
         .executeUpdate();
     }
   }

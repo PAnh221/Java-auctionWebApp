@@ -32,8 +32,10 @@ public class WatchlistModel {
         }
     }
 
+
+    //Vĩ sửa sau khi sửa database
     public static List<Product> findAllbyUserID(int UserID) {
-        final String query = "select product.ProID, ProName, SubCatID, SellerID, TinyDes, FullDes, Bin, UploadDate, CatID, ImgIndex " +
+        final String query = "select product.ProID, ProName, SubCatID, SellerID, TinyDes, FullDes, Bin, UploadDate/*, CatID*/, ImgIndex " +
                 "from watchlist, product " +
                 "where watchlist.UserID = :UserID and watchlist.ProID = product.ProID";
         try (Connection con = DbUtils.getConnection()) {

@@ -15,7 +15,7 @@
             <c:choose>
                 <c:when test="${watchlistDetails.size() == 0}">
                     <div class="card-body">
-                        <p class="card-text">Không có dữ liệu.</p>
+                        <p class="card-text">Bạn chưa yêu thích sản phẩm nào.</p>
                     </div>
                 </c:when>
                 <c:otherwise>
