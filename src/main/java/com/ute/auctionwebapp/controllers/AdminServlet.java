@@ -63,7 +63,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/Category/IsAvailable":
                 int catid = Integer.parseInt(request.getParameter("id"));
-                Product checkp = ProductModelAdmin.findByCat(catid);
+                Product checkp = ProductModelAdmin.findBySubCat(catid);
                 Boolean isAvai = (checkp == null);
 
                 PrintWriter out = response.getWriter();
@@ -196,6 +196,7 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
             path = "/Product/Index";

@@ -41,6 +41,19 @@ public class ProductModelAdmin {
     }
   }
 
+  public static Product checkCat(int CatID) {
+    final String query = "select * from product where CatID = :CatID";
+    try (Connection con = DbUtils.getConnection()) {
+      List<Product> list = con.createQuery(query)
+              .addParameter("CatID", CatID)
+              .executeAndFetch(Product.class);
+      if (list.size() == 0) {
+        return null;
+      }
+      return list.get(0);
+    }
+  }
+
   public static Product findBySubCat(int SubCatID) {
     final String query = "select * from product where SubCatID = :SubCatID";
     try (Connection con = DbUtils.getConnection()) {

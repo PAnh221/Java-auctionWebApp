@@ -24,11 +24,12 @@
                     <form action="" class="form_accounts" method="post" style="width: 100%">
                         <div class="input-form">
                             <span>#</span><br>
-                            <input type="text" name="subcatid" id="subcatid" value="${category.subCatID}" >
+                            <input type="text" name="subcatid" id="subcatid" value="${category.subCatID}" readonly>
                         </div>
                         <div class="input-form">
                             <span>Sub Category</span>
-                            <input type="text" name="subcatname" value="${category.subCatName}" >
+                            <input type="text" name="subcatname" id="subcatname" value="${category.subCatName}" onkeyup="checkSubCat()">
+                            <p style="font-size: 14px" id="checksubcatname"></p>
                         </div>
                         <div class="input-form">
                             <span>Category</span><br>
@@ -50,7 +51,7 @@
                         </div>
 
                         <div class="input-form">
-                            <button type="submit" class="btn btn-outline-success" formaction="${pageContext.request.contextPath}/Admin/SubCategory/Update" style="padding: 5px 40px; font-size: 20px">
+                            <button type="submit" class="btn btn-outline-success" id="btnSave" formaction="${pageContext.request.contextPath}/Admin/SubCategory/Update" style="padding: 5px 40px; font-size: 20px">
                                 Save
                             </button>
                             <button type="submit" class="btn btn-outline-danger" id="btnDelete" formaction="${pageContext.request.contextPath}/Admin/SubCategory/Delete" style="padding: 5px 40px; font-size: 20px">
@@ -74,6 +75,22 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+    function checkSubCat()
+    {
+        const subcatname = $("#subcatname").val();
+        if(subcatname !== '')
+        {
+            document.getElementById("btnSave").disabled = false;
+            document.querySelector('#checksubcatname').innerText = "Tên danh mục phụ hợp lệ!"
+            document.querySelector('#checksubcatname').style.color = "green"
+        }
+        else
+        {
+            document.querySelector('#checksubcatname').innerText = "Vui lòng đặt tên danh mục phụ!"
+            document.querySelector('#checksubcatname').style.color = "red"
+            document.getElementById("btnSave").disabled = true;
+        }
+    }
     $("#btnDelete").on('click', function (e) {
         e.preventDefault();
         const catid = $("#subcatid").val();

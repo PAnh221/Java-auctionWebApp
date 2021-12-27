@@ -84,7 +84,6 @@
     $("#btnDelete").on('click', function (e) {
         e.preventDefault();
         const catid = $("#catid").val();
-
         //check
         $.getJSON('${pageContext.request.contextPath}/Admin/Category/IsAvailable?id='+catid, function (data)
         {

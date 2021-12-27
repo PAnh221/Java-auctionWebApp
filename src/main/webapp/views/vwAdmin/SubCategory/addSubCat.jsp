@@ -27,7 +27,8 @@
                         </div>
                         <div class="input-form">
                             <span>Sub Category</span>
-                            <input type="text" name="subcatname">
+                            <input type="text" name="subcatname" id="subcatname" onkeyup="checkSubCat()">
+                            <p style="font-size: 14px" id="checksubcatname"></p>
                         </div>
                         <div class="input-form">
                             <span>Category</span><br>
@@ -44,11 +45,9 @@
                                     <option value="${c.catID}">${c.catName}</option>
                                 </c:forEach>
                             </select>
-
-                            <%--                            <input type="text" name="catid" value="${category.catID}" >--%>
                         </div>
                         <div class="input-form">
-                            <button type="submit" class="btn btn-outline-success" style="padding: 5px 40px; font-size: 20px">
+                            <button type="submit" class="btn btn-outline-success" id="btnAdd" style="padding: 5px 40px; font-size: 20px">
                                 Add
                             </button>
                             <a href="${pageContext.request.contextPath}/Admin/SubCategory/Detail" class="btn btn-outline-primary" role="button" style="padding: 5px 40px; font-size: 20px; margin-left: 10px;">
@@ -65,5 +64,24 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+    function checkSubCat()
+    {
+        const subcatname = $("#subcatname").val();
+        if(subcatname !== '')
+        {
+            document.getElementById("btnAdd").disabled = false;
+            document.querySelector('#checksubcatname').innerText = "Tên danh mục phụ hợp lệ!"
+            document.querySelector('#checksubcatname').style.color = "green"
+        }
+        else
+        {
+            document.querySelector('#checksubcatname').innerText = "Vui lòng đặt tên danh mục phụ!"
+            document.querySelector('#checksubcatname').style.color = "red"
+            document.getElementById("btnAdd").disabled = true;
+        }
+    }
+</script>
 </body>
 </html>
