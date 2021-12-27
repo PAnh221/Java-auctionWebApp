@@ -147,21 +147,13 @@
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 
-    // function validateForm(){
-    //     if(grecaptcha.getResponse()){
-    //         return true;
-    //     }
-    //     else{
-    //         alert("Please prove that you're not robot");
-    //     }
-    //
-    // }
 
     $('#frmRegister').on('submit', function (e) {
         e.preventDefault();
         if(grecaptcha.getResponse()){
             const username = $("#txtUsername").val();
-            $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {
+            const email = $('#txtEmail').val();
+            $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username+'&email='+email, function (data) {
                 if (data === true) {
                     $("#frmRegister").off('submit').submit();
                 } else {
