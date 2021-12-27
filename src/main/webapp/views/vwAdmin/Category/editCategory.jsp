@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
@@ -36,15 +36,16 @@
                     <form action="" class="form_accounts" method="post" style="width: 100%">
                         <div class="input-form">
                             <span>Category ID</span>
-                            <input type="text" id="catid" name="catid" value="${category.catID}" >
+                            <input type="text" id="catid" name="catid" value="${category.catID}" readonly>
                         </div>
                         <div class="input-form">
                             <span>Category Name</span>
-                            <input type="text" name="catname" value="${category.catName}" >
+                            <input type="text" name="catname" id="catname" value="${category.catName}" onkeyup="checkCat()">
+                            <p style="font-size: 14px" id="checkcatname"></p>
                         </div>
 
                         <div class="input-form">
-                            <button type="submit" class="btn btn-outline-success" formaction="${pageContext.request.contextPath}/Admin/Category/Update" style="padding: 5px 40px; font-size: 20px">
+                            <button type="submit" class="btn btn-outline-success" id="btnsave" formaction="${pageContext.request.contextPath}/Admin/Category/Update" style="padding: 5px 40px; font-size: 20px">
                                 Save
                             </button>
                             <button type="submit" class="btn btn-outline-danger" id="btnDelete" formaction="${pageContext.request.contextPath}/Admin/Category/Delete" style="padding: 5px 40px; font-size: 20px">
@@ -64,9 +65,26 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+    function checkCat()
+    {
+        const catname = $("#catname").val();
+        if(catname !== '')
+        {
+            document.getElementById("btnsave").disabled = false;
+            document.querySelector('#checkcatname').innerText = "Tên danh mục hợp lệ!"
+            document.querySelector('#checkcatname').style.color = "green"
+        }
+        else
+        {
+            document.querySelector('#checkcatname').innerText = "Vui lòng đặt tên danh mục!"
+            document.querySelector('#checkcatname').style.color = "red"
+            document.getElementById("btnsave").disabled = true;
+        }
+    }
     $("#btnDelete").on('click', function (e) {
         e.preventDefault();
         const catid = $("#catid").val();
+
         //check
         $.getJSON('${pageContext.request.contextPath}/Admin/Category/IsAvailable?id='+catid, function (data)
         {

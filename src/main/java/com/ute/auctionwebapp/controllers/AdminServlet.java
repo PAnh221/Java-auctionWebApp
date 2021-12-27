@@ -28,6 +28,7 @@ import java.util.List;
 public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
             path = "/Index";
