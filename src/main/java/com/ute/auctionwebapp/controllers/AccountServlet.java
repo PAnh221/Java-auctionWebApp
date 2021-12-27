@@ -105,6 +105,10 @@ public class AccountServlet extends HttpServlet {
         int rating = 0;
         User c = new User(257,permission, rating, username, name, bcryptHashString, address, email, dob);
         UserModel.add(c);
+        HttpSession session = request.getSession();
+        session.setAttribute("auth", true);
+        session.setAttribute("authUser", c);
+        ServletUtils.redirect("/Home", request, response);
     }
 
     private void loginUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
