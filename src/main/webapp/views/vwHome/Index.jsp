@@ -10,13 +10,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-//Top 5 sản phẩm gần kết thúc đấu giá
+<%--Top 5 sản phẩm gần kết thúc đấu giá--%>
 <jsp:useBean id="top5_1" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
 
-//Top 5 sản phẩm nhiều lượt ra giá nhất
+<%--Top 5 sản phẩm nhiều lượt ra giá nhất--%>
 <jsp:useBean id="top5_2" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
 
-//Top 5 sản phẩm giá cao nhất
+<%--Top 5 sản phẩm giá cao nhất--%>
 <jsp:useBean id="top5_3" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
 
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
