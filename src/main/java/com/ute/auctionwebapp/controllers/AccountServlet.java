@@ -93,7 +93,6 @@ public class AccountServlet extends HttpServlet {
         int rating = 0;
         User c = new User(256,permission, rating, username, name, bcryptHashString, address, email, dob);
         UserModel.add(c);
-
     }
 
     private void loginUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -108,7 +107,7 @@ public class AccountServlet extends HttpServlet {
                 session.setAttribute("authUser", user);
                 String url = (String) session.getAttribute("retUrl");
                 if(url==null)
-                    url = "/Home";
+                    url = "/Product";
                 ServletUtils.redirect(url, request, response);
             } else {
                 request.setAttribute("hasError", true);

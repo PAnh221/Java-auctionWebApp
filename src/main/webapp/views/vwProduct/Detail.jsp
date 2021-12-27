@@ -6,6 +6,7 @@
 <jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product" />
 <jsp:useBean id="relevantProducts" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
 <jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />
+<jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 
 <t:main>
   <jsp:body>
@@ -17,7 +18,7 @@
       <div class="card-body">
 <%--        <img src="${pageContext.request.contextPath}/public/imgs/sp/1/main.jpg" alt="${product.proName}" title="${product.proName}">--%>
         <div class="mt-3">
-          <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?proid=${c.proID}" role="button">
+          <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${product.proID}&UserID=${authUser.userID}" role="button">
             <i class="fa fa-heart" aria-hidden="true"></i>
           </a>
           <p class="card-text mt-3 d-inline ml-2">

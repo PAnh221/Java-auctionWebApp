@@ -9,7 +9,21 @@ import java.util.List;
 
 public class WatchlistModel {
     public static void add(Watchlist w) {
+        List<Watchlist> watchlists = WatchlistModel.findbyUIDandPID(w.getUserID(), w.getProID());
+        if (watchlists.size() > 0) return;
+
         String insertSql = "INSERT INTO watchlist (ProID, UserID) VALUES (:ProID,:UserID)";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(insertSql)
+                    .addParameter("ProID", w.getProID())
+                    .addParameter("UserID", w.getUserID())
+                    .executeUpdate();
+        }
+    }
+
+    public static void delete(Watchlist w) {
+        String insertSql = "delete " +
+                "from watchlist where ProID=:ProID and UserID=:UserID";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(insertSql)
                     .addParameter("ProID", w.getProID())
@@ -26,6 +40,19 @@ public class WatchlistModel {
             return con.createQuery(query)
                     .addParameter("UserID", UserID)
                     .executeAndFetch(Product.class);
+        }
+    }
+
+    //check if data already exists
+    public static List<Watchlist> findbyUIDandPID(int UserID, int ProID) {
+        final String query = "select *" +
+                "from watchlist " +
+                "where UserID = :UserID and ProID = :ProID";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("UserID", UserID)
+                    .addParameter("ProID", ProID)
+                    .executeAndFetch(Watchlist.class);
         }
     }
 
