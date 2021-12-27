@@ -119,7 +119,7 @@ public class AccountServlet extends HttpServlet {
                 session.setAttribute("authUser", user);
                 String url = (String) session.getAttribute("retUrl");
                 if(url==null)
-                    url = "/Product";
+                    url = "/Home";
                 ServletUtils.redirect(url, request, response);
             } else {
                 request.setAttribute("hasError", true);
@@ -163,7 +163,7 @@ public class AccountServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 String url = (String) session.getAttribute("retUrl");
                 if (url == null)
-                    url = "/Product";
+                    url = "/Home";
                 ServletUtils.redirect(url, request, response);
             } else {
                 request.setAttribute("hasError", true);
