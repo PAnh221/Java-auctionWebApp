@@ -103,4 +103,23 @@ public class ProductModel {
               .executeAndFetch(Product.class);
     }
   }
+
+  //Top 5 sản phẩm sắp kết thúc
+  public static List<Product> Top5AboutToEnd(){
+    final String query = "select * from product order by Bin desc limit 5";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .executeAndFetch(Product.class);
+    }
+  }
+
+
+  //Top 5 sản phẩm có nhiều lượt ra giá nhất
+  public static List<Product> Top5HotProducts(){
+    final String query = "select * from product order by Bin desc limit 5";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .executeAndFetch(Product.class);
+    }
+  }
 }
