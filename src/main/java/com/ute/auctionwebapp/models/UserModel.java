@@ -73,7 +73,19 @@ public class UserModel {
       return list.get(0);
     }
   }
+  public static User findByEmail(String email) {
+    final String query = "select * from user where Email = :Email";
+    try (Connection con = DbUtils.getConnection()) {
+      List<User> list = con.createQuery(query)
+              .addParameter("Email", email)
+              .executeAndFetch(User.class);
 
+      if (list.size() == 0) {
+        return null;
+      }
+      return list.get(0);
+    }
+  }
   public static void add(User c) {
     String insertSql = "INSERT INTO user (UserName, Name, Password, Address, Email, Dob, Permission) VALUES (:username,:name,:password,:address,:email,:dob,:permission)\n";
     try (Connection con = DbUtils.getConnection()) {
