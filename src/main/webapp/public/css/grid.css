@@ -3,6 +3,12 @@
     display: block;
     padding: 0;
 }
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
 
 .grid.wide {
     max-width: 1200px;

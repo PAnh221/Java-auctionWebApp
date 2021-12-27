@@ -49,10 +49,11 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "/IsAvailable":
 
-                String username = request.getParameter("user");
-                User user = UserModel.findByUsername(username);
-                boolean isAvailable = (user==null);
-
+                String txtusername = request.getParameter("user");
+                String txtemail = request.getParameter("email");
+                User username = UserModel.findByUsername(txtusername);
+                User useremail = UserModel.findByEmail(txtemail);
+                boolean isAvailable = (username==null)&&(useremail==null);
                 PrintWriter out = response.getWriter();
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
