@@ -41,10 +41,16 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/Edit.jsp", request, response);
                 break;
             case "/IsAvailable":
+
+                String username = request.getParameter("user");
+                User user = UserModel.findByUsername(username);
+                boolean isAvailable = (user==null);
+
                 PrintWriter out = response.getWriter();
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-                out.print(true);
+
+                out.print(isAvailable);
                 out.flush();
                 break;
             default:
@@ -80,11 +86,12 @@ public class AccountServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String Strdob = request.getParameter("dob") + " 00:00";
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dob = LocalDateTime.parse(Strdob, df);
         int permission = 0;
         int rating = 0;
-        User c = new User(permission, rating, username, name, bcryptHashString, address, email, dob);
+        User c = new User(256,permission, rating, username, name, bcryptHashString, address, email, dob);
         UserModel.add(c);
 
     }
