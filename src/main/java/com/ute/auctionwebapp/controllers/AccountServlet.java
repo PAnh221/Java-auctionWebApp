@@ -24,6 +24,9 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
 
+        HttpSession session = request.getSession();
+        String state = String.valueOf(session.getAttribute("auth"));
+
         switch (path) {
             case "/Register":
                 ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
@@ -35,6 +38,10 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/ForgetPass.jsp", request, response);
                 break;
             case "/Profile":
+                if(state == "false") {
+                    ServletUtils.redirect("/Account/Login", request, response);
+                    return;
+                }
                 ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
                 break;
             case "/Edit":
@@ -72,6 +79,11 @@ public class AccountServlet extends HttpServlet {
             case "/Logout":
                 logoutUser(request, response);
                 break;
+
+            case "/Edit":
+                editUser(request, response);
+                break;
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -91,7 +103,7 @@ public class AccountServlet extends HttpServlet {
         LocalDateTime dob = LocalDateTime.parse(Strdob, df);
         int permission = 0;
         int rating = 0;
-        User c = new User(256,permission, rating, username, name, bcryptHashString, address, email, dob);
+        User c = new User(257,permission, rating, username, name, bcryptHashString, address, email, dob);
         UserModel.add(c);
     }
 
@@ -129,5 +141,41 @@ public class AccountServlet extends HttpServlet {
         if (url == null) url = "/Home";
         ServletUtils.redirect(url, request, response);
     }
+
+    private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        User user = UserModel.findByUsername(username);
+        if (user != null) {
+            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
+            if (result.verified) {
+                user.setName(request.getParameter("name"));
+                user.setEmail(request.getParameter("email"));
+
+//                String rawpass = request.getParameter("rawpass");
+                String newPassword = request.getParameter("newpassword");
+                String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPassword.toCharArray());
+                user.setPassword(bcryptHashString);
+
+                UserModel.editUser(user);
+
+                HttpSession session = request.getSession();
+                String url = (String) session.getAttribute("retUrl");
+                if (url == null)
+                    url = "/Product";
+                ServletUtils.redirect(url, request, response);
+            } else {
+                request.setAttribute("hasError", true);
+                request.setAttribute("errorMessage", "Sai mật khẩu");
+                ServletUtils.forward("/views/vwAccount/Edit.jsp", request, response);
+            }
+        } else {
+            request.setAttribute("hasError", true);
+            request.setAttribute("errorMessage", "Sai mật khẩu");
+            ServletUtils.forward("/views/vwAccount/Edit.jsp", request, response);
+        }
+    }
+
 }
 

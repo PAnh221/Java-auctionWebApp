@@ -133,4 +133,16 @@ public class UserModel {
               .executeUpdate();
     }
   }
+
+  public static void editUser(User user) {
+    String sql = "UPDATE user SET Name = :name, Email = :email, Password = :password WHERE UserID = :userid \n";
+    try (Connection con = DbUtils.getConnection()) {
+      con.createQuery(sql)
+              .addParameter("name", user.getName())
+              .addParameter("userid", user.getUserID())
+              .addParameter("email", user.getEmail())
+              .addParameter("password", user.getPassword())
+              .executeUpdate();
+    }
+  }
 }
