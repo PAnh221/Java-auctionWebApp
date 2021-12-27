@@ -13,6 +13,14 @@
     <!-- Fontawesome CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/style.css"/>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        var onloadCallback = function() {
+            grecaptcha.render('html_element', {
+                'sitekey' : '6LfbJdAdAAAAAHnxBhXAfAktymLU5HZ7DhgoRR3n'
+            });
+        };
+    </script>
 </head>
 
 <body class="bg-info">
@@ -46,7 +54,7 @@
                 <div class="col-lg-7 bg-white p-4">
                     <h1 class="text-center font-weight-bold text-primary">Create Account</h1>
                     <hr class="my-3"/>
-                    <form action="" method="post" class="px-3" id="frmRegister">
+                    <form method="post" class="px-3" id="frmRegister">
                         <div class="input-group input-group-lg form-group">
                             <div class="input-group-prepend">
                                     <span class="input-group-text rounded-0">
@@ -107,8 +115,8 @@
                             <input type="password" id="txtConfirmPass" class="form-control rounded-0" minlength="5"
                                    placeholder="Confirm Password" required/>
                         </div>
-                        <div class="form-group">
-                            <div id="passError" class="text-danger font-weight-bolder"></div>
+                        <div class="form-group input-group input-group-lg">
+                            <div class="g-recaptcha" data-sitekey="6LfbJdAdAAAAAHnxBhXAfAktymLU5HZ7DhgoRR3n" id="html_element"></div>
                         </div>
                         <div class="form-group">
                             <input type="submit" id="register-btn" value="Sign Up"
@@ -120,10 +128,14 @@
         </div>
     </div>
 </div>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     var password = document.getElementById("txtPassword"), confirm_password = document.getElementById("txtConfirmPass");
+
     function validatePassword() {
         if (password.value != confirm_password.value) {
             confirm_password.setCustomValidity("Passwords Don't Match");
@@ -131,21 +143,38 @@
             confirm_password.setCustomValidity('');
         }
     }
+
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 
-    $('#frmRegister').on('submit',function (e){
+    // function validateForm(){
+    //     if(grecaptcha.getResponse()){
+    //         return true;
+    //     }
+    //     else{
+    //         alert("Please prove that you're not robot");
+    //     }
+    //
+    // }
+
+    $('#frmRegister').on('submit', function (e) {
         e.preventDefault();
-        const username = $("#txtUsername").val();
-        $.get
-        $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user='+username,function (data){
-           if(data===true){
-               $("#frmRegister").off('submit').submit();
-           }else{
-               alert("User already exists");
-           }
-        });
+        if(grecaptcha.getResponse()){
+            const username = $("#txtUsername").val();
+            $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {
+                if (data === true) {
+                    $("#frmRegister").off('submit').submit();
+                } else {
+                    alert("User already exists");
+                }
+            });
+            return true;
+        }
+        else{
+            alert("Please prove that you're not robot");
+        }
     });
+
 
 </script>
 </body>
