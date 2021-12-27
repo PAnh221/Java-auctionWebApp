@@ -23,12 +23,20 @@
     <form method="post" enctype="multipart/form-data">
       <div class="card">
         <h4 class="card-header">
-          Upload
+          Đăng sản phẩm
         </h4>
         <div class="card-body">
           <div class="form-group">
-            <label for="txtProName">Product</label>
+            <label for="txtProName">Tên sản phẩm</label>
             <input type="text" class="form-control" id="txtProName" name="ProName" autofocus>
+            <label for="txtProName">Giá khởi điểm</label>
+            <input type="number" class="form-control" id="numStartPrice" name="StartPrice" autofocus>
+            <label for="txtProName">Bước giá</label>
+            <input type="number" class="form-control" id="numStepPrice" name="StepPrice" autofocus>
+            <label for="txtProName">Giá mua ngay</label>
+            <input type="number" class="form-control" id="numBin" name="Bin" autofocus>
+            <label for="txtProName">Mô tả ngắn gọn</label>
+            <input type="number" class="form-control" id="numBin" name="Bin" autofocus>
           </div>
           <div class="form-group">
             <input id="fuMain" name="fuMain" type="file" />

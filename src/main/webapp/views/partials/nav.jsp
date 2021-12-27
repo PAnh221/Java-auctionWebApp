@@ -21,15 +21,18 @@
                 </li>
         </ul>
 
-         <form class="form-inline my-2 my-lg-0">
-         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
-         <i class="fa fa-search" aria-hidden="true"></i>
-         </button>
+         <form class="form-inline mr-auto" style="width: 400px;">
+             <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
         </form>
         <ul class="navbar-nav">
             <c:choose>
                 <c:when test="${auth}">
+                    <c:if test="${authUser.getPermission() == 2}">
+                        <a href="${pageContext.request.contextPath}/Misc/Upload"><button type="button" class="btn btn-outline-info mr-3">Post A Product</button></a>
+                    </c:if>
                     <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post"></form>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="" role="button"
