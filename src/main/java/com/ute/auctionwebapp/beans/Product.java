@@ -1,5 +1,7 @@
 package com.ute.auctionwebapp.beans;
 
+//import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
+
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -7,24 +9,31 @@ import java.util.Date;
 public class Product {
   private int ProID;
   private String ProName, TinyDes, FullDes;
-  private int SubCatID, SellerID, CatID, ImgIndex;
-  private LocalDateTime UploadDate;
-  private int Bin;
-
+  private int SubCatID, SellerID, ImgIndex;
+  //private int CatID;
+  private LocalDateTime UploadDate, EndDate;
+  private int Bin, StartPrice, StepPrice;
+  private int Status;
   public Product() {}
 
 
-  public Product(int proID, String proName, String tinyDes, String fullDes, int subCatID, int sellerID, int catID, int imgIndex, LocalDateTime uploadDate, int bin) {
+  public Product(int proID, String proName, String tinyDes, String fullDes, int subCatID, int sellerID, int imgIndex, LocalDateTime uploadDate, int bin, int startPrice, int stepPrice, int status /*, int catId */) {
     ProID = proID;
     ProName = proName;
     TinyDes = tinyDes;
     FullDes = fullDes;
     SubCatID = subCatID;
     SellerID = sellerID;
-    CatID = catID;
     ImgIndex = imgIndex;
     UploadDate = uploadDate;
     Bin = bin;
+    Status = status;
+    //CatID = catId
+
+    //Mới thêm
+    EndDate = uploadDate.plusDays(7);
+    StartPrice = startPrice;
+    StepPrice = stepPrice;
   }
 
   public int getProID() {
@@ -67,20 +76,20 @@ public class Product {
     SubCatID = subCatID;
   }
 
+  //public int getCatID() {
+  //  return CatID;
+  //}
+  //
+  //public void setCatID(int catId) {
+  //  CatID = catId;
+  //}
+
   public int getSellerID() {
     return SellerID;
   }
 
   public void setSellerID(int sellerID) {
     SellerID = sellerID;
-  }
-
-  public int getCatID() {
-    return CatID;
-  }
-
-  public void setCatID(int catID) {
-    CatID = catID;
   }
 
   public int getImgIndex() {
@@ -106,4 +115,24 @@ public class Product {
   public void setBin(int bin) {
     Bin = bin;
   }
+
+
+  //Mới thêm
+
+  public LocalDateTime getEndDate(){ return EndDate;}
+
+  public void setEndDate(LocalDateTime endDate) { EndDate = endDate;}
+
+  public int getStartPrice() {return StartPrice;}
+
+  public void setStartPrice(int startPrice) {StartPrice = startPrice;}
+
+  public int getStepPrice() {return StepPrice;}
+
+  public void setStepPrice(int stepPrice) {StepPrice = stepPrice;}
+
+  public int getStatus() {return Status;}
+
+  public void setStatus(int status){ Status = status;}
+
 }

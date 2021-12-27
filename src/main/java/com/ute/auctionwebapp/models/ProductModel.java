@@ -15,8 +15,9 @@ public class ProductModel {
     }
   }
 
+  //Vĩ sửa sau khi sửa database
   public static List<Product> findByCatId(int CatID) {
-    final String query = "select * from product where CatID = :CatID";
+    final String query = "SELECT * FROM product WHERE product.SubCatID IN (SELECT SubCatID FROM subcategory WHERE subcategory.CatID = :CatID)";
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
         .addParameter("CatID", CatID)

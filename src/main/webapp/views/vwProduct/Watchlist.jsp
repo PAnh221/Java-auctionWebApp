@@ -3,23 +3,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<jsp:useBean id="products" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
+<jsp:useBean id="watchlistDetails" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
+<jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
+
 <t:main>
     <jsp:body>
         <div class="card">
             <h4 class="card-header">
-                Sản Phẩm
+                Sản Phẩm Yêu Thích
             </h4>
             <c:choose>
-                <c:when test="${products.size() == 0}">
+                <c:when test="${watchlistDetails.size() == 0}">
                     <div class="card-body">
-                        <p class="card-text">Không có dữ liệu.</p>
+                        <p class="card-text">Bạn chưa yêu thích sản phẩm nào.</p>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div class="card-body">
                         <div class="row">
-                            <c:forEach items="${products}" var="c">
+                            <c:forEach items="${watchlistDetails}" var="c">
                                 <div class="col-sm-3 mb-2">
                                     <div class="card h-100">
                                             <%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
@@ -31,8 +33,8 @@
                                             <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                         </div>
                                         <div class="card-footer text-muted">
-                                            <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?proid=${c.proID}" role="button">
-                                                <i class="fa fa-heart" aria-hidden="true"></i>
+                                            <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/RemoveWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
                                             </a>
 
                                             <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Product/Detail?id=${c.proID}" role="button">

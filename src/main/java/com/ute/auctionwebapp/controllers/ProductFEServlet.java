@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "ProductFEServlet", value = "/Product/*")
@@ -31,32 +32,36 @@ public class ProductFEServlet extends HttpServlet {
 
     HttpSession session = request.getSession();
     String state = String.valueOf(session.getAttribute("auth"));
+
     switch (path) {
       case "/Watchlist":
         if (state == "false") {
-          ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+          ServletUtils.redirect("/Account/Login", request, response);
           break;
         }
+
+        int UID = Integer.parseInt(request.getParameter("UserID"));
+        List<Product> wList = WatchlistModel.findAllbyUserID(UID);
+        request.setAttribute("watchlistDetails", wList);
+        ServletUtils.forward("/views/vwProduct/Watchlist.jsp", request, response);
+        break;
 
       case "/AddWatchlist":
         if (state == "false") {
-          ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+          ServletUtils.redirect("/Account/Login", request, response);
           break;
         }
-
-        int id_user = Integer.parseInt(request.getParameter("UserID"));
-        int id_product = Integer.parseInt(request.getParameter("ProID"));
-        List<Watchlist> watchlists = WatchlistModel.findAllbyUserID(id_user);
-        for (int i = 0; i < watchlists.size(); i++) {
-          if (id_product == watchlists.get(i).getProID()) {
-            ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
-            break;
-          }
-        }
-        Watchlist w = new Watchlist(id_product, id_user);
-        WatchlistModel.add(w);
+        addWatchlist(request, response);
         break;
-//        ServletUtils.forward("/views/vwProduct/Index.jsp", request, response);
+
+      case "/RemoveWatchlist":
+        if (state == "false") {
+          ServletUtils.redirect("/Account/Login", request, response);
+          break;
+        }
+        deleteWatchlist(request, response);
+        break;
+
       case "/Index":
         List<Product> listP = ProductModel.findAll();
         request.setAttribute("products", listP);
@@ -115,9 +120,6 @@ public class ProductFEServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String path = request.getPathInfo();
     switch (path) {
-      case "/ByCat?id=2":
-        addWatchlist(request, response);
-        break;
 
       default:
         ServletUtils.forward("/views/404.jsp", request, response);
@@ -126,11 +128,18 @@ public class ProductFEServlet extends HttpServlet {
   }
 
   private void addWatchlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//    int proid = Integer.parseInt(request.getParameter("proid"));
-    int userid = 1;
-    int proid = 1;
-    Watchlist w = new Watchlist(proid, userid);
-    WatchlistModel.add(w);
-    ServletUtils.forward("views/vwProduct/ByCat?id=2", request, response);
+        int id_user = Integer.parseInt(request.getParameter("UserID"));
+        int id_product = Integer.parseInt(request.getParameter("ProID"));
+        Watchlist w = new Watchlist(id_product, id_user);
+        WatchlistModel.add(w);
+        ServletUtils.redirect("/Product/Index", request, response);
+  }
+
+  private void deleteWatchlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    int id_user = Integer.parseInt(request.getParameter("UserID"));
+    int id_product = Integer.parseInt(request.getParameter("ProID"));
+    Watchlist w = new Watchlist(id_product, id_user);
+    WatchlistModel.delete(w);
+    ServletUtils.redirect("/Product/Index", request, response);
   }
 }

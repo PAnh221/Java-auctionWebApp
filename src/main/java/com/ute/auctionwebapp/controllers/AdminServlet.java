@@ -383,9 +383,10 @@ public class AdminServlet extends HttpServlet {
 
     private void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int imgindex = Integer.parseInt(request.getParameter("imgindex"));
-        int catid = Integer.parseInt(request.getParameter("catid"));
         String proname = request.getParameter("proname");
         int bin = Integer.parseInt(request.getParameter("bin"));
+        int startprice = Integer.parseInt(request.getParameter("startprice"));
+        int stepprice = Integer.parseInt(request.getParameter("stepprice"));
         String fulldes = request.getParameter("fulldes");
         String tinydes = request.getParameter("tinydes");
         String bd = request.getParameter("uploaddate")+" 00:00";
@@ -395,19 +396,19 @@ public class AdminServlet extends HttpServlet {
         int subcatid = Integer.parseInt(request.getParameter("subcatid"));
         int proid = Integer.parseInt(request.getParameter("proid"));
 
-        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, catid, imgindex, uploaddate, bin);
+        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, imgindex, uploaddate, bin, startprice, stepprice, 0);
         ProductModelAdmin.add(prod);
         ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
     }
 //(ImgIndex, CatID, UploadDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, ProID)
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int imgindex = Integer.parseInt(request.getParameter("imgindex"));
-        int catid = Integer.parseInt(request.getParameter("catid"));
         String proname = request.getParameter("proname");
         int bin = Integer.parseInt(request.getParameter("bin"));
+
         String fulldes = request.getParameter("fulldes");
         String tinydes = request.getParameter("tinydes");
-//        LocalDate.now() //Định dạng là dd/MM/yyyy thì db mới nhận
+//      LocalDate.now() //Định dạng là dd/MM/yyyy thì db mới nhận
         String bd = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+" 00:00";
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime uploaddate = LocalDateTime.parse(bd, df);
@@ -415,7 +416,12 @@ public class AdminServlet extends HttpServlet {
         int subcatid = Integer.parseInt(request.getParameter("subcatid"));
         int proid = Integer.parseInt(request.getParameter("proid"));
 
-        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, catid, imgindex, uploaddate, bin);
+        //Vĩ thêm sau khí sửa database
+        int startprice = Integer.parseInt(request.getParameter("startprice"));
+        int stepprice = Integer.parseInt(request.getParameter("stepprice"));
+        int status = Integer.parseInt(request.getParameter("status"));
+
+        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, imgindex, uploaddate, bin, startprice, stepprice, status);
         ProductModelAdmin.update(prod);
         ServletUtils.redirect("/Admin/Product/Detail", request, response);
     }
