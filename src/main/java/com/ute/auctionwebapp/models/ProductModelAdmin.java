@@ -109,7 +109,7 @@ public class ProductModelAdmin {
   //}
 
   public static void add(Product p) {
-    String insertSql = "INSERT INTO product (ImgIndex, UploadDate, EndDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, ProID, StartPrice, StepPrice, Status) VALUES (:imgindex,:uploaddate, :enddate, :bin,:fulldes,:tinydes,:sellerid,:subcatid,:proname,:proid,:startprice,:stepprice,:status)\n";
+    String insertSql = "INSERT INTO product (ImgIndex, UploadDate, EndDate, Bin, FullDes, TinyDes, SellerID, SubCatID, ProName, StartPrice, StepPrice, Status) VALUES (:imgindex,:uploaddate, :enddate, :bin,:fulldes,:tinydes,:sellerid,:subcatid,:proname/*,:proid*/,:startprice,:stepprice,:status)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
               .addParameter("imgindex", p.getImgIndex())
@@ -120,7 +120,7 @@ public class ProductModelAdmin {
               .addParameter("sellerid", p.getSellerID())
               .addParameter("subcatid", p.getSubCatID())
               .addParameter("proname", p.getProName())
-              .addParameter("proid", p.getProID())
+              //.addParameter("proid", p.getProID())
 
               //Vĩ thêm sau khi sửa database
               .addParameter("startprice", p.getStartPrice())

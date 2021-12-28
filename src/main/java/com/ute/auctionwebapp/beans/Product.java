@@ -35,6 +35,23 @@ public class Product {
     StartPrice = startPrice;
     StepPrice = stepPrice;
   }
+  public Product(String proName, String tinyDes, String fullDes, int subCatID, int sellerID, int imgIndex, LocalDateTime uploadDate, int bin, int startPrice, int stepPrice, int status /*, int catId */) {
+    ProName = proName;
+    TinyDes = tinyDes;
+    FullDes = fullDes;
+    SubCatID = subCatID;
+    SellerID = sellerID;
+    ImgIndex = imgIndex;
+    UploadDate = uploadDate;
+    Bin = bin;
+    Status = status;
+    //CatID = catId
+
+    //Mới thêm
+    EndDate = uploadDate.plusDays(7);
+    StartPrice = startPrice;
+    StepPrice = stepPrice;
+  }
 
   public int getProID() {
     return ProID;

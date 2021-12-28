@@ -4,7 +4,7 @@
 
 <t:main>
   <jsp:attribute name="js">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/kr8w0r5fuhf6ct3y26bbhqco9zkw8umtqcz3lfc5sjwj9rhh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
       tinymce.init({
         selector: '#txtFullDes',

@@ -56,6 +56,18 @@ public class ProductModel {
     }
   }
 
+  public static Product getNewestProduct(){
+    final String query = "select * from product order by ProID DESC";
+    try (Connection con = DbUtils.getConnection()) {
+      List<Product> list = con.createQuery(query)
+              .executeAndFetch(Product.class);
+      if (list.size() == 0) {
+        return null;
+      }
+      return list.get(0);
+    }
+  }
+
 
 
 //  public static void add(Product p) {
