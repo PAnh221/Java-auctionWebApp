@@ -34,7 +34,8 @@
 </head>
 
 <body>
-<div class="container">
+<jsp:include page="../../views/partials/nav.jsp" />
+<div class="container mt-3">
     <div class="row flex-lg-nowrap">
         <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
             <div class="card p-3">
