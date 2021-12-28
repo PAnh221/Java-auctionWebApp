@@ -1,6 +1,5 @@
 package com.ute.auctionwebapp.controllers;
 
-//import at.favre.lib.crypto.bcrypt.BCrypt;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.auctionwebapp.Utils.GoogleRecaptcha;
 import com.ute.auctionwebapp.Utils.ServletUtils;
