@@ -5,6 +5,7 @@ public class Bid {
     private int BidID, BidderID,ProductID;
     private LocalDateTime Time;
     private int MaxBid;
+    private String UserName;
 
     public Bid(){
     }
@@ -35,5 +36,9 @@ public class Bid {
     public int getMaxBid(){return MaxBid;}
 
     public void setMaxBid(int maxBid){MaxBid = maxBid;}
+
+    public String getUserName(){return UserName;}
+
+    public void setUserName(String userName){UserName = userName;}
 
 }

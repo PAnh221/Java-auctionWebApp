@@ -5,6 +5,7 @@
 
 <jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product" />
 <jsp:useBean id="relevantProducts" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
+<jsp:useBean id="bidHistory" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Bid>" />
 <jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 
@@ -35,26 +36,30 @@
 
         <h5 class="mt-5">Lịch sử đấu giá</h5>
 
-        <table class="table-sm mt-2">
+        <table class="table table-striped">
           <thead class="thead-light">
           <tr>
             <th scope="col"><i>Thời điểm</i></th>
-            <th scope="col"><i>Người mua</i></th>
+            <th scope="col"><i>Người ra giá</i></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>00:00</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>00:00</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <td>00:00</td>
-            <td>the Bird</td>
-          </tr>
+          <c:choose>
+            <c:when test="${bidHistory.size()==0}">
+              <tr>
+                <td>Chưa có</td>
+                <td>Chưa có</td>
+              </tr>
+            </c:when>
+            <c:otherwise>
+              <c:forEach items="${bidHistory}" var="h">
+                <tr>
+                  <td>${h.time}</td>
+                  <td>${h.userName}</td>
+                </tr>
+              </c:forEach>
+            </c:otherwise>
+          </c:choose>
           </tbody>
         </table>
         <form class="form-inline mt-2" method="post">

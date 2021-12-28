@@ -2,14 +2,12 @@ package com.ute.auctionwebapp.controllers;
 
 import com.mysql.cj.Session;
 import com.ute.auctionwebapp.Utils.ServletUtils;
-import com.ute.auctionwebapp.beans.Category;
-import com.ute.auctionwebapp.beans.Product;
-import com.ute.auctionwebapp.beans.User;
-import com.ute.auctionwebapp.beans.Watchlist;
+import com.ute.auctionwebapp.beans.*;
 import com.ute.auctionwebapp.models.CategoryModel;
 import com.ute.auctionwebapp.models.ProductModel;
 import com.ute.auctionwebapp.models.UserModel;
 import com.ute.auctionwebapp.models.WatchlistModel;
+import com.ute.auctionwebapp.models.BidModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -95,7 +93,8 @@ public class ProductFEServlet extends HttpServlet {
         int proId = Integer.parseInt(request.getParameter("id"));
         Product product = ProductModel.findById(proId);
         List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId); //danh sach sp cung subcat
-
+        List<Bid> list_bid = BidModel.getListBidByProductID(proId);
+        list_bid.forEach(bid -> bid.setUserName(UserModel.findById(bid.getBidderID()).getUserName()));
         int sID = product.getSellerID();
         User s = UserModel.findById(sID);
 
@@ -105,6 +104,7 @@ public class ProductFEServlet extends HttpServlet {
         } else {
           request.setAttribute("product", product);
           request.setAttribute("relevantProducts", list_relevant);
+          request.setAttribute("bidHistory", list_bid);
           request.setAttribute("seller", s);
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
