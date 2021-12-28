@@ -1,5 +1,7 @@
 package com.ute.auctionwebapp.controllers;
 
+import java.util.Properties;
+
 
 //import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.auctionwebapp.Utils.ServletUtils;
@@ -9,16 +11,20 @@ import com.ute.auctionwebapp.beans.SubCategory;
 import com.ute.auctionwebapp.beans.User;
 import com.ute.auctionwebapp.models.*;
 
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -158,7 +164,9 @@ public class AdminServlet extends HttpServlet {
                 UserModel.degradeSeller(useridd);
                 ServletUtils.redirect("/Admin/User/Detail", request, response);
                 break;
-
+            case "/User/SendMail":
+                sendMail(request, response);
+                break;
             //              PRODUCT <====================================================================
             case "/Product/Add":
                 ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
@@ -252,6 +260,9 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/User/Delete":
                 deleteUser(request, response);
+                break;
+            case "/User/SendMail":
+                sendMail(request, response);
                 break;
 
 //                PRODUCT <===========================================================
@@ -453,4 +464,48 @@ public class AdminServlet extends HttpServlet {
         out.print(available);
         out.flush();
     }
+
+    private void sendMail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //reset mật khẩu
+        int userid = Integer.parseInt(request.getParameter("id"));
+        UserModel.editPass(userid);
+
+        //mail
+        final String username = "caulacbo3qcuhanh@gmail.com";
+        final String password = "thanhnha";
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        String emailTo = "maithanhnha12345pyl@gmail.com";
+        String emailSubject = "Reset Password";
+        String content = "New Password is 123456";
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(emailTo)
+            );
+            message.setSubject(emailSubject);
+            message.setText(content);
+
+            // sends the e-mail
+            Transport.send(message);
+            System.out.println("send done!");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        ServletUtils.redirect("/Admin/User/Detail", request, response);
+    }
+
 }
