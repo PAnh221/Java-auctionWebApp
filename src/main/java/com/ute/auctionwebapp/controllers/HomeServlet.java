@@ -1,8 +1,10 @@
 package com.ute.auctionwebapp.controllers;
 
 import com.ute.auctionwebapp.Utils.ServletUtils;
+import com.ute.auctionwebapp.beans.Bid;
 import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.beans.User;
+import com.ute.auctionwebapp.models.BidModel;
 import com.ute.auctionwebapp.models.ProductModel;
 import com.ute.auctionwebapp.models.UserModel;
 
@@ -25,11 +27,21 @@ public class HomeServlet extends HttpServlet {
         }
         switch (path){
             case "/Index":
+                System.out.println(BidModel.getCurrentPriceByID(5));
+                System.out.println(BidModel.getCurrentBidderIDByID(5));
 
                 List<Product> listP1 = ProductModel.Top5AboutToEnd();
+                listP1.forEach(product -> {
+                    product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+                    product.setCurrentBidderID(BidModel.getCurrentBidderIDByID(product.getProID()));});
                 List<Product> listP2 = ProductModel.Top5HotProducts();
+                listP2.forEach(product -> {
+                    product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+                    product.setCurrentBidderID(BidModel.getCurrentBidderIDByID(product.getProID()));});
                 List<Product> listP3 = ProductModel.Top5HighestPrice();
-
+                listP3.forEach(product -> {
+                    product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+                    product.setCurrentBidderID(BidModel.getCurrentBidderIDByID(product.getProID()));});
                 request.setAttribute("top5_1", listP1);
                 request.setAttribute("top5_2", listP2);
                 request.setAttribute("top5_3", listP3);

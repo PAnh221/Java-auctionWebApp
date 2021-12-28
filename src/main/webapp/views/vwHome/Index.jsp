@@ -43,7 +43,7 @@
                                         <div class="card-body">
                                             <h6 class="card-title">${c.proName}</h6>
                                             <h5 class="card-title text-danger">
-                                                <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
+                                                <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
                                             <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                         </div>
@@ -65,6 +65,7 @@
                 </c:otherwise>
             </c:choose>
         </div>
+        <br>
         <div class="card">
             <h4 class="card-header">
                 Top 5 sản phẩm hot nhất
@@ -85,7 +86,7 @@
                                         <div class="card-body">
                                             <h6 class="card-title">${c.proName}</h6>
                                             <h5 class="card-title text-danger">
-                                                <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
+                                                <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
                                             <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                         </div>
@@ -107,6 +108,7 @@
                 </c:otherwise>
             </c:choose>
         </div>
+        <br>
         <div class="card">
             <h4 class="card-header">
                 Top 5 sản phẩm giá cao nhất
@@ -127,7 +129,7 @@
                                         <div class="card-body">
                                             <h6 class="card-title">${c.proName}</h6>
                                             <h5 class="card-title text-danger">
-                                                <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
+                                                <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
                                             <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                         </div>
@@ -149,5 +151,6 @@
                 </c:otherwise>
             </c:choose>
         </div>
+        <br>
     </jsp:body>
 </t:main>

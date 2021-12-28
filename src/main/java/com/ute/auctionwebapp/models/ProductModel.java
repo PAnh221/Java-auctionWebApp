@@ -4,6 +4,9 @@ import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.Utils.DbUtils;
 import org.sql2o.Connection;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ProductModel {
@@ -86,8 +89,6 @@ public class ProductModel {
     }
   }
 
-
-
 //  public static void add(Product p) {
 //    String insertSql = "INSERT INTO products (ProName, TinyDes, FullDes, Price, CatID, Quantity) VALUES (:proname,:tinydes,:fulldes,:price,:catid,:quantity)";
 //    try (Connection con = DbUtils.getConnection()) {
@@ -127,16 +128,24 @@ public class ProductModel {
 
   //Top 5 select
   public static List<Product> Top5HighestPrice() {
-    final String query = "select * from product order by Bin desc limit 5";
-    try (Connection con = DbUtils.getConnection()) {
-      return con.createQuery(query)
-              .executeAndFetch(Product.class);
+    List<Product> allProduct = ProductModel.findAll();
+    allProduct.forEach(product -> product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID())));
+    Collections.sort(allProduct, new Comparator<Product>() {
+      @Override
+      public int compare(Product o1, Product o2) {
+        return o1.getCurrentPrice()>o2.getCurrentPrice()? -1 : 1;
+      }
+    });
+    List<Product> highestPrice = new ArrayList<>();
+    for (int i = 0; i < allProduct.size() && i < 5; i++){
+      highestPrice.add(allProduct.get(i));
     }
+    return highestPrice;
   }
 
   //Top 5 sản phẩm sắp kết thúc
   public static List<Product> Top5AboutToEnd(){
-    final String query = "select * from product order by Bin desc limit 5";
+    final String query = "select * from product where Status = 0 order by EndDate asc limit 5";
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
               .executeAndFetch(Product.class);
@@ -144,9 +153,9 @@ public class ProductModel {
   }
 
 
-  //Top 5 sản phẩm có nhiều lượt ra giá nhất
+  //Top 5 sản phẩm có nhiều người ra giá nhất
   public static List<Product> Top5HotProducts(){
-    final String query = "select * from product order by Bin desc limit 5";
+    final String query = "SELECT * FROM product WHERE ProID IN (SELECT ProductID from (SELECT ProductID,COUNT(BidderID) as Count FROM bid GROUP BY ProductID ORDER BY Count DESC LIMIT 5) AS A)";
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
               .executeAndFetch(Product.class);
