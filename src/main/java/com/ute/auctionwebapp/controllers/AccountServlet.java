@@ -3,7 +3,9 @@ package com.ute.auctionwebapp.controllers;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.auctionwebapp.Utils.GoogleRecaptcha;
 import com.ute.auctionwebapp.Utils.ServletUtils;
+import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.beans.User;
+import com.ute.auctionwebapp.models.ProductModel;
 import com.ute.auctionwebapp.models.UserModel;
 import org.json.simple.parser.ParseException;
 
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 
 @WebServlet(name = "AccountServlet", value = "/Account/*")
@@ -43,6 +46,12 @@ public class AccountServlet extends HttpServlet {
                     ServletUtils.redirect("/Account/Login", request, response);
                     return;
                 }
+                User user = (User)session.getAttribute("authUser");
+                int userID = user.getUserID();
+                List<Product> ListAuctioning = ProductModel.findAuctioningBySellerID(userID);
+                List<Product> ListAuctioned = ProductModel.findAuctionedBySellerID(userID);
+                request.setAttribute("ListAuctioning",ListAuctioning);
+                request.setAttribute("ListAuctioned",ListAuctioned);
                 ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
                 break;
             case "/Edit":

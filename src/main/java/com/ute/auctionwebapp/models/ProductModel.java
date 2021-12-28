@@ -56,6 +56,24 @@ public class ProductModel {
     }
   }
 
+  public static List<Product> findAuctioningBySellerID(int sellerID){
+    final String query = "select * from product where Status = 0 and SellerID = :sellerID";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("sellerID", sellerID)
+              .executeAndFetch(Product.class);
+    }
+  }
+
+  public static List<Product> findAuctionedBySellerID(int sellerID){
+    final String query = "select * from product where Status = 1 and SellerID = :sellerID";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("sellerID", sellerID)
+              .executeAndFetch(Product.class);
+    }
+  }
+
   public static Product getNewestProduct(){
     final String query = "select * from product order by ProID DESC";
     try (Connection con = DbUtils.getConnection()) {
