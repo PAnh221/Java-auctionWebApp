@@ -100,31 +100,81 @@ public class MiscServlet extends HttpServlet {
     Collection<Part> parts = request.getParts();
     for (Part part : request.getParts()) {
       if (part.getName().equals("fuMain")) {
-        String contentDisposition = part.getHeader("content-disposition");
-        String[] items = contentDisposition.split(";");
-        for (String s : items) {
-          String tmp = s.trim();
-          if (tmp.startsWith("filename")) {
-            int idx = tmp.indexOf("=") + 2;
-            String filename = tmp.substring(idx, tmp.length() - 1);
-            String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
-            System.out.println(targetDir);
-            File dir = new File(targetDir);
-            Boolean createDirSuccess;
-            if (!dir.exists()) {
-               createDirSuccess = dir.mkdir();
-            }
-            else {createDirSuccess = true;}
-            if(createDirSuccess) {
-              String destination = targetDir + "/" + filename;
-              part.write(destination);
-            }
-            else {
-              System.out.println("Lỗi tạo thư mục chứa ảnh!");
-            }
-          }
+        //String contentDisposition = part.getHeader("content-disposition");
+        //String[] items = contentDisposition.split(";");
+        //for (String s : items) {
+          //String tmp = s.trim();
+          //if (tmp.startsWith("filename")) {
+            //int idx = tmp.indexOf("=") + 2;
+        String filename = imgindex + "_main";
+        String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
+        System.out.println(targetDir);
+        File dir = new File(targetDir);
+        Boolean createDirSuccess;
+        if (!dir.exists()) {
+           createDirSuccess = dir.mkdir();
+        }
+        else {createDirSuccess = true;}
+        if(createDirSuccess) {
+          String destination = targetDir + "/" + filename + ".png";
+          part.write(destination);
+        }
+        else {
+          System.out.println("Lỗi tạo thư mục chứa ảnh!");
+        }
+          //}
+        //}
+      } else if (part.getName().equals("fuSub1")){
+        //String contentDisposition = part.getHeader("content-disposition");
+        //String[] items = contentDisposition.split(";");
+        //for (String s : items) {
+          //String tmp = s.trim();
+          //if (tmp.startsWith("filename")) {
+            //int idx = tmp.indexOf("=") + 2;
+        String filename = imgindex + "_sub1";
+        String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
+        System.out.println(targetDir);
+        File dir = new File(targetDir);
+        Boolean createDirSuccess;
+        if (!dir.exists()) {
+          createDirSuccess = dir.mkdir();
+        }
+        else {createDirSuccess = true;}
+        if(createDirSuccess) {
+          String destination = targetDir + "/" + filename + ".png";
+          part.write(destination);
+        }
+        else {
+          System.out.println("Lỗi tạo thư mục chứa ảnh!");
+        }
+          //}
+        //}
+      } else if (part.getName().equals("fuSub2")){
+        //String contentDisposition = part.getHeader("content-disposition");
+        //String[] items = contentDisposition.split(";");
+        //for (String s : items) {
+          //String tmp = s.trim();
+          //if (tmp.startsWith("filename")) {
+            //int idx = tmp.indexOf("=") + 2;
+        String filename = imgindex+"_sub2";
+        String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
+        System.out.println(targetDir);
+        File dir = new File(targetDir);
+        Boolean createDirSuccess;
+        if (!dir.exists()) {
+          createDirSuccess = dir.mkdir();
+        }
+        else {createDirSuccess = true;}
+        if(createDirSuccess) {
+          String destination = targetDir + "/" + filename + ".png";
+          part.write(destination);
+        }
+        else {
+          System.out.println("Lỗi tạo thư mục chứa ảnh!");
         }
       }
+        //}
+      //}
     }
     Product prod = new Product(proname, tinydes, fulldes, subcatid, sellerid, imgindex, uploaddate, bin, startprice, stepprice, 0);
     ProductModelAdmin.add(prod);

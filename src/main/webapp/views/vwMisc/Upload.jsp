@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.2.5/js/locales/vi.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/kr8w0r5fuhf6ct3y26bbhqco9zkw8umtqcz3lfc5sjwj9rhh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
-      $('#fuMain').fileinput({
+      $('.fuMain').fileinput({
         theme: 'fa',
         language: 'vi',
         dropZoneEnabled: false,
@@ -64,8 +64,17 @@
             <textarea id="txtFullDes" name="FullDes"></textarea>
           </div>
           <div class="form-group">
-            <label for="fuMain">Thêm tối thiểu 3 ảnh mô tả <label style="color: red">( * )</label></label>
-            <input id="fuMain" name="fuMain" type="file" />
+            <br>
+            <label>Thêm 3 ảnh mô tả <label style="color: red">( * )</label></label>
+            <br>
+            <label>Ảnh đại diện</label>
+            <input class="fuMain" name="fuMain" type="file" />
+            <br>
+            <label>Ảnh mô tả 1</label>
+            <input class="fuMain" name="fuSub1" type="file" />.
+            <br>
+            <label>Ảnh mô tả 2</label>
+            <input class="fuMain" name="fuSub2" type="file" />
           </div>
         </div>
         <div class="card-footer">
