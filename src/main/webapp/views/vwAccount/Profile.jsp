@@ -39,6 +39,12 @@
                                 <p class="text-muted font-size-sm">${authUser.address}</p>
 <%--                                <button class="btn btn-primary">Follow</button>--%>
 <%--                                <button class="btn btn-outline-primary">Message</button>--%>
+                                <c:if test = "${authUser.permission == 0}">
+                                    <span class="badge badge-success">Bidder</span>
+                                </c:if>
+                                <c:if test = "${authUser.permission == 1}">
+                                    <span class="badge badge-success">Seller</span>
+                                </c:if>
                             </div>
                         </div>
                         <hr class="my-4">
