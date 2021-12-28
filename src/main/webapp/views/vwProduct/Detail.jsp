@@ -33,41 +33,43 @@
         <p class="card-text">${product.fullDes}</p>
         <p class="card-text"><i>Ngày được đăng bán:</i> ${product.uploadDate}</p>
 
-        <h4 class="mt-5">Lịch sử đấu giá</h4>
-        <table class="table table-striped">
-          <thead>
+        <h5 class="mt-5">Lịch sử đấu giá</h5>
+
+        <table class="table-sm mt-2">
+          <thead class="thead-light">
           <tr>
-            <th scope="col">Thời điểm</th>
-            <th scope="col">Người mua</th>
-            <th scope="col">Giá</th>
+            <th scope="col"><i>Thời điểm</i></th>
+            <th scope="col"><i>Người mua</i></th>
           </tr>
           </thead>
           <tbody>
           <tr>
             <td>00:00</td>
             <td>Otto</td>
-            <td>@mdo</td>
           </tr>
           <tr>
-            <td>Jacob</td>
+            <td>00:00</td>
             <td>Thornton</td>
-            <td>@fat</td>
           </tr>
           <tr>
-            <td>Larry</td>
+            <td>00:00</td>
             <td>the Bird</td>
-            <td>@twitter</td>
           </tr>
           </tbody>
         </table>
-<%--        <a class="btn btn-sm btn-outline-success" href="#" role="button">--%>
-<%--          <i class="fa fa-gavel" aria-hidden="true"></i>--%>
-<%--          Ra giá--%>
-<%--        </a>--%>
-        <button type="button" class="btn btn-danger btn-lg">
-          <i class="fa fa-gavel" aria-hidden="true"></i>
-          Ra giá
-        </button>
+        <form class="form-inline mt-2" method="post">
+          <div class="form-group mb-2">
+            <span>Mức giá </span>
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control"placeholder="Nhập mức giá" id="price">
+          </div>
+          <button type="submit" class="btn btn-danger btn-lg">
+            <i class="fa fa-gavel" aria-hidden="true"></i>
+            Ra giá
+          </button>
+        </form>
+
         <div class="alert alert-primary mt-3" role="alert">
           <p><i class="fa fa-id-badge mr-2" aria-hidden="true"></i>${seller.name}</p>
           <p><i class="fa fa-envelope mr-1" aria-hidden="true"></i>${seller.email}</p>

@@ -119,7 +119,9 @@ public class ProductFEServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String path = request.getPathInfo();
+
     switch (path) {
+
 
       default:
         ServletUtils.forward("/views/404.jsp", request, response);

@@ -58,7 +58,6 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/Edit.jsp", request, response);
                 break;
             case "/IsAvailable":
-
                 String txtusername = request.getParameter("user");
                 String txtemail = request.getParameter("email");
                 User username = UserModel.findByUsername(txtusername);
