@@ -33,7 +33,7 @@
                                             <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                         </div>
                                         <div class="card-footer text-muted">
-                                            <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?proid=${c.proID}" role="button">
+                                            <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
                                                 <i class="fa fa-heart" aria-hidden="true"></i>
                                             </a>
 
