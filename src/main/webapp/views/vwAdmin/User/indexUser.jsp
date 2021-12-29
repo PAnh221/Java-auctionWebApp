@@ -34,7 +34,7 @@
                     <tr>
                         <th scope="col">#</th> <br>
                         <th scope="col">Username </th>
-                        <th scope="col">Password</th>
+<%--                        <th scope="col" style="width: 20%">Password</th>--%>
                         <th scope="col">Name</th>
                         <th scope="col">Address</th>
                         <th scope="col">Email</th>
@@ -48,7 +48,7 @@
                         <tr>
                             <th scope="row">${u.userID}</th>
                             <td>${u.userName}</td>
-                            <td>${u.password}</td>
+<%--                            <td>${u.password}</td>--%>
                             <td>${u.name}</td>
                             <td>${u.address}</td>
                             <td>${u.email}</td>

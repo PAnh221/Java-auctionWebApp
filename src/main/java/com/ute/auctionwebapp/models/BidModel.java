@@ -125,5 +125,12 @@ public class BidModel {
             return list.size() == 0;
         }
     }
-
+    public static void deletePro(int id) {
+        String sql = "delete from bid where ProductID = :ProID";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("ProID", id)
+                    .executeUpdate();
+        }
+    }
 }

@@ -32,38 +32,12 @@
                     <form action="" class="form_accounts" method="post" style="width: 100%">
                         <div class="input-form">
                             <span>#</span> <br>
-                            <input type="text" name="proid" value="${product.proID}">
+                            <input type="text" name="proid" value="${product.proID}" readonly>
                         </div>
                         <div class="input-form">
                             <span>Product Name</span>
                             <input type="text" name="proname" id="productname" value="${product.proName}">
                         </div>
-                        <div class="input-form">
-                            <span>Tiny Des</span>
-                            <input type="text" name="tinydes" value="${product.tinyDes}">
-                        </div>
-                        <div class="input-form">
-                            <span>Full Des</span><br>
-                            <input type="text" name="fulldes" value="${product.fullDes}">
-                        </div>
-
-                        <div class="input-form">
-                            <span>Category</span><br>
-                            <select id="catid" name="catid"  style="width: 94%;
-                                                                    padding: 6.5px 10px;
-                                                                    outline: none;
-                                                                    border: 1px solid #607d8b;
-                                                                    font-size: 16px;
-                                                                    letter-spacing: 1px;
-                                                                    background: transparent;
-                                                                    border-radius: 3px;
-                                                                    margin-bottom: 5px;">
-                                <c:forEach items="${categories}" var="c">
-                                    <option value="${c.catID}">${c.catName}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
                         <div class="input-form">
                             <span>Sub Category</span><br>
                             <select id="subcatid" name="subcatid"  style="width: 94%;
@@ -80,7 +54,6 @@
                                 </c:forEach>
                             </select>
                         </div>
-
                         <div class="input-form">
                             <span>User</span><br>
                             <select id="sellerid" name="sellerid"  style="width: 94%;
@@ -97,19 +70,41 @@
                                 </c:forEach>
                             </select>
                         </div>
+                        <div class="input-form">
+                            <span>Start Price</span><br>
+                            <input type="text" name="startprice" value="${product.startPrice}">
+                        </div>
+                        <div class="input-form">
+                            <span>Step Price</span><br>
+                            <input type="text" name="stepprice" value="${product.stepPrice}">
+                        </div>
+                        <div class="input-form">
+                            <span>Tiny Des</span>
+                            <input type="text" name="tinydes" value="${product.tinyDes}">
+                        </div>
+                        <div class="input-form">
+                            <span>Full Des</span><br>
+                            <input type="text" name="fulldes" value="${product.fullDes}">
+                        </div>
+
+                        <div class="input-form">
+                            <span>Bin</span><br>
+                            <input type="text" name="bin" value="${product.bin}">
+                        </div>
 
                         <div class="input-form">
                             <span>Index Img</span><br>
                             <input type="text" name="imgindex" value="${product.imgIndex}">
                         </div>
+
+                        <div class="input-form">
+                            <span>Status</span><br>
+                            <input type="text" name="status" value="${product.status}">
+                        </div>
 <%--                        <div class="input-form">--%>
 <%--                            <span>Upload Date</span>--%>
 <%--                            <input type="text" name="uploaddate" id="txtUploadDate" value="${product.uploadDate}">--%>
 <%--                        </div>--%>
-                        <div class="input-form">
-                            <span>Bin</span><br>
-                            <input type="text" name="bin" value="${product.bin}">
-                        </div>
                         <div class="input-form">
                             <button type="submit" class="btn btn-outline-success" formaction="${pageContext.request.contextPath}/Admin/Product/Update" style="padding: 5px 40px; font-size: 20px">
                                 Save

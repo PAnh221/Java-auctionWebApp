@@ -407,9 +407,9 @@ public class AdminServlet extends HttpServlet {
         LocalDateTime uploaddate = LocalDateTime.parse(bd, df);
         int sellerid = Integer.parseInt(request.getParameter("sellerid"));
         int subcatid = Integer.parseInt(request.getParameter("subcatid"));
-        int proid = Integer.parseInt(request.getParameter("proid"));
+//        int proid = Integer.parseInt(request.getParameter("proid"));
 
-        Product prod = new Product(proid, proname, tinydes, fulldes, subcatid, sellerid, imgindex, uploaddate, bin, startprice, stepprice, 0);
+        Product prod = new Product(1, proname, tinydes, fulldes, subcatid, sellerid, imgindex, uploaddate, bin, startprice, stepprice, 0);
         ProductModelAdmin.add(prod);
         ServletUtils.forward("/views/vwAdmin/Product/addProduct.jsp", request, response);
     }
@@ -441,6 +441,8 @@ public class AdminServlet extends HttpServlet {
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int proid = Integer.parseInt(request.getParameter("proid"));
+        BidModel.deletePro(proid);
+        WatchlistModel.deleteProduct(proid);
         ProductModelAdmin.delete(proid);
         ServletUtils.redirect("/Admin/Product/Detail", request, response);
     }
