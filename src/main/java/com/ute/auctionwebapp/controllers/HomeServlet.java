@@ -27,8 +27,6 @@ public class HomeServlet extends HttpServlet {
         }
         switch (path){
             case "/Index":
-                System.out.println(BidModel.getCurrentPriceByID(5));
-                System.out.println(BidModel.getCurrentBidderUsernameByID(5));
 
                 List<Product> listP1 = ProductModel.Top5AboutToEnd();
                 listP1.forEach(product -> {

@@ -152,7 +152,7 @@ public class ProductModelAdmin {
   }
 
   public static void update(Product p) {
-    String sql = "UPDATE product SET  ImgIndex = :imgindex, CatID = :catid, UploadDate = :uploaddate, EndDate = :enddate, Bin = :bin, FullDes = :fulldes, TinyDes = :tinydes, SellerID = :sellerid, SubCatID = :subcatid, ProName = :proname, StartPrice = :startprice, StepPrice = :stepprice WHERE ProID = :proid \n";
+    String sql = "UPDATE product SET  ImgIndex = :imgindex, UploadDate = :uploaddate, EndDate = :enddate, Bin = :bin, FullDes = :fulldes, TinyDes = :tinydes, SellerID = :sellerid, SubCatID = :subcatid, ProName = :proname, StartPrice = :startprice, StepPrice = :stepprice WHERE ProID = :proid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("imgindex", p.getImgIndex())

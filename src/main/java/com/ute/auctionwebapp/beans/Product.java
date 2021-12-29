@@ -28,7 +28,7 @@ public class Product {
     SellerID = sellerID;
     ImgIndex = imgIndex;
     UploadDate = uploadDate;
-    Bin = bin;
+    Bin = Math.abs(bin);
     Status = status;
     //CatID = catId
 
@@ -47,7 +47,7 @@ public class Product {
     SellerID = sellerID;
     ImgIndex = imgIndex;
     UploadDate = uploadDate;
-    Bin = bin;
+    Bin = Math.abs(bin);
     Status = status;
     //CatID = catId
 

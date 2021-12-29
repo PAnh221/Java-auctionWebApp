@@ -105,7 +105,6 @@ public class MiscServlet extends HttpServlet {
     int sellerid = seller.getUserID();
     String SubCategoryID = request.getParameter("SubCategory");
     SubCategoryID = SubCategoryID.substring(1,SubCategoryID.length()-1);
-    System.out.println(SubCategoryID);
     int subcatid = Integer.parseInt(SubCategoryID);
     Collection<Part> parts = request.getParts();
     for (Part part : request.getParts()) {
@@ -118,7 +117,7 @@ public class MiscServlet extends HttpServlet {
             //int idx = tmp.indexOf("=") + 2;
         String filename = imgindex + "_main";
         String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
-        System.out.println(targetDir);
+        //System.out.println(targetDir);
         File dir = new File(targetDir);
         Boolean createDirSuccess;
         if (!dir.exists()) {
@@ -143,7 +142,7 @@ public class MiscServlet extends HttpServlet {
             //int idx = tmp.indexOf("=") + 2;
         String filename = imgindex + "_sub1";
         String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
-        System.out.println(targetDir);
+        //System.out.println(targetDir);
         File dir = new File(targetDir);
         Boolean createDirSuccess;
         if (!dir.exists()) {
@@ -168,7 +167,7 @@ public class MiscServlet extends HttpServlet {
             //int idx = tmp.indexOf("=") + 2;
         String filename = imgindex+"_sub2";
         String targetDir = this.getServletContext().getRealPath("public/imgs/sp/" + imgindex);
-        System.out.println(targetDir);
+        //System.out.println(targetDir);
         File dir = new File(targetDir);
         Boolean createDirSuccess;
         if (!dir.exists()) {

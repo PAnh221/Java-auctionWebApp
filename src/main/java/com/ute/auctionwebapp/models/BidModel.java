@@ -10,7 +10,27 @@ import java.util.List;
 public class BidModel {
 
     public static void addBid(Bid bid){
+        String insertSql = "INSERT INTO bid (BidderID, ProductID, Time, MaxBid) VALUES (:bidderID,:productID,:time,:maxBid)\n";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(insertSql)
+                    .addParameter("bidderID", bid.getBidderID())
+                    .addParameter("productID", bid.getProductID())
+                    .addParameter("time", bid.getTime())
+                    .addParameter("maxBid", bid.getMaxBid())
+                    .executeUpdate();
+        }
+    }
 
+    public static void updateBid(Bid bid){
+        String sql = "UPDATE bid SET Time = :time, MaxBid = :maxBid where ProductID = :productID and BidderID = :bidderID";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("bidderID", bid.getBidderID())
+                    .addParameter("productID", bid.getProductID())
+                    .addParameter("time", bid.getTime())
+                    .addParameter("maxBid", bid.getMaxBid())
+                    .executeUpdate();
+        }
     }
 
     public static int getCurrentPriceByID(int productID){
@@ -94,4 +114,16 @@ public class BidModel {
             return list.get(1);
         }
     }
+
+    public static Boolean notExisted(int productID, int bidderID){
+        final String query = "select * from bid where ProductID = :productID and BidderID = :bidderID";
+        try (Connection con = DbUtils.getConnection()) {
+            List<Bid> list = con.createQuery(query)
+                    .addParameter("productID", productID)
+                    .addParameter("bidderID", bidderID)
+                    .executeAndFetch(Bid.class);
+            return list.size() == 0;
+        }
+    }
+
 }

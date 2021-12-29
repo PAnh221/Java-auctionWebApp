@@ -80,7 +80,8 @@
           <button <%--type="submit"--%>onclick="if (confirm('Bạn có muốn đấu giá món đồ: ${product.proName} với giá ' + document.getElementById('price').value +' vnđ?')) {
                                                     <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
                                                     const Http = new XMLHttpRequest();
-                                                    const url='${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;
+                                                    const url='${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}&bidderid=${authUser.userID}&price='+document.getElementById('price').value;
+                                                    <%--const url = '${pageContext.request.contextPath}/Product/AddWatchlist?proid=${product.proID}'--%>
                                                     Http.open('POST', url);
                                                     Http.send();
                                                 } else {

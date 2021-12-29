@@ -161,4 +161,16 @@ public class ProductModel {
               .executeAndFetch(Product.class);
     }
   }
+
+  public static void endAuctionProductID(int productID){
+    int status = BidModel.getCurrentBidderUsernameByID(productID) != null? 1 : 2;
+
+    String sql = "update product set Status = :Status where ProID = :ProID";
+    try (Connection con = DbUtils.getConnection()) {
+      con.createQuery(sql)
+              .addParameter("ProID", productID)
+              .addParameter("Status", status)
+              .executeUpdate();
+    }
+  }
 }
