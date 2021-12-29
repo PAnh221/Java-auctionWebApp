@@ -4,6 +4,7 @@ import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.Utils.DbUtils;
 import org.sql2o.Connection;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,11 +37,33 @@ public class ProductModel {
               .executeAndFetch(Product.class);
     }
   }
-  public  static  List<Product> fullTextSearch(String keyword){
-    final String query = "select * from product where MATCH(ProName,TinyDes,FullDes) AGAINST(:keyword)";
+  public  static  List<Product> fullTextSearch(String keyword,String order_by){
+    String query = "select * from product where MATCH(ProName,TinyDes,FullDes) AGAINST(:keyword) ";
+    LocalDateTime now = LocalDateTime.now();
+    switch (order_by){
+      case "new_post":
+        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
+//        ===================     debug ==================================================
+//        query += "HAVING (EndDate >= :time_now) Order By UploadDate desc";
+        break;
+      case "almost_over":
+        query += "HAVING DATE_SUB(:time_now,INTERVAL -60 MINUTE ) <= EndDate Order By EndDate ASC";
+        //        ===================     debug ==================================================
+//        query += "HAVING DATE_SUB(:time_now,INTERVAL -11 DAY ) <= EndDate Order By EndDate ASC";
+        break;
+      case "asc_price":
+        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
+        break;
+      case "des_price":
+        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
+        break;
+      default:
+        break;
+    }
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
               .addParameter("keyword", keyword)
+              .addParameter("time_now", now)
               .executeAndFetch(Product.class);
     }
   }

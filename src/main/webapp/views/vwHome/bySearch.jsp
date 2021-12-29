@@ -9,9 +9,27 @@
 <t:main>
     <jsp:body>
         <div class="card">
-            <h4 class="card-header">
-                Tìm kiếm theo từ khóa ${keyword}
-            </h4>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <div class="nav-link" href="#" style="color: #0d0d0d" disabled> <h5>Tìm kiếm theo từ khóa ${keyword}</h5> </div>
+                        </li>
+                    </ul>
+                </div>
+                <span class="navbar-text mr-3">Order by: </span>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ${order_by}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=new_post">New Post</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=almost_over">Almost Over</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=des_price">Price: Low to High</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=asc_price">Price: High to Low</a>
+                    </div>
+                </div>
+            </nav>
             <c:choose>
                 <c:when test="${listSearchProduct.size() == 0}">
                     <div class="card-body">

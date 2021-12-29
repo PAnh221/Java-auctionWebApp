@@ -48,9 +48,32 @@ public class HomeServlet extends HttpServlet {
                 break;
             case "/bySearch":
                 String keyword = request.getParameter("search_input");
-                List<Product> listSearchProduct = ProductModel.fullTextSearch(keyword);
-                request.setAttribute("keyword", keyword);
+                String type_order = request.getParameter("type_order");
+                if(type_order==null){
+                    type_order="new_post";
+                }
+                List<Product> listSearchProduct = ProductModel.fullTextSearch(keyword,type_order);
                 request.setAttribute("listSearchProduct", listSearchProduct);
+                request.setAttribute("keyword", keyword);
+                String order = null;
+                switch (type_order){
+                    case "new_post":
+                        order = "New Post";
+                        break;
+                    case "almost_over":
+                        order = "Almost Over";
+                        break;
+                    case "asc_price":
+                        order = "Price: Low to High";
+                        break;
+                    case "des_price":
+                        order = "Price: High to Low";
+                        break;
+                    default:
+                        ServletUtils.forward("/views/404.jsp",request,response);
+                        break;
+                }
+                request.setAttribute("order_by",order);
                 ServletUtils.forward("/views/vwHome/bySearch.jsp",request,response);
                 break;
             default:
