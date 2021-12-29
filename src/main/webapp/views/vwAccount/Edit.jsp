@@ -91,8 +91,8 @@
                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">${authUser.name}</h4>
-                                            <p class="mb-0">${authUser.name}</p>
-<%--                                            <div class="text-muted"><small>Last seen 2 hours ago</small></div>--%>
+                                            <p class="mb-0">${authUser.userName}</p>
+                                            <div class="text-muted"><small>${authUser.address}</small></div>
                                             <div class="mt-2">
                                                 <button class="btn btn-primary" type="button">
                                                     <i class="fa fa-fw fa-camera"></i>
@@ -100,10 +100,17 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="text-center text-sm-right">
-                                            <span class="badge badge-secondary">${authUser.permission}</span>
-<%--                                            <div class="text-muted"><small>Joined 09 Dec 2017</small></div>--%>
-                                        </div>
+                                        <c:if test = "${authUser.permission == 0}">
+                                            <div class="text-center text-sm-right">
+                                                <span class="badge badge-success">Bidder</span>
+                                            </div>
+                                        </c:if>
+                                        <c:if test = "${authUser.permission == 1}">
+                                            <div class="text-center text-sm-right">
+                                                <span class="badge badge-info">Seller</span>
+                                            </div>
+                                        </c:if>
+
                                     </div>
                                 </div>
                                 <ul class="nav nav-tabs">
