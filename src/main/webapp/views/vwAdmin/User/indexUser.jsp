@@ -56,6 +56,7 @@
                             <td>${u.permission}</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${u.userID}">Edit |</a>
+                                <a href="${pageContext.request.contextPath}/Admin/User/SendMail?id=${u.userID}">Reset Pass |</a>
                                 <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">UpBidder |</a>
                                 <a href="${pageContext.request.contextPath}/Admin/User/Degrade?id=${u.userID}">DeSeller</a>
                             </td>

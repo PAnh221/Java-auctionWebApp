@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserModel {
   public static List<User> findAll() {
-    final String query = "SELECT UserID, UserName, Name, Password, Address, Email, Dob, Permission, Rating FROM user\n";
+    final String query = "SELECT UserID, UserName, Name, Password, Address, Email, Dob, Permission FROM user\n";
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
         .executeAndFetch(User.class);
@@ -130,7 +130,7 @@ public class UserModel {
   }
 
   public static void upgradeBidder(int id) {
-    String sql = "UPDATE user SET  Permission = 2 WHERE UserID = :userid and Rating > 9\n";
+    String sql = "UPDATE user SET  Permission = 2 WHERE UserID = :userid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", id)
@@ -154,6 +154,16 @@ public class UserModel {
               .addParameter("userid", user.getUserID())
               .addParameter("email", user.getEmail())
               .addParameter("password", user.getPassword())
+              .executeUpdate();
+    }
+  }
+
+  public static void editPass(int userid) {
+    String sql = "UPDATE user SET Password = :password WHERE UserID = :userid \n";
+    try (Connection con = DbUtils.getConnection()) {
+      con.createQuery(sql)
+              .addParameter("userid", userid)
+              .addParameter("password", "123456")
               .executeUpdate();
     }
   }
