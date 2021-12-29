@@ -32,6 +32,14 @@ public class WatchlistModel {
         }
     }
 
+    public static void deleteProduct(int id) {
+        String sql = "delete from watchlist where ProID = :ProID";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("ProID", id)
+                    .executeUpdate();
+        }
+    }
 
     //Vĩ sửa sau khi sửa database
     public static List<Product> findAllbyUserID(int UserID) {

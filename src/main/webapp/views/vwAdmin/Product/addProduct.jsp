@@ -26,25 +26,13 @@
             <div class="row">
                 <div class="form" id="frmProduct" style="width: 100%">
                     <form action="" class="form_accounts" method="post" style="width: 100%">
-                        <div class="input-form">
-                            <span>#</span> <br>
-                            <input type="text" name="proid">
-                        </div>
+<%--                        <div class="input-form">--%>
+<%--                            <span>#</span> <br>--%>
+<%--                            <input type="text" name="proid">--%>
+<%--                        </div>--%>
                         <div class="input-form">
                             <span>Product Name</span>
                             <input type="text" name="proname" id="productname">
-                        </div>
-                        <div class="input-form">
-                            <span>Tiny Des</span>
-                            <input type="text" name="tinydes">
-                        </div>
-                        <div class="input-form">
-                            <span>Full Des</span><br>
-                            <input type="text" name="fulldes">
-                        </div>
-                        <div class="input-form">
-                            <span>Cat ID</span><br>
-                            <input type="text" name="catid">
                         </div>
                         <div class="input-form">
                             <span>Subcat ID</span>
@@ -55,16 +43,32 @@
                             <input type="text" name="sellerid">
                         </div>
                         <div class="input-form">
-                            <span>Index Img</span><br>
-                            <input type="text" name="imgindex">
+                            <span>Start Price</span><br>
+                            <input type="text" name="startprice">
+                        </div>
+                        <div class="input-form">
+                            <span>Step Price</span><br>
+                            <input type="text" name="stepprice">
+                        </div>
+                        <div class="input-form">
+                            <span>Tiny Des</span>
+                            <input type="text" name="tinydes">
+                        </div>
+                        <div class="input-form">
+                            <span>Full Des</span><br>
+                            <input type="text" name="fulldes">
+                        </div>
+                        <div class="input-form">
+                            <span>Bin</span><br>
+                            <input type="text" name="bin">
                         </div>
                         <div class="input-form">
                             <span>Upload Date</span>
                             <input type="text" name="uploaddate" id="txtUploadDate">
                         </div>
                         <div class="input-form">
-                            <span>Bin</span><br>
-                            <input type="text" name="bin">
+                            <span>Index Img</span><br>
+                            <input type="text" name="imgindex">
                         </div>
                         <div class="input-form">
                             <button type="submit" class="btn btn-outline-success" style="padding: 5px 40px; font-size: 20px">

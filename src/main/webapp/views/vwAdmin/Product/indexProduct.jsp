@@ -36,12 +36,15 @@
                         <th scope="col">Name </th>
                         <th scope="col">SubCat ID</th>
                         <th scope="col">Seller ID</th>
+                        <th scope="col">Start Price</th>
+                        <th scope="col">Step Price</th>
                         <th scope="col">Tiny Des</th>
                         <th scope="col">Full Des</th>
                         <th scope="col">Bin</th>
                         <th scope="col">Upload Date</th>
-                        <th scope="col">CatID</th>
+                        <th scope="col">End Date</th>
                         <th scope="col">Img Index</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Handle</th>
                     </tr>
                     </thead>
@@ -52,12 +55,15 @@
                             <td>${p.proName}</td>
                             <td>${p.subCatID}</td>
                             <td>${p.sellerID}</td>
+                            <td>${p.startPrice}</td>
+                            <td>${p.stepPrice}</td>
                             <td>${p.tinyDes}</td>
                             <td>${p.fullDes}</td>
                             <td>${p.bin}</td>
                             <td>${p.uploadDate}</td>
-                            <td>${p.catID}</td>
+                            <td>${p.endDate}</td>
                             <td>${p.imgIndex}</td>
+                            <td>${p.status}</td>
                             <td style="width: 9%">
                                 <a href="${pageContext.request.contextPath}/Admin/Product/CreateAution?id=${p.proID}">New Aution</a><br>
                                 <a href="${pageContext.request.contextPath}/Admin/Product/Edit?id=${p.proID}">Edit</a><br>
