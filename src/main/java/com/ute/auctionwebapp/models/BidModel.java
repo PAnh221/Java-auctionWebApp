@@ -35,23 +35,24 @@ public class BidModel {
         }
     }
 
-    public static int getCurrentBidderIDByID(int productID){
+    public static String getCurrentBidderUsernameByID(int productID){
         Product product = ProductModelAdmin.findById(productID);
         List<Bid> listBid = getListBidByProductID(productID);
-        if (listBid.size()<=1) return -1;
-        else {
+        if (listBid.size()==1) return UserModel.findById(listBid.get(0).getBidderID()).getUserName();
+        else if (listBid.size()==0) return null;
+        else{
             Bid best = getBestBiddingByProductID(productID);
             Bid second = getSecondBestBiddingByProductID(productID);
 
             if (best.getMaxBid() - second.getMaxBid() >= product.getStepPrice()){
-                return best.getBidderID();
+                return UserModel.findById(best.getBidderID()).getUserName();
             }
             else{
                 if (best.getTime().isAfter(second.getTime())){
-                    return second.getBidderID();
+                    return UserModel.findById(second.getBidderID()).getUserName();
                 }
                 else{
-                    return best.getBidderID();
+                    return UserModel.findById(best.getBidderID()).getUserName();
                 }
             }
         }

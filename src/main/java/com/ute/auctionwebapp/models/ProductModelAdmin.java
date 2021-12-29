@@ -131,6 +131,26 @@ public class ProductModelAdmin {
     }
   }
 
+  public static void updateTinyDes(int productID, String tinyDes){
+    String sql = "UPDATE product SET TinyDes = :TinyDes where ProID = :ProID";
+    try (Connection con = DbUtils.getConnection()) {
+      con.createQuery(sql)
+              .addParameter("ProID", productID)
+              .addParameter("TinyDes", tinyDes)
+              .executeUpdate();
+    }
+  }
+
+  public static void updateFullDes(int productID, String fullDes){
+    String sql = "UPDATE product SET FullDes = :FullDes where ProID = :ProID";
+    try (Connection con = DbUtils.getConnection()) {
+      con.createQuery(sql)
+              .addParameter("ProID", productID)
+              .addParameter("FullDes", fullDes)
+              .executeUpdate();
+    }
+  }
+
   public static void update(Product p) {
     String sql = "UPDATE product SET  ImgIndex = :imgindex, CatID = :catid, UploadDate = :uploaddate, EndDate = :enddate, Bin = :bin, FullDes = :fulldes, TinyDes = :tinydes, SellerID = :sellerid, SubCatID = :subcatid, ProName = :proname, StartPrice = :startprice, StepPrice = :stepprice WHERE ProID = :proid \n";
     try (Connection con = DbUtils.getConnection()) {

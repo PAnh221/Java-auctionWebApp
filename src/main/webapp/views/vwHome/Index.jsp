@@ -45,8 +45,10 @@
                                             <h5 class="card-title text-danger">
                                                 <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
-                                            <p class="font-weight-light mt-3">${c.uploadDate}</p>
-                                        </div>
+                                            <c:if test="${c.currentBidderUsername != null}">
+                                                <p class="font-weight-light mt-3">Người giữ: <i>${c.currentBidderUsername}</i></p>
+                                            </c:if>
+                                            <p class="font-weight-light mt-3">Ngày đăng: <i>${c.uploadDate}</i></p>                                        </div>
                                         <div class="card-footer text-muted">
                                             <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
                                                 <i class="fa fa-heart" aria-hidden="true"></i>
@@ -88,7 +90,10 @@
                                             <h5 class="card-title text-danger">
                                                 <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
-                                            <p class="font-weight-light mt-3">${c.uploadDate}</p>
+                                            <c:if test="${c.currentBidderUsername != null}">
+                                                <p class="font-weight-light mt-3">Người giữ: <i>${c.currentBidderUsername}</i></p>
+                                            </c:if>
+                                            <p class="font-weight-light mt-3">Ngày đăng: <i>${c.uploadDate}</i></p>
                                         </div>
                                         <div class="card-footer text-muted">
                                             <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
@@ -131,7 +136,10 @@
                                             <h5 class="card-title text-danger">
                                                 <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
-                                            <p class="font-weight-light mt-3">${c.uploadDate}</p>
+                                            <c:if test="${c.currentBidderUsername != null}">
+                                                <p class="font-weight-light mt-3">Người giữ: <i>${c.currentBidderUsername}</i></p>
+                                            </c:if>
+                                            <p class="font-weight-light mt-3">Ngày đăng: <i>${c.uploadDate}</i></p>
                                         </div>
                                         <div class="card-footer text-muted">
                                             <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">

@@ -14,7 +14,8 @@ public class Product {
   private LocalDateTime UploadDate, EndDate;
   private int Bin, StartPrice, StepPrice;
   private int Status;
-  private int CurrentPrice, CurrentBidderID;
+  private int CurrentPrice;
+  private String CurrentBidderUsername;
   public Product() {}
 
 
@@ -35,7 +36,7 @@ public class Product {
     EndDate = uploadDate.plusDays(7);
     StartPrice = startPrice;
     StepPrice = stepPrice;
-    CurrentBidderID = -1;
+    CurrentBidderUsername = null;
     CurrentPrice = startPrice;
   }
   public Product(String proName, String tinyDes, String fullDes, int subCatID, int sellerID, int imgIndex, LocalDateTime uploadDate, int bin, int startPrice, int stepPrice, int status /*, int catId */) {
@@ -54,6 +55,8 @@ public class Product {
     EndDate = uploadDate.plusDays(7);
     StartPrice = startPrice;
     StepPrice = stepPrice;
+    CurrentBidderUsername = null;
+    CurrentPrice = startPrice;
   }
 
   public int getProID() {
@@ -159,8 +162,8 @@ public class Product {
 
   public void setCurrentPrice(int currentPrice) {CurrentPrice = currentPrice;}
 
-  public int getCurrentBidderID() {return CurrentBidderID;}
+  public String getCurrentBidderUsername() {return CurrentBidderUsername;}
 
-  public void setCurrentBidderID(int currentBidderID){ Status = currentBidderID;}
+  public void setCurrentBidderUsername(String currentBidderUsername){ CurrentBidderUsername = currentBidderUsername;}
 
 }

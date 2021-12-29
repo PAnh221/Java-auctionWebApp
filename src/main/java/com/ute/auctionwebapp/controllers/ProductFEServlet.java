@@ -92,6 +92,8 @@ public class ProductFEServlet extends HttpServlet {
       case "/Detail":
         int proId = Integer.parseInt(request.getParameter("id"));
         Product product = ProductModel.findById(proId);
+        product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(proId));
+        product.setCurrentPrice(BidModel.getCurrentPriceByID(proId));
         List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId); //danh sach sp cung subcat
         List<Bid> list_bid = BidModel.getListBidByProductID(proId);
         list_bid.forEach(bid -> bid.setUserName(UserModel.findById(bid.getBidderID()).getUserName()));
@@ -99,7 +101,7 @@ public class ProductFEServlet extends HttpServlet {
         User s = UserModel.findById(sID);
 
 
-        if (product == null) {
+        if (ProductModel.findById(proId) == null) {
           ServletUtils.redirect("/Home", request, response);
         } else {
           request.setAttribute("product", product);

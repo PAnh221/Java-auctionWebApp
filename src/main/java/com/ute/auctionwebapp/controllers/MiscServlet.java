@@ -43,7 +43,17 @@ public class MiscServlet extends HttpServlet {
     if(user.getPermission()==2){
       switch (path) {
         case "/Editor":
-          ServletUtils.forward("/views/vwMisc/Editor.jsp", request, response);
+          int proID = Integer.parseInt(request.getParameter("ProID"));
+          Product product = ProductModel.findById(proID);
+          if (ProductModel.findById(proID) == null || user.getUserID() != product.getSellerID()){
+            ServletUtils.redirect("/Home", request, response);
+          }
+          else{
+            String tinyDes = product.getTinyDes();
+            request.setAttribute("tinyDes", tinyDes);
+            request.setAttribute("product", product);
+            ServletUtils.forward("/views/vwMisc/Editor.jsp", request, response);
+          }
           break;
 
         case "/Upload":
@@ -187,12 +197,20 @@ public class MiscServlet extends HttpServlet {
 
   private void postEditor(HttpServletRequest request, HttpServletResponse response) throws
     ServletException, IOException {
-    String tinyDesc = request.getParameter("TinyDes");
-    System.out.println(tinyDesc);
-
-    String desc = request.getParameter("FullDes");
-    System.out.println(desc);
-
-    ServletUtils.forward("/views/vwMisc/Editor.jsp", request, response);
+    String fulldes = request.getParameter("FullDes");
+    String tinydes = request.getParameter("TinyDes");
+    int proid = Integer.parseInt(request.getParameter("ProID"));
+    if (!tinydes.equals(ProductModel.findById(proid).getTinyDes())){
+      ProductModelAdmin.updateTinyDes(proid, tinydes);
+    }
+    if (!fulldes.equals("")){
+      String oldFullDes = ProductModel.findById(proid).getFullDes();
+      LocalDateTime now = LocalDateTime.now();
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+      String time = now.format(formatter);
+      String newFullDes = oldFullDes+  "<p>&nbsp;</p> <p>✏️ " + time + "</p>" + fulldes;
+      ProductModelAdmin.updateFullDes(proid, newFullDes);
+    }
+    ServletUtils.redirect("/Account/Profile", request, response);
   }
 }
