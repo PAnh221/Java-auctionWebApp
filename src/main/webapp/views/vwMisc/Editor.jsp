@@ -26,7 +26,7 @@
     <form action="" method="post">
       <div class="card">
         <h4 class="card-header">
-          WYSIWYG HTML Editor
+          Chỉnh sửa mô tả cho sản phẩm: ${product.proName}
         </h4>
         <div class="card-body">
           <div class="form-group">

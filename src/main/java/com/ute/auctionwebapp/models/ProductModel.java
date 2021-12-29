@@ -76,7 +76,7 @@ public class ProductModel {
   }
 
   public static List<Product> findAuctionedBySellerID(int sellerID){
-    final String query = "select * from product where Status = 1 and SellerID = :sellerID";
+    final String query = "select * from product where Status > 0 and SellerID = :sellerID";
     try (Connection con = DbUtils.getConnection()) {
       return con.createQuery(query)
               .addParameter("sellerID", sellerID)

@@ -9,7 +9,20 @@ import java.util.List;
 
 public class BidModel {
 
+    public static void deleteBid(int bidderID, int productID){
+        if (!notExisted(productID, bidderID)){
+            String sql = "delete from bid where ProductID = :productID and BidderID = :bidderID";
+            try (Connection con = DbUtils.getConnection()) {
+                con.createQuery(sql)
+                        .addParameter("productID", productID)
+                        .addParameter("bidderID", bidderID)
+                        .executeUpdate();
+            }
+        }
+    }
+
     public static void addBid(Bid bid){
+        if (BanModel.isExisted(bid.getProductID(), bid.getBidderID())) return;
         String insertSql = "INSERT INTO bid (BidderID, ProductID, Time, MaxBid) VALUES (:bidderID,:productID,:time,:maxBid)\n";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(insertSql)
@@ -36,13 +49,20 @@ public class BidModel {
     public static int getCurrentPriceByID(int productID){
         Product product = ProductModelAdmin.findById(productID);
         List<Bid> listBid = getListBidByProductID(productID);
-        if (listBid.size()<=1) return product.getStartPrice();
+        if (listBid.size()<=1) {
+            if(listBid.size()==1 && listBid.get(0).getMaxBid()==product.getBin())
+                return product.getBin();
+            return product.getStartPrice();
+        }
         else {
             Bid best = getBestBiddingByProductID(productID);
             Bid second = getSecondBestBiddingByProductID(productID);
 
             if (best.getMaxBid() - second.getMaxBid() >= product.getStepPrice()){
-                return second.getMaxBid() + product.getStepPrice();
+                if (product.getBin() > 0 && best.getMaxBid() == product.getBin())
+                    return product.getBin();
+                else
+                    return second.getMaxBid() + product.getStepPrice();
             }
             else{
                 if (best.getTime().isAfter(second.getTime())){

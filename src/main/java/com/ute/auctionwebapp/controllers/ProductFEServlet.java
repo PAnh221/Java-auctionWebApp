@@ -3,11 +3,8 @@ package com.ute.auctionwebapp.controllers;
 import com.mysql.cj.Session;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.*;
-import com.ute.auctionwebapp.models.CategoryModel;
-import com.ute.auctionwebapp.models.ProductModel;
-import com.ute.auctionwebapp.models.UserModel;
-import com.ute.auctionwebapp.models.WatchlistModel;
-import com.ute.auctionwebapp.models.BidModel;
+import com.ute.auctionwebapp.models.*;
+//import org.graalvm.compiler.core.common.alloc.Trace;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -107,6 +104,18 @@ public class ProductFEServlet extends HttpServlet {
         List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId); //danh sach sp cung subcat
         List<Bid> list_bid = BidModel.getListBidByProductID(proId);
         list_bid.forEach(bid -> bid.setUserName(UserModel.findById(bid.getBidderID()).getUserName()));
+        List<Ban> listBanned = BanModel.findListBanByProductID(proId);
+        Boolean isBanned = false;
+        if (state == "true"){
+          User currentUser = (User)session.getAttribute("authUser");
+          int currentUserID = currentUser.getUserID();
+          for (Ban ban : listBanned) {
+            if (ban.getBidderBannedID() == currentUserID){
+              isBanned = true;
+              break;
+            }
+          }
+        }
         int sID = product.getSellerID();
         User s = UserModel.findById(sID);
 
@@ -118,6 +127,7 @@ public class ProductFEServlet extends HttpServlet {
           request.setAttribute("relevantProducts", list_relevant);
           request.setAttribute("bidHistory", list_bid);
           request.setAttribute("seller", s);
+          request.setAttribute("isBanned", isBanned);
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
         break;

@@ -1,3 +1,6 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.ute.auctionwebapp.beans.Ban" %>
+<%@ page import="java.util.concurrent.atomic.AtomicReference" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -6,6 +9,7 @@
 <jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product" />
 <jsp:useBean id="relevantProducts" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>" />
 <jsp:useBean id="bidHistory" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Bid>" />
+<jsp:useBean id="isBanned" scope="request" type="java.lang.Boolean" />
 <jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 
@@ -14,6 +18,21 @@
     <div class="card">
       <h4 class="card-header">
           ${product.proName}
+          <c:choose>
+            <c:when test="${product.status==0}">
+              <i style="font-weight: lighter"> - ${product.tinyDes}</i>
+            </c:when>
+            <c:otherwise>
+              <c:choose>
+                <c:when test="${product.status==1}">
+                  <i style="font-weight: lighter"> - (Đã bán)</i>
+                </c:when>
+                <c:otherwise>
+                  <i style="font-weight: lighter"> - (Đã hết hạn đấu giá)</i>
+                </c:otherwise>
+              </c:choose>
+            </c:otherwise>
+          </c:choose>
       </h4>
 
       <div class="card-body">
@@ -64,6 +83,21 @@
                 <tr>
                   <td>${h.time}</td>
                   <td>${h.userName}</td>
+                    <c:if test="${authUser.userID == product.sellerID && product.status == 0}">
+                        <button class="btn btn-secondary" onclick="if (confirm('Bạn có muốn ban user: ${h.userName} khỏi sản phẩm hiện tại không?')) {
+                          <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
+                                const Http = new XMLHttpRequest();
+                                const url='${pageContext.request.contextPath}/Ban/AddBan?proid=${product.proID}&bidderusername=${h.userName}';
+                          <%--const url = '${pageContext.request.contextPath}/Product/AddWatchlist?proid=${product.proID}'--%>
+                                Http.open('POST', url);
+                                Http.send();
+                                console.log('Đã ban user');
+                                } else {
+                                console.log('Hủy thao tác ban user');}">
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        Kick
+                      </button>
+                    </c:if>
                 </tr>
               </c:forEach>
             </c:otherwise>
@@ -74,21 +108,34 @@
           <div class="form-group mb-2">
             <span>Nhập giá tối đa </span>
           </div>
-          <div class="form-group mx-sm-3 mb-2">
-            <input type="number" class="form-control" min="${product.currentPrice + product.stepPrice}" id="price" value="${product.currentPrice + product.stepPrice}">
-          </div>
-          <button <%--type="submit"--%>onclick="if (confirm('Bạn có muốn đấu giá món đồ: ${product.proName} với giá ' + document.getElementById('price').value +' vnđ?')) {
-                                                    <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
-                                                    const Http = new XMLHttpRequest();
-                                                    const url='${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}&bidderid=${authUser.userID}&price='+document.getElementById('price').value;
-                                                    <%--const url = '${pageContext.request.contextPath}/Product/AddWatchlist?proid=${product.proID}'--%>
-                                                    Http.open('POST', url);
-                                                    Http.send();
-                                                } else {
-                                                    console.log('Hủy thao tác ra giá');}" class="btn btn-danger btn-lg">
-            <i class="fa fa-gavel" aria-hidden="true"></i>
-            Ra giá
-          </button>
+          <c:choose>
+            <c:when test="${product.status == 0 && authUser.userID != product.sellerID && !isBanned}">
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="number" class="form-control" min="${product.currentPrice + product.stepPrice}" id="price" value="${product.currentPrice + product.stepPrice}">
+              </div>
+              <button <%--type="submit"--%>onclick="if (confirm('Bạn có muốn đấu giá món đồ: ${product.proName} với giá ' + document.getElementById('price').value +' vnđ?')) {
+                <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
+                      const Http = new XMLHttpRequest();
+                      const url='${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}&bidderid=${authUser.userID}&price='+document.getElementById('price').value;
+                <%--const url = '${pageContext.request.contextPath}/Product/AddWatchlist?proid=${product.proID}'--%>
+                      Http.open('POST', url);
+                      Http.send();
+                      } else {
+                      console.log('Hủy thao tác ra giá');}" class="btn btn-danger btn-lg">
+                <i class="fa fa-gavel" aria-hidden="true"></i>
+                Ra giá
+              </button>
+            </c:when>
+            <c:otherwise>
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="number" class="form-control" disabled>
+              </div>
+              <button class="btn btn-secondary btn-lg" disabled>
+                <i class="fa fa-gavel" aria-hidden="true"></i>
+                Ra giá
+              </button>
+            </c:otherwise>
+          </c:choose>
         </div>
 
         <div class="alert alert-primary mt-3" role="alert">

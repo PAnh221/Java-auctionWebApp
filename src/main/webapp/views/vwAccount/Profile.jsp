@@ -233,7 +233,7 @@
                         <p class="card-text">Hiện tại không có sản phẩm nào của bạn đang được đấu giá. <a href="${pageContext.request.contextPath}/Misc/Upload" style="color: #56baed">Đăng sản phẩm ngay?</a></p>
                     </c:if>
                     <c:if test="${authUser.permission != 1}">
-                        <p class="card-text">Hiện tại không có sản phẩm nào của bạn đang được đấu giá. <a onclick="alert('Vui lòng gửi yêu cầu cho quản trị viên để trở thành Seller trước khi thực hiện thao tác này!')" style="color: #56baed">Đăng sản phẩm ngay?</a></p>
+                        <p class="card-text">Hiện tại không có sản phẩm nào của bạn đang được đấu giá. <a href="" onclick="alert('Vui lòng gửi yêu cầu cho quản trị viên để trở thành Seller trước khi thực hiện thao tác này!')" style="color: #56baed">Đăng sản phẩm ngay?</a></p>
                     </c:if>
                 </div>
             </c:when>
@@ -252,8 +252,8 @@
                                         <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                     </div>
                                     <div class="card-footer text-muted">
-                                        <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
-                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                        <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Misc/Editor?ProID=${c.proID}" role="button">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
 
                                         <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Product/Detail?id=${c.proID}" role="button">
