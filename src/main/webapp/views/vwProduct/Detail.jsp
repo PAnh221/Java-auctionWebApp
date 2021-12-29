@@ -24,14 +24,16 @@
           </a>
           <p class="card-text mt-3 d-inline ml-2">
             Giá hiện tại:
-          <h5 class="card-title text-danger d-inline">
-            <u><small>đ</small></u><fmt:formatNumber value="${product.currentPrice}" type="number" />
-          </h5>
-            (mua ngay với
             <h5 class="card-title text-danger d-inline">
-              <u><small>đ</small></u><fmt:formatNumber value="${product.bin}" type="number" />
+              <u><small>đ</small></u><fmt:formatNumber value="${product.currentPrice}" type="number" />
             </h5>
-            )
+            <c:if test="${product.bin != 0}">
+              (mua ngay với
+              <h5 class="card-title text-danger d-inline">
+                <u><small>đ</small></u><fmt:formatNumber value="${product.bin}" type="number" />
+              </h5>
+              )
+            </c:if>
           </p>
         </div>
 
@@ -68,18 +70,25 @@
           </c:choose>
           </tbody>
         </table>
-        <form class="form-inline mt-2" method="post">
+        <div class="form-inline mt-2">
           <div class="form-group mb-2">
-            <span>Mức giá </span>
+            <span>Nhập giá tối đa </span>
           </div>
           <div class="form-group mx-sm-3 mb-2">
-            <input type="number" class="form-control"placeholder="Nhập mức giá" id="price">
+            <input type="number" class="form-control" min="${product.currentPrice + product.stepPrice}" id="price" value="${product.currentPrice + product.stepPrice}">
           </div>
-          <button type="submit" class="btn btn-danger btn-lg">
+          <button <%--type="submit"--%>onclick="if (confirm('Bạn có muốn đấu giá món đồ: ${product.proName} với giá ' + document.getElementById('price').value +' vnđ?')) {
+                                                    <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
+                                                    const Http = new XMLHttpRequest();
+                                                    const url='${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;
+                                                    Http.open('POST', url);
+                                                    Http.send();
+                                                } else {
+                                                    console.log('Hủy thao tác ra giá');}" class="btn btn-danger btn-lg">
             <i class="fa fa-gavel" aria-hidden="true"></i>
             Ra giá
           </button>
-        </form>
+        </div>
 
         <div class="alert alert-primary mt-3" role="alert">
           <p><i class="fa fa-id-badge mr-2" aria-hidden="true"></i>${seller.name}</p>
