@@ -19,6 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/Product/Watchlist?UserID=${authUser.userID}">Watchlist</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Product/MyBid?UserID=${authUser.userID}">My Bid</a>
+                </li>
         </ul>
 
          <form class="form-inline mr-auto" style="width: 400px;" method="get" action="${pageContext.request.contextPath}/Home/bySearch">

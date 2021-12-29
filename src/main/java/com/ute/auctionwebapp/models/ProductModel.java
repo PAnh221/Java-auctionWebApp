@@ -180,4 +180,16 @@ public class ProductModel {
               .executeUpdate();
     }
   }
+
+  //trả về danh sách các sản phẩm mà user có id truyền vào sở hữu
+  public static List<Product> findBiddedProductbyUserID(int UserID){
+    final String query = "SELECT product.ProID, ProName, SubCatID, SellerID, StartPrice, StepPrice, TinyDes, FullDes, Bin, UploadDate, EndDate, ImgIndex, Status " +
+            "FROM bid, product " +
+            "where bid.ProductID = product.ProID and bid.BidderID = :UserID\n";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("UserID", UserID)
+              .executeAndFetch(Product.class);
+    }
+  }
 }

@@ -32,6 +32,16 @@ public class ProductFEServlet extends HttpServlet {
     String state = String.valueOf(session.getAttribute("auth"));
 
     switch (path) {
+      case "/MyBid":
+        if (state == "false") {
+          ServletUtils.redirect("/Account/Login", request, response);
+          break;
+        }
+        List<Product> bList = ProductModel.findBiddedProductbyUserID(Integer.parseInt(request.getParameter("UserID")));
+        request.setAttribute("biddingProductDetails", bList);
+        ServletUtils.forward("/views/vwProduct/BiddingList.jsp", request, response);
+        break;
+
       case "/Watchlist":
         if (state == "false") {
           ServletUtils.redirect("/Account/Login", request, response);
