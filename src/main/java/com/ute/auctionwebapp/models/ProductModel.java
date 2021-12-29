@@ -36,7 +36,14 @@ public class ProductModel {
               .executeAndFetch(Product.class);
     }
   }
-
+  public  static  List<Product> fullTextSearch(String keyword){
+    final String query = "select * from product where MATCH(ProName,TinyDes,FullDes) AGAINST(:keyword)";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("keyword", keyword)
+              .executeAndFetch(Product.class);
+    }
+  }
   public static List<Product> findRelevantProductByProID(int ProID) {
     final String query = "select * from product where SubCatID = (select SubCatID from product where ProID = :ProID) and ProID != :ProID";
     try (Connection con = DbUtils.getConnection()) {

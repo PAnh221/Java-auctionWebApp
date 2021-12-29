@@ -46,6 +46,13 @@ public class HomeServlet extends HttpServlet {
 
                 ServletUtils.forward("/views/vwHome/Index.jsp", request, response);
                 break;
+            case "/bySearch":
+                String keyword = request.getParameter("search_input");
+                List<Product> listSearchProduct = ProductModel.fullTextSearch(keyword);
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("listSearchProduct", listSearchProduct);
+                ServletUtils.forward("/views/vwHome/bySearch.jsp",request,response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp",request,response);
                 break;

@@ -21,8 +21,8 @@
                 </li>
         </ul>
 
-         <form class="form-inline mr-auto" style="width: 400px;">
-             <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search">
+         <form class="form-inline mr-auto" style="width: 400px;" method="get" action="${pageContext.request.contextPath}/Home/bySearch">
+             <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search" name="search_input" id="search_input">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>
