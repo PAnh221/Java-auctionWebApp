@@ -3,7 +3,6 @@
 
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 
-
 <html lang="en">
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-        var check = function() {
+        var check = function () {
             if (document.getElementById('newpassword').value ==
                 document.getElementById('confirm-newpassword').value) {
                 document.getElementById('submitbtn').disabled = false;
@@ -34,7 +33,7 @@
 </head>
 
 <body>
-<jsp:include page="../../views/partials/nav.jsp" />
+<jsp:include page="../../views/partials/nav.jsp"/>
 <div class="container mt-3">
     <div class="row flex-lg-nowrap">
         <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
@@ -100,12 +99,12 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <c:if test = "${authUser.permission == 0}">
+                                        <c:if test="${authUser.permission == 0}">
                                             <div class="text-center text-sm-right">
                                                 <span class="badge badge-success">Bidder</span>
                                             </div>
                                         </c:if>
-                                        <c:if test = "${authUser.permission == 1}">
+                                        <c:if test="${authUser.permission == 1}">
                                             <div class="text-center text-sm-right">
                                                 <span class="badge badge-info">Seller</span>
                                             </div>
@@ -148,22 +147,24 @@
                                                         </div>
                                                     </div>
                                                     <c:if test="${hasError}">
-                                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                        <div class="alert alert-warning alert-dismissible fade show"
+                                                             role="alert">
                                                             <strong>Edit failed!</strong> ${errorMessage}
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <button type="button" class="close" data-dismiss="alert"
+                                                                    aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                     </c:if>
-<%--                                                    <div class="row">--%>
-<%--                                                        <div class="col mb-3">--%>
-<%--                                                            <div class="form-group">--%>
-<%--                                                                <label>About</label>--%>
-<%--                                                                <textarea class="form-control" rows="5"--%>
-<%--                                                                          placeholder="My Bio"></textarea>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
+                                                    <%--                                                    <div class="row">--%>
+                                                    <%--                                                        <div class="col mb-3">--%>
+                                                    <%--                                                            <div class="form-group">--%>
+                                                    <%--                                                                <label>About</label>--%>
+                                                    <%--                                                                <textarea class="form-control" rows="5"--%>
+                                                    <%--                                                                          placeholder="My Bio"></textarea>--%>
+                                                    <%--                                                            </div>--%>
+                                                    <%--                                                        </div>--%>
+                                                    <%--                                                    </div>--%>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -173,7 +174,8 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Current Password</label>
-                                                                <input class="form-control" type="password" name="password"
+                                                                <input class="form-control" type="password"
+                                                                       name="password"
                                                                        placeholder="Current Password">
                                                             </div>
                                                         </div>
@@ -182,7 +184,8 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>New Password</label>
-                                                                <input class="form-control" type="password" name="newpassword" id="newpassword"
+                                                                <input class="form-control" type="password"
+                                                                       name="newpassword" id="newpassword"
                                                                        placeholder="New Password" onkeyup='check();'>
                                                             </div>
 
@@ -193,7 +196,9 @@
                                                             <div class="form-group">
                                                                 <label>Confirm <span
                                                                         class="d-none d-xl-inline">Password</span></label>
-                                                                <input class="form-control" type="password" name="confirm-newpassword" id="confirm-newpassword"
+                                                                <input class="form-control" type="password"
+                                                                       name="confirm-newpassword"
+                                                                       id="confirm-newpassword"
                                                                        placeholder="Confirm" onkeyup='check();'>
                                                                 <span id="message"></span>
 
@@ -201,42 +206,43 @@
                                                         </div>
                                                     </div>
                                                 </div>
-<%--                                                <div class="col-12 col-sm-5 offset-sm-1 mb-3">--%>
-<%--                                                    <div class="mb-2"><b>Keeping in Touch</b></div>--%>
-<%--                                                    <div class="row">--%>
-<%--                                                        <div class="col">--%>
-<%--                                                            <label>Email Notifications</label>--%>
-<%--                                                            <div class="custom-controls-stacked px-2">--%>
-<%--                                                                <div class="custom-control custom-checkbox">--%>
-<%--                                                                    <input type="checkbox" class="custom-control-input"--%>
-<%--                                                                           id="notifications-blog"--%>
-<%--                                                                           checked="">--%>
-<%--                                                                    <label class="custom-control-label"--%>
-<%--                                                                           for="notifications-blog">Blog posts</label>--%>
-<%--                                                                </div>--%>
-<%--                                                                <div class="custom-control custom-checkbox">--%>
-<%--                                                                    <input type="checkbox" class="custom-control-input"--%>
-<%--                                                                           id="notifications-news"--%>
-<%--                                                                           checked="">--%>
-<%--                                                                    <label class="custom-control-label"--%>
-<%--                                                                           for="notifications-news">Newsletter</label>--%>
-<%--                                                                </div>--%>
-<%--                                                                <div class="custom-control custom-checkbox">--%>
-<%--                                                                    <input type="checkbox" class="custom-control-input"--%>
-<%--                                                                           id="notifications-offers"--%>
-<%--                                                                           checked="">--%>
-<%--                                                                    <label class="custom-control-label"--%>
-<%--                                                                           for="notifications-offers">Personal--%>
-<%--                                                                        Offers</label>--%>
-<%--                                                                </div>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
+                                                <%--                                                <div class="col-12 col-sm-5 offset-sm-1 mb-3">--%>
+                                                <%--                                                    <div class="mb-2"><b>Keeping in Touch</b></div>--%>
+                                                <%--                                                    <div class="row">--%>
+                                                <%--                                                        <div class="col">--%>
+                                                <%--                                                            <label>Email Notifications</label>--%>
+                                                <%--                                                            <div class="custom-controls-stacked px-2">--%>
+                                                <%--                                                                <div class="custom-control custom-checkbox">--%>
+                                                <%--                                                                    <input type="checkbox" class="custom-control-input"--%>
+                                                <%--                                                                           id="notifications-blog"--%>
+                                                <%--                                                                           checked="">--%>
+                                                <%--                                                                    <label class="custom-control-label"--%>
+                                                <%--                                                                           for="notifications-blog">Blog posts</label>--%>
+                                                <%--                                                                </div>--%>
+                                                <%--                                                                <div class="custom-control custom-checkbox">--%>
+                                                <%--                                                                    <input type="checkbox" class="custom-control-input"--%>
+                                                <%--                                                                           id="notifications-news"--%>
+                                                <%--                                                                           checked="">--%>
+                                                <%--                                                                    <label class="custom-control-label"--%>
+                                                <%--                                                                           for="notifications-news">Newsletter</label>--%>
+                                                <%--                                                                </div>--%>
+                                                <%--                                                                <div class="custom-control custom-checkbox">--%>
+                                                <%--                                                                    <input type="checkbox" class="custom-control-input"--%>
+                                                <%--                                                                           id="notifications-offers"--%>
+                                                <%--                                                                           checked="">--%>
+                                                <%--                                                                    <label class="custom-control-label"--%>
+                                                <%--                                                                           for="notifications-offers">Personal--%>
+                                                <%--                                                                        Offers</label>--%>
+                                                <%--                                                                </div>--%>
+                                                <%--                                                            </div>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
                                             </div>
                                             <div class="row">
                                                 <div class="col d-flex justify-content-end">
-                                                    <button id="submitbtn" class="btn btn-primary" type="submit" formaction="${pageContext.request.contextPath}/Account/Edit">
+                                                    <button id="submitbtn" class="btn btn-primary" type="submit"
+                                                            formaction="${pageContext.request.contextPath}/Account/Edit">
                                                         Save Changes
                                                     </button>
                                                 </div>
@@ -251,13 +257,17 @@
                 </div>
 
                 <div class="col-12 col-md-3 mb-3">
+                    <c:if test= "${authUser.permission == 0}">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title font-weight-bold">Support</h6>
-                            <p class="card-text">Get fast, free help from our friendly assistants.</p>
-                            <button type="button" class="btn btn-primary">Contact Us</button>
+                            <h6 class="card-title font-weight-bold">Bạn muốn trở thành người bán?</h6>
+                            <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Request/AddRequest?id=${authUser.userID}" role="button">
+                                <%--                        <i class="fa fa-eye" aria-hidden="true"></i>--%>
+                                Xin nâng cấp
+                            </a>
                         </div>
                     </div>
+                    </c:if>
                 </div>
             </div>
 

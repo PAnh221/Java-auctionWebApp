@@ -6,6 +6,7 @@ import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.beans.User;
 import com.ute.auctionwebapp.models.ProductModel;
+import com.ute.auctionwebapp.models.RequestModel;
 import com.ute.auctionwebapp.models.UserModel;
 import org.json.simple.parser.ParseException;
 
