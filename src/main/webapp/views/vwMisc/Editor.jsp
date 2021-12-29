@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<jsp:useBean id="product" scope="request" type="com.ute.auctionwebapp.beans.Product"/>
+<jsp:useBean id="tinyDes" scope="request" type="java.lang.String"/>
 
 <t:main>
   <jsp:attribute name="js">
@@ -26,11 +30,11 @@
         </h4>
         <div class="card-body">
           <div class="form-group">
-            <label for="txtTinyDes">Description</label>
-            <input type="text" class="form-control" id="txtTinyDes" name="TinyDes" autofocus />
+            <label for="txtTinyDes">Chỉnh sửa mô tả ngắn gọn</label>
+            <input type="text" class="form-control" id="txtTinyDes" name="TinyDes" autofocus placeholder="${tinyDes}" value="${tinyDes}"/>
           </div>
           <div class="form-group">
-            <label for="txtFullDes">Full Description</label>
+            <label for="txtFullDes">Bổ sung mô tả chi tiết</label>
             <textarea id="txtFullDes" name="FullDes"></textarea>
           </div>
         </div>

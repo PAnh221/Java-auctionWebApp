@@ -23,14 +23,20 @@
             <i class="fa fa-heart" aria-hidden="true"></i>
           </a>
           <p class="card-text mt-3 d-inline ml-2">
-            Giá bán ngay:
+            Giá hiện tại:
           <h5 class="card-title text-danger d-inline">
-            <u><small>đ</small></u><fmt:formatNumber value="${product.bin}" type="number" />
+            <u><small>đ</small></u><fmt:formatNumber value="${product.currentPrice}" type="number" />
           </h5>
+            (mua ngay với
+            <h5 class="card-title text-danger d-inline">
+              <u><small>đ</small></u><fmt:formatNumber value="${product.bin}" type="number" />
+            </h5>
+            )
           </p>
         </div>
 
 <%--        <p class="card-text">Tồn kho: ${product.quantity}</p>--%>
+        <p>Mô tả chi tiết: </p>
         <p class="card-text">${product.fullDes}</p>
         <p class="card-text"><i>Ngày được đăng bán:</i> ${product.uploadDate}</p>
 
@@ -67,7 +73,7 @@
             <span>Mức giá </span>
           </div>
           <div class="form-group mx-sm-3 mb-2">
-            <input type="text" class="form-control"placeholder="Nhập mức giá" id="price">
+            <input type="number" class="form-control"placeholder="Nhập mức giá" id="price">
           </div>
           <button type="submit" class="btn btn-danger btn-lg">
             <i class="fa fa-gavel" aria-hidden="true"></i>
