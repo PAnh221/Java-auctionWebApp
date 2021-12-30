@@ -355,6 +355,12 @@ ALTER TABLE `watchlist`
   ADD CONSTRAINT `watchlist_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `watchlist_product` FOREIGN KEY (`ProID`) REFERENCES `product` (`ProID`);
 
+--
+-- Fulltext search cho bảng `product`
+--
+Alter table product add fulltext(ProName,TinyDes,FullDes);
+
+
 DELIMITER $$
 --
 -- Sự kiện

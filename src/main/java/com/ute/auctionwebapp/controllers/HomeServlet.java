@@ -27,6 +27,8 @@ public class HomeServlet extends HttpServlet {
         }
         switch (path){
             case "/Index":
+                List<Product> listAll = ProductModel.findAll();
+                request.setAttribute("allProducts", listAll);
 
                 List<Product> listP1 = ProductModel.Top5AboutToEnd();
                 listP1.forEach(product -> {
