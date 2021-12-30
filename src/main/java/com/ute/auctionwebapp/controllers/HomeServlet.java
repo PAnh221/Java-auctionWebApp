@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "HomeServlet", value = "/Home/*")
@@ -51,31 +52,39 @@ public class HomeServlet extends HttpServlet {
             case "/bySearch":
                 String keyword = request.getParameter("search_input");
                 String type_order = request.getParameter("type_order");
+                int page_current;
+                try{
+                    page_current = Integer.parseInt(request.getParameter("current_page"));
+                }
+                catch (NumberFormatException e){
+                    page_current = 1;
+                }
+
                 if(type_order==null){
-                    type_order="new_post";
+                    type_order="New Post";
                 }
                 List<Product> listSearchProduct = ProductModel.fullTextSearch(keyword,type_order);
-                request.setAttribute("listSearchProduct", listSearchProduct);
-                request.setAttribute("keyword", keyword);
-                String order = null;
-                switch (type_order){
-                    case "new_post":
-                        order = "New Post";
-                        break;
-                    case "almost_over":
-                        order = "Almost Over";
-                        break;
-                    case "asc_price":
-                        order = "Price: Low to High";
-                        break;
-                    case "des_price":
-                        order = "Price: High to Low";
-                        break;
-                    default:
-                        ServletUtils.forward("/views/404.jsp",request,response);
-                        break;
+                float product_inPage = 2.0f;
+                int total_page = 0;
+                if(listSearchProduct.size()!=0){
+                    total_page = (int) Math.ceil(listSearchProduct.size()/product_inPage);
                 }
-                request.setAttribute("order_by",order);
+                List<Product> showSearchProduct = new ArrayList<>();
+                int first_index = (int) (1 + product_inPage*(page_current-1));
+                for(int i = first_index-1;i< first_index+product_inPage-1;i++){
+                    if(i<listSearchProduct.size()){
+                        showSearchProduct.add(listSearchProduct.get(i));
+                    }
+                    else{
+                        break;
+                    }
+                }
+//                request.setAttribute("listSearchProduct", listSearchProduct);
+                request.setAttribute("listSearchProduct", showSearchProduct);
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("total_page",total_page);
+                request.setAttribute("current_page",page_current);
+                request.setAttribute("order_by",type_order);
                 ServletUtils.forward("/views/vwHome/bySearch.jsp",request,response);
                 break;
             default:
@@ -89,5 +98,6 @@ public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
 
 }
