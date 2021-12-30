@@ -142,6 +142,10 @@ public class ProductFEServlet extends HttpServlet {
         product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(proId));
         product.setCurrentPrice(BidModel.getCurrentPriceByID(proId));
         List<Product> list_relevant = ProductModel.findRelevantProductByProID(proId); //danh sach sp cung subcat
+        for (Product product1 : list_relevant) {
+          product1.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product1.getProID()));
+          product1.setCurrentPrice(BidModel.getCurrentPriceByID(proId));
+        }
         List<Bid> list_bid = BidModel.getListBidByProductID(proId);
         list_bid.forEach(bid -> bid.setUserName(UserModel.findById(bid.getBidderID()).getUserName()));
         List<Ban> listBanned = BanModel.findListBanByProductID(proId);
