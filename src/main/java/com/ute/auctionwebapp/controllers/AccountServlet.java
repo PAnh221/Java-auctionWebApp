@@ -217,8 +217,11 @@ public class AccountServlet extends HttpServlet {
     }
     private void sendMail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //reset mật khẩu
+        String newpass = "123456";
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, newpass.toCharArray());
+
         String email = request.getParameter("email");
-        UserModel.editPassByEmail(email);
+        UserModel.editPassByEmail(email, bcryptHashString);
 
         //mail
         final String username = "caulacbo3qcuhanh@gmail.com";
