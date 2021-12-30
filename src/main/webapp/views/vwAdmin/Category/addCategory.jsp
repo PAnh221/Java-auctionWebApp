@@ -19,10 +19,10 @@
             <div class="row">
                 <div class="form" id="frmCategory" style="width: 100%">
                     <form action="" class="form_accounts" method="post" style="width: 100%">
-                        <div class="input-form">
-                            <span>Category ID</span>
-                            <input type="text" name="catid">
-                        </div>
+<%--                        <div class="input-form">--%>
+<%--                            <span>Category ID</span>--%>
+<%--                            <input type="text" name="catid">--%>
+<%--                        </div>--%>
                         <div class="input-form">
                             <span>Category Name</span>
                             <input type="text" name="catname" id="catname" onkeyup="checkCat()">

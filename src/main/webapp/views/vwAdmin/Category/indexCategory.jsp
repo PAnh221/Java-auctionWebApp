@@ -24,7 +24,7 @@
                 </div>
                 <a href="${pageContext.request.contextPath}/Admin/Category/Add" class="btn btn-success addProduct" role="button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add Product
+                    Add Category
                 </a>
             </div>
             <div class="row">

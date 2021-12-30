@@ -80,7 +80,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/Category/IsAvailable":
                 int catid = Integer.parseInt(request.getParameter("id"));
-                Product checkp = ProductModelAdmin.findBySubCat(catid);
+                Product checkp = ProductModelAdmin.checkCat(catid);
                 Boolean isAvai = (checkp == null);
 
                 PrintWriter out = response.getWriter();
@@ -308,10 +308,10 @@ public class AdminServlet extends HttpServlet {
         }
     }
     private void addCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int catid = Integer.parseInt(request.getParameter("catid"));
+//        int catid = Integer.parseInt(request.getParameter("catid"));
         String catname = request.getParameter("catname");
 
-        Category c = new Category(catid, catname);
+        Category c = new Category(catname);
         CategoryModel.add(c);
         ServletUtils.forward("/views/vwAdmin/Category/addCategory.jsp", request, response);
     }
@@ -327,7 +327,7 @@ public class AdminServlet extends HttpServlet {
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("catid"));
-        Product pro = ProductModelAdmin.findByCat(id);
+        Product pro = ProductModelAdmin.checkCat(id);
         if (pro != null)
         {
             ServletUtils.redirect("/Admin/Category/Edit?id="+id, request, response);

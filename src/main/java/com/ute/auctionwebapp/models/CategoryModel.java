@@ -47,10 +47,9 @@ public class CategoryModel {
   }
 
   public static void add(Category c) {
-    String insertSql = "INSERT INTO category (CatID, CatName) VALUES (:catid,:catname)\n";
+    String insertSql = "INSERT INTO category (CatName) VALUES (:catname)\n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(insertSql)
-              .addParameter("catid", c.getCatID())
         .addParameter("catname", c.getCatName())
         .executeUpdate();
     }
