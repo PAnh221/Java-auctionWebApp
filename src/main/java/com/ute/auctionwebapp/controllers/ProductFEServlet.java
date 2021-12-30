@@ -100,12 +100,12 @@ public class ProductFEServlet extends HttpServlet {
 
       case "/ByCat":
         int catId = Integer.parseInt(request.getParameter("id"));
-        List<Product> list = ProductModel.findByCatId(catId);
+        List<Product> listByCat = ProductModel.findByCatId(catId);
 
-        list.forEach(product -> {
+        listByCat.forEach(product -> {
           product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
           product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
-        request.setAttribute("products", list);
+        request.setAttribute("products", listByCat);
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;
 
@@ -149,7 +149,6 @@ public class ProductFEServlet extends HttpServlet {
         int sID = product.getSellerID();
         User s = UserModel.findById(sID);
 
-
         if (ProductModel.findById(proId) == null) {
           ServletUtils.redirect("/Home", request, response);
         } else {
@@ -162,6 +161,8 @@ public class ProductFEServlet extends HttpServlet {
 
           User currentUser = (User)session.getAttribute("authUser");
           int currentUserID = currentUser.getUserID();
+          currentUser.setCanAuction(RatingModel.getReputationOfUserID(currentUser.getUserID())>80);
+          session.setAttribute("authUser",currentUser);
           request.setAttribute("reputation", RatingModel.getReputationOfUserID(currentUserID));
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
