@@ -100,8 +100,8 @@
                         <c:forEach var = "i" begin = "1" end = "${total_page}">
                             <c:choose>
                                 <c:when test="${current_page==i}">
-                                    <li class="page-item"><a class="page-link" href="#" style="color: red">
-                                        ${i}
+                                    <li class="page-item active" ><a class="page-link" href="">
+                                        ${i}<span class="sr-only">(current)</span>
                                     </a></li>
                                 </c:when>
                                 <c:otherwise>
