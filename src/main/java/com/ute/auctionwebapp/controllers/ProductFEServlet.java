@@ -165,6 +165,10 @@ public class ProductFEServlet extends HttpServlet {
     int id_product = Integer.parseInt(request.getParameter("ProID"));
     Watchlist w = new Watchlist(id_product, id_user);
     WatchlistModel.delete(w);
-    ServletUtils.redirect("/Product/Index", request, response);
+
+    int UID = Integer.parseInt(request.getParameter("UserID"));
+    List<Product> wList = WatchlistModel.findAllbyUserID(UID);
+    request.setAttribute("watchlistDetails", wList);
+    ServletUtils.forward("/views/vwProduct/Watchlist.jsp", request, response);
   }
 }
