@@ -36,6 +36,29 @@
       </h4>
 
       <div class="card-body">
+        <div class="w-50">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/main.jpg" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/1.jpg" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/2.jpg" alt="Third slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev h-100 w-10" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <i class="fa fa-arrow-left text-info" aria-hidden="true"></i>
+
+            </a>
+            <a class="carousel-control-next h-100 w-10" href="#carouselExampleControls" role="button" data-slide="next">
+                  <i class="fa fa-arrow-right text-info" aria-hidden="true"></i>
+
+            </a>
+          </div>
+        </div>
 <%--        <img src="${pageContext.request.contextPath}/public/imgs/sp/1/main.jpg" alt="${product.proName}" title="${product.proName}">--%>
         <div class="mt-3">
           <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${product.proID}&UserID=${authUser.userID}" role="button">

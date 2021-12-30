@@ -15,4 +15,24 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/Account/Edit</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>SessionInitAdminFilter</filter-name>
+        <url-pattern>/Admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthAdminFilter</filter-name>
+        <url-pattern>/Admin/Category/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthAdminFilter</filter-name>
+        <url-pattern>/Admin/User/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthAdminFilter</filter-name>
+        <url-pattern>/Admin/SubCategory/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthAdminFilter</filter-name>
+        <url-pattern>/Admin/Product/*</url-pattern>
+    </filter-mapping>
 </web-app>

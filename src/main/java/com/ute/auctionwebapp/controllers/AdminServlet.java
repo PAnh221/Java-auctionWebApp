@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -37,10 +38,19 @@ public class AdminServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
-            path = "/Index";
+            path = "/Login";
         }
+        HttpSession session = request.getSession();
+        String state = String.valueOf(session.getAttribute("authAdmin"));
 
         switch (path) {
+            case "/Login":
+                ServletUtils.forward("/views/vwAdmin/login.jsp", request, response);
+                break;
+            case "/Logout":
+                session.setAttribute("authAdmin", false);
+                ServletUtils.redirect("/Admin/Login",request,response);
+                break;
             case "/Index":
                 ServletUtils.forward("/views/vwAdmin/login.jsp", request, response);
                 break;
@@ -128,6 +138,11 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "/User/UpgradeBidder":
                 List<User> listUpgrade = UserModel.findByPermission(0);
+                if (listUpgrade == null)
+                {
+                    request.setAttribute("users", null);
+                    ServletUtils.forward("/views/vwAdmin/User/indexNoneUpgradeUser.jsp", request, response);
+                }
                 request.setAttribute("users", listUpgrade);
                 ServletUtils.forward("/views/vwAdmin/User/indexUpgradeUser.jsp", request, response);
                 break;
@@ -207,27 +222,36 @@ public class AdminServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String path = request.getPathInfo();
         if (path == null || path.equals("/")) {
-            path = "/Product/Index";
+            path = "/Login";
         }
 
         switch (path) {
-            case "/Product/Login":
+            case "/Login":
                 String username = request.getParameter("user");
                 String pass = request.getParameter("pass");
                 try {
                     if(username.equals("admin") & pass.equals("admin"))
                     {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("authAdmin", true);
                         ServletUtils.redirect("/Admin/Category/Detail", request, response);
                     }
                     else
                     {
-                        ServletUtils.redirect("/Admin",request,response);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("authAdmin", false);
+                        ServletUtils.redirect("/Admin/Login",request,response);
                     }
                 }
                 catch (Exception e)
                 {
                     ServletUtils.redirect("/Admin",request,response);
                 }
+                break;
+            case "/Logout":
+                HttpSession session = request.getSession();
+                session.setAttribute("authAdmin", false);
+                ServletUtils.redirect("/Admin/Login",request,response);
                 break;
             case "/Category/Add":
                 addCategory(request, response);
@@ -372,19 +396,30 @@ public class AdminServlet extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String year = request.getParameter("dob").substring(0,4);
-        String month = request.getParameter("dob").substring(5,7);
-        String day = request.getParameter("dob").substring(8,10);
-
-        String bd = day+"/"+month+ "/"+ year +" 00:00";
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime dob = LocalDateTime.parse(bd, df);
         int permission = Integer.parseInt(request.getParameter("permission"));
-        //int rating = Integer.parseInt(request.getParameter("rating"));
+        try {
+            String year = request.getParameter("dob").substring(0,4);
+            String month = request.getParameter("dob").substring(5,7);
+            String day = request.getParameter("dob").substring(8,10);
 
-        User user = new User(userid, permission,/* rating,*/ username, name, pass, address, email, dob);
-        UserModel.update(user);
-        ServletUtils.redirect("/Admin/User/Detail", request, response);
+            String bd = day+"/"+month+ "/"+ year +" 00:00";
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime dob = LocalDateTime.parse(bd, df);
+            User user = new User(userid, permission,/* rating,*/ username, name, pass, address, email, dob);
+            UserModel.update(user);
+            ServletUtils.redirect("/Admin/User/Detail", request, response);
+        }
+        catch (Exception e)
+        {
+            String bd = request.getParameter("dob")+" 00:00";
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime dob = LocalDateTime.parse(bd, df);
+            User user = new User(userid, permission,/* rating,*/ username, name, pass, address, email, dob);
+            UserModel.update(user);
+            ServletUtils.redirect("/Admin/User/Detail", request, response);
+        }
+
+        //int rating = Integer.parseInt(request.getParameter("rating"));
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

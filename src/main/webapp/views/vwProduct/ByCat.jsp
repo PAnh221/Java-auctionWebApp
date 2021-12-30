@@ -24,7 +24,8 @@
                 <c:forEach items="${products}" var="c">
                   <div class="col-sm-3 mb-2">
                     <div class="card h-100">
-<%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
+                        <%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
+                      <img src="" alt="${c.proName}" title="${c.proName}" class="card-img-top">
                       <div class="card-body">
                         <h6 class="card-title">${c.proName}</h6>
                         <h5 class="card-title text-danger">
