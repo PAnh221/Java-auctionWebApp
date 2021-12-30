@@ -6,6 +6,8 @@ public class Bid {
     private LocalDateTime Time;
     private int MaxBid;
     private String UserName;
+    private String EncodeUserName;
+
     private float ReputationOfBidder;
 
     public Bid(){
@@ -16,6 +18,7 @@ public class Bid {
         ProductID = productID;
         Time = time;
         MaxBid = maxBid;
+        EncodeUserName = "";
     }
 
     public int getBidID(){return BidID;}
@@ -46,4 +49,7 @@ public class Bid {
 
     public void setReputationOfBidder(float reputationOfBidder){ReputationOfBidder = reputationOfBidder;}
 
+    public String getEncodeUserName(){return EncodeUserName;}
+
+    public void setEncodeUserName(String encodeUserName){EncodeUserName = encodeUserName;}
 }

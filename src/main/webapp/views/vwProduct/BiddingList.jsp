@@ -110,9 +110,13 @@
                                         <div class="card-body">
                                             <h6 class="card-title">${c.proName}</h6>
                                             <h5 class="card-title text-danger">
-                                                <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
+                                                <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                             </h5>
-                                            <p class="font-weight-light mt-3">${c.uploadDate}</p>
+                                            <c:if test="${c.currentBidderUsername != null}">
+                                                <p class="font-weight-light mt-3">Người giữ: <i>${c.currentBidderUsername}</i></p>
+                                            </c:if>
+                                            <p class="font-weight-light mt-3">Ngày đăng: <i>${c.uploadDate}</i></p>
+                                            <p class="font-weight-light mt-3">Ngày kết thúc: <i>${c.endDate}</i></p>
                                         </div>
                                         <div class="card-footer text-muted">
                                             <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">

@@ -57,6 +57,14 @@ public class ProductFEServlet extends HttpServlet {
             listWinProduct.add(product);
           }
         }
+        for (Product product : listWinProduct) {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));
+        }
+        for (Product product : listProductBidding) {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));
+        }
         request.setAttribute("biddingProductDetails", listProductBidding);
         request.setAttribute("winProductDetails", listWinProduct);
         ServletUtils.forward("/views/vwProduct/BiddingList.jsp", request, response);
@@ -154,7 +162,26 @@ public class ProductFEServlet extends HttpServlet {
         } else {
           request.setAttribute("product", product);
           request.setAttribute("relevantProducts", list_relevant);
-          list_bid.forEach(bid -> bid.setReputationOfBidder(RatingModel.getReputationOfUserID(bid.getBidderID())));
+          for (Bid bid : list_bid) {
+            bid.setReputationOfBidder(RatingModel.getReputationOfUserID(bid.getBidderID()));
+            String txt = bid.getUserName();
+            String[] res = new String[txt.length()];
+            for (int i = 0; i < txt.length(); i++) {
+              res[i] = Character.toString(txt.charAt(i));
+            }
+            String encode = "";
+            for (int i = 0; i < res.length; i++) {
+              if(i%2 == 0)
+              {
+                encode = encode + res[i];
+              }
+              else
+              {
+                encode = encode + "*";
+              }
+            }
+            bid.setEncodeUserName(encode);
+          }
           request.setAttribute("bidHistory", list_bid);
           request.setAttribute("seller", s);
           request.setAttribute("isBanned", isBanned);
