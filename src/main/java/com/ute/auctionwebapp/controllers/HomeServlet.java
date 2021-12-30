@@ -64,7 +64,7 @@ public class HomeServlet extends HttpServlet {
                     type_order="New Post";
                 }
                 List<Product> listSearchProduct = ProductModel.fullTextSearch(keyword,type_order);
-                float product_inPage = 2.0f;
+                float product_inPage = 12.0f;
                 int total_page = 0;
                 if(listSearchProduct.size()!=0){
                     total_page = (int) Math.ceil(listSearchProduct.size()/product_inPage);
