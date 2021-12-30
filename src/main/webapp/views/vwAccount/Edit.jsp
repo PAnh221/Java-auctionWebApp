@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<jsp:useBean id="isRequesting" scope="request" type="java.lang.Boolean"/>
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 
 <html lang="en">
@@ -258,15 +259,28 @@
 
                 <div class="col-12 col-md-3 mb-3">
                     <c:if test= "${authUser.permission == 0}">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title font-weight-bold">Bạn muốn trở thành người bán?</h6>
-                            <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Request/AddRequest?id=${authUser.userID}" role="button">
-                                <%--                        <i class="fa fa-eye" aria-hidden="true"></i>--%>
-                                Xin nâng cấp
-                            </a>
-                        </div>
-                    </div>
+                        <c:choose>
+                        <c:when test = "${isRequesting == false}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title font-weight-bold">Yêu cầu trở thành người bán của bạn đang được xử lý...</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title font-weight-bold">Bạn muốn trở thành người bán?</h6>
+                                    <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Request/AddRequest?id=${authUser.userID}" role="button">
+                                            <%--                        <i class="fa fa-eye" aria-hidden="true"></i>--%>
+                                        Xin nâng cấp
+                                    </a>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                        </c:choose>
                     </c:if>
                 </div>
             </div>

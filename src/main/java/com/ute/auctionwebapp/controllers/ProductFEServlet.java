@@ -105,6 +105,7 @@ public class ProductFEServlet extends HttpServlet {
         List<Bid> list_bid = BidModel.getListBidByProductID(proId);
         list_bid.forEach(bid -> bid.setUserName(UserModel.findById(bid.getBidderID()).getUserName()));
         List<Ban> listBanned = BanModel.findListBanByProductID(proId);
+
         Boolean isBanned = false;
         if (state == "true"){
           User currentUser = (User)session.getAttribute("authUser");
@@ -129,6 +130,10 @@ public class ProductFEServlet extends HttpServlet {
           request.setAttribute("bidHistory", list_bid);
           request.setAttribute("seller", s);
           request.setAttribute("isBanned", isBanned);
+
+          User currentUser = (User)session.getAttribute("authUser");
+          int currentUserID = currentUser.getUserID();
+          request.setAttribute("reputation", RatingModel.getReputationOfUserID(currentUserID));
           ServletUtils.forward("/views/vwProduct/Detail.jsp", request, response);
         }
         break;

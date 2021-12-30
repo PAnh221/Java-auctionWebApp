@@ -67,6 +67,10 @@ public class AccountServlet extends HttpServlet {
                     ServletUtils.redirect("/Account/Login", request, response);
                 break;
             case "/Edit":
+                User currentUser = (User)session.getAttribute("authUser");
+                int currentUserID = currentUser.getUserID();
+                Boolean isRequesting = RequestModel.checkExist(currentUserID);
+                request.setAttribute("isRequesting", isRequesting);
                 ServletUtils.forward("/views/vwAccount/Edit.jsp", request, response);
                 break;
             case "/IsAvailable":

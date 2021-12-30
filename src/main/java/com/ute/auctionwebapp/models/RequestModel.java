@@ -9,6 +9,18 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class RequestModel {
+//    public static boolean checkRequestingbyID(int UserID) {
+//        String Sql = "select * from request where IdBidder = :UserID";
+//        try (Connection con = DbUtils.getConnection()) {
+//            List<Request> requestList = con.createQuery(Sql)
+//                    .addParameter("IdBidder", UserID)
+//                    .executeAndFetch(Request.class);
+//            if(requestList.size() > 0)
+//                return true;
+//            return false;
+//        }
+//    }
+
     public static void add(int BidderID) {
         if (RequestModel.checkExist(BidderID)) {
             String insertSql = "insert into request(IdRequest, IdBidder) VALUES (null, :BidderID)";

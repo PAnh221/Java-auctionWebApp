@@ -11,6 +11,7 @@
 <jsp:useBean id="bidHistory" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Bid>" />
 <jsp:useBean id="isBanned" scope="request" type="java.lang.Boolean" />
 <jsp:useBean id="seller" scope="request" type="com.ute.auctionwebapp.beans.User" />
+<jsp:useBean id="reputation" scope="request" type="java.lang.Float"/>
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
 
 <t:main>
@@ -164,12 +165,9 @@
         <div class="alert alert-primary mt-3" role="alert">
           <p><i class="fa fa-id-badge mr-2" aria-hidden="true"></i>${seller.name}</p>
           <p><i class="fa fa-envelope mr-1" aria-hidden="true"></i>${seller.email}</p>
-<%--          <p><i class="fa fa-star mr-1" aria-hidden="true"></i>${seller.rating}</p>--%>
-        </div>
+          <a href="${pageContext.request.contextPath}/Rating/Detail?Username=${seller.userName}"><h5 class="mt-3"><i class="fa fa-star mr-1" aria-hidden="true"></i> ${reputation}%</h5></a></div>
       </div>
     </div>
-
-
 
     <div class="card mt-3">
       <h5 class="card-header">
