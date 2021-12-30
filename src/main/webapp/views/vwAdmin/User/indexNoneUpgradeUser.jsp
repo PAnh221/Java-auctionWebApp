@@ -1,37 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <html>
 <head>
     <title>Admin Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/admin.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/login.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
 <div class="main grid">
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-            <!-- Tabs Titles -->
-            <h2 class="active"> Sign In </h2>
-            <a class="inactive underlineHover">Auction Website </a>
+    <div class="row">
+        <div class="col l-2 admin_left">
+            <jsp:include page="../../partials/leftAdmin.jsp"/>
+        </div>
 
-            <!-- Icon -->
-            <div class="fadeIn first">
-                <img src="${pageContext.request.contextPath}/public/imgs/admin/logo3.jpg" id="icon" alt="User Icon" />
+
+        <div class="col l-10 admin_right">
+            <div class="row admin_product_title">
+                <div>
+                    List Upgrade User:
+                </div>
             </div>
 
-            <!-- Login Form -->
-            <form method="post" action="${pageContext.request.contextPath}/Admin/Login">
-                <input type="text" id="login" class="fadeIn second" name="user" placeholder="Enter username">
-                <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Enter password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
-            </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Auction website</a>
+            <div class="card-body">
+                <p class="card-text">Không có dữ liệu.</p>
             </div>
 
         </div>

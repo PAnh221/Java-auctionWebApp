@@ -18,6 +18,8 @@
             <jsp:include page="../../partials/leftAdmin.jsp"/>
         </div>
 
+
+
         <div class="col l-10 admin_right">
             <div class="row admin_product_title">
                 <div>
