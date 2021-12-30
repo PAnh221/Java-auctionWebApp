@@ -54,12 +54,12 @@
             <div>
                 <a href="${pageContext.request.contextPath}/Admin/Product/Detail">Product List</a>
             </div>
-            <div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Live">Live Auction</a>
-            </div>
-            <div>
-                <a href="${pageContext.request.contextPath}/Admin/Product/Won">Won Auction</a>
-            </div>
+<%--            <div>--%>
+<%--                <a href="${pageContext.request.contextPath}/Admin/Product/Live">Live Auction</a>--%>
+<%--            </div>--%>
+<%--            <div>--%>
+<%--                <a href="${pageContext.request.contextPath}/Admin/Product/Won">Won Auction</a>--%>
+<%--            </div>--%>
         </div>
     </div>
 </div>

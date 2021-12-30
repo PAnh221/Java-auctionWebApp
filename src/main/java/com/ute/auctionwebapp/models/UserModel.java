@@ -170,4 +170,14 @@ public class UserModel {
               .executeUpdate();
     }
   }
+
+  public static void editPassByEmail(String email) {
+    String sql = "UPDATE user SET Password = :password WHERE Email = :email \n";
+    try (Connection con = DbUtils.getConnection()) {
+      con.createQuery(sql)
+              .addParameter("email", email)
+              .addParameter("password", "123456")
+              .executeUpdate();
+    }
+  }
 }

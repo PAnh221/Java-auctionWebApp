@@ -486,7 +486,7 @@ public class AdminServlet extends HttpServlet {
             }
         });
 
-        String emailTo = "maithanhnha12345pyl@gmail.com";
+        String emailTo = request.getParameter("email");
         String emailSubject = "Reset Password";
         String content = "New Password is 123456";
         try {
