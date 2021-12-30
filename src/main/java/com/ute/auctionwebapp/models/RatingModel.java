@@ -7,11 +7,23 @@ import org.sql2o.Connection;
 import java.text.DecimalFormat;
 import java.time.Period;
 import java.util.List;
+import java.util.Objects;
 
 //Hàm check xem ratingID có được đánh giá rated ID hay không
 public class RatingModel {
     public static Boolean checkIfCanRate(int ratingID, int ratedID, int productID){
-        return true;
+        System.out.println("ratingUserID :"+ratingID);
+        System.out.println("ratedUserID :"+ratedID);
+        System.out.println("onProductID :"+productID);
+        Product product = ProductModel.findById(productID);
+        System.out.println(BidModel.getCurrentBidderUsernameByID(productID));
+        if(isExisted(ratingID,ratedID,productID) || ratedID == 0 || ratingID == 0 || productID == 0|| product.getStatus()==0)
+            return false;
+        else{
+            User rating = UserModel.findById(ratingID);
+            User rated = UserModel.findById(ratedID);
+            return (product.getSellerID() == ratedID && Objects.equals(BidModel.getCurrentBidderUsernameByID(productID), rating.getUserName())) || (product.getSellerID() == ratingID && Objects.equals(BidModel.getCurrentBidderUsernameByID(productID), rated.getUserName()));
+        }
     }
 
     public static Boolean checkIfCanWatchDetail(int userID, int userDetail){
@@ -35,6 +47,18 @@ public class RatingModel {
         }
     }
 
+    public static Boolean isExisted(int ratingID, int ratedID, int productID){
+        final String query = "select * from Rating where IdRated = :ratedID and IdRating = :ratingID and IdProduct = :productID";
+        try (Connection con = DbUtils.getConnection()) {
+            List<Rating> listRating = con.createQuery(query)
+                                        .addParameter("ratingID", ratingID)
+                                        .addParameter("ratedID", ratedID)
+                                        .addParameter("productID", productID)
+                                        .executeAndFetch(Rating.class);
+            return listRating.size() != 0;
+        }
+    }
+
     public static float getReputationOfUserID(int userID){
         List<Rating> listRating = getListRatingByIdUser(userID);
         float sum = listRating.size();
@@ -48,5 +72,20 @@ public class RatingModel {
         DecimalFormat df = new DecimalFormat("#.##");
         Float reputation = Float.parseFloat(df.format(postsitive*100/sum));
         return reputation;
+    }
+
+    public static void add(Rating rating) {
+        String insertSql = "insert into rating (IdRated, IdRating, IdProduct, Vote, FeedBack, Time)\n" +
+                "values (:IdRated, :IdRating, :IdProduct, :Vote, :FeedBack, :Time);";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(insertSql)
+                    .addParameter("IdRated", rating.getIdRated())
+                    .addParameter("IdRating", rating.getIdRating())
+                    .addParameter("IdProduct", rating.getIdProduct())
+                    .addParameter("Vote", rating.getVote())
+                    .addParameter("FeedBack", rating.getFeedBack())
+                    .addParameter("Time", rating.getTime())
+                    .executeUpdate();
+        }
     }
 }

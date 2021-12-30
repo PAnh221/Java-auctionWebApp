@@ -215,4 +215,15 @@ public class ProductModel {
               .executeAndFetch(Product.class);
     }
   }
+
+  public static List<Product> findProductBoughtByUserID(int UserID){
+    final String query = "SELECT product.ProID, ProName, SubCatID, SellerID, StartPrice, StepPrice, TinyDes, FullDes, Bin, UploadDate, EndDate, ImgIndex, Status " +
+            "FROM bid, product " +
+            "where bid.ProductID = product.ProID and bid.BidderID = :UserID\n";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("UserID", UserID)
+              .executeAndFetch(Product.class);
+    }
+  }
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -36,6 +37,11 @@ public class RatingServlet extends HttpServlet {
             int productID = Integer.parseInt(request.getParameter("ProID"));
             Product product = ProductModel.findById(productID);
             if (ratedUsername == null || userRated == null || product == null || productID == 0) {
+                System.out.println(ratedUsername);
+                System.out.println(userRated);
+                System.out.println(product);
+                System.out.println(productID);
+                System.out.println("THam số null");
                 ServletUtils.redirect("/Home",request,response);
             }else if(RatingModel.checkIfCanRate(currentUser.getUserID(), userRated.getUserID(), productID)){
 
@@ -43,6 +49,7 @@ public class RatingServlet extends HttpServlet {
                 request.setAttribute("reputation", RatingModel.getReputationOfUserID(userRated.getUserID()));
                 ServletUtils.forward("/views/vwRating/AddRating.jsp",request,response);
             } else {
+                System.out.println("không có quyền để đánh giá");
                 ServletUtils.redirect("/Home",request,response);
             }
         } else if (path.equals("/Detail")) {
@@ -74,8 +81,33 @@ public class RatingServlet extends HttpServlet {
                 return;
             }
             ServletUtils.redirect("/Home",request,response);
+        }else {
+            ServletUtils.redirect("/Home",request,response);
         }
     }
 
-
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String path = request.getPathInfo();
+        if(path.equals("/AddRate")){
+            HttpSession session = request.getSession();
+            Boolean state = (Boolean) session.getAttribute("auth");
+            User currentUser = (User)session.getAttribute("authUser");
+            String feedBack = request.getParameter("feedback");
+            int vote = Integer.parseInt(request.getParameter("vote"));
+            String ratedUsername = request.getParameter("RatedUsername");
+            User userRated = UserModel.findByUsername(ratedUsername);
+            int productID = Integer.parseInt(request.getParameter("ProID"));
+            Product product = ProductModel.findById(productID);
+            if(feedBack == null||ratedUsername==null||userRated==null||product==null||!state){
+                ServletUtils.redirect("/Home",request,response);
+                return;
+            }else if (RatingModel.checkIfCanRate(currentUser.getUserID(),userRated.getUserID(),productID)){
+                Rating rating = new Rating(userRated.getUserID(), currentUser.getUserID(), productID, vote, feedBack, LocalDateTime.now());
+                RatingModel.add(rating);
+            }
+        }
+        ServletUtils.redirect("/Home",request,response);
+    }
 }

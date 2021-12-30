@@ -53,22 +53,27 @@
                 </div>
             </div>
             <div class="col-lg-9">
+                <form method="POST">
                 <div class="form-group blue-border-focus w-80 h-50">
-                    <textarea style="font-size: 24px" class="form-control p-10 d-flex justify-content-center align-items-center text-center h-100" id="exampleFormControlTextarea5" rows="3"></textarea>
+                    <textarea style="font-size: 24px" class="form-control p-10 d-flex justify-content-center align-items-center text-center h-100" id="exampleFormControlTextarea5" name="feedback" rows="3"></textarea>
                 </div>
                 <div class="d-flex align-items-center justify-content-center text-center mt-4">
                     <div class="col-lg-2 d-flex justify-content-end mt-3">
-                        <figure style="max-width: 60px; max-height: 60px" onclick="document.getElementById('likeImg').src='/auctionWebApp_war/public/imgs/icon/like-button.png';document.getElementById('dislikeImg').src='/auctionWebApp_war/public/imgs/icon/dislike-disable-button.png';"><img src="${pageContext.request.contextPath}/public/imgs/icon/like-button.png" style="width: 100%" id="likeImg" alt=""></figure>
+                        <figure style="max-width: 60px; max-height: 60px" onclick="document.getElementById('likeImg').src='/auctionWebApp_war/public/imgs/icon/like-button.png';document.getElementById('dislikeImg').src='/auctionWebApp_war/public/imgs/icon/dislike-disable-button.png';document.getElementById('like').checked = true;"><img src="${pageContext.request.contextPath}/public/imgs/icon/like-button.png" style="width: 100%" id="likeImg" alt=""></figure>
                     </div>
 
                     <div class="col-lg-2 d-flex justify-content-start mt-3">
-                        <figure style="max-width: 60px; max-height: 60px" onclick="document.getElementById('likeImg').src='/auctionWebApp_war/public/imgs/icon/like-disable-button.png';document.getElementById('dislikeImg').src='/auctionWebApp_war/public/imgs/icon/dislike-button.png';"><img src="${pageContext.request.contextPath}/public/imgs/icon/dislike-disable-button.png" style="width: 100%" id="dislikeImg" alt=""></figure>
+                        <figure style="max-width: 60px; max-height: 60px" onclick="document.getElementById('likeImg').src='/auctionWebApp_war/public/imgs/icon/like-disable-button.png';document.getElementById('dislikeImg').src='/auctionWebApp_war/public/imgs/icon/dislike-button.png';document.getElementById('dislike').checked = true;"><img src="${pageContext.request.contextPath}/public/imgs/icon/dislike-disable-button.png" style="width: 100%" id="dislikeImg" alt=""></figure>
                     </div>
+
+                    <input type="radio" id="dislike" name="vote" value="0" style="display: none">
+                    <input type="radio" id="like" name="vote" value="1" style="display: none" checked="checked">
 
                     <button type="submit" class="col-lg-2 btn btn-primary btn-lg">
                         <i class="fa fa-check" aria-hidden="true"></i>Rate
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
