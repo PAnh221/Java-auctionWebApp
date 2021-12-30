@@ -168,22 +168,22 @@ public class UserModel {
     }
   }
 
-  public static void editPass(int userid) {
+  public static void editPass(int userid, String password) {
     String sql = "UPDATE user SET Password = :password WHERE UserID = :userid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", userid)
-              .addParameter("password", "123456")
+              .addParameter("password", password)
               .executeUpdate();
     }
   }
 
-  public static void editPassByEmail(String email) {
+  public static void editPassByEmail(String email, String password) {
     String sql = "UPDATE user SET Password = :password WHERE Email = :email \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("email", email)
-              .addParameter("password", "123456")
+              .addParameter("password", password)
               .executeUpdate();
     }
   }

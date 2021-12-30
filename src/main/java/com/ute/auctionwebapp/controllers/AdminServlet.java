@@ -4,6 +4,7 @@ import java.util.Properties;
 
 
 //import at.favre.lib.crypto.bcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Category;
 import com.ute.auctionwebapp.beans.Product;
@@ -505,8 +506,10 @@ public class AdminServlet extends HttpServlet {
 
     private void sendMail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //reset mật khẩu
+        String newpass = "123456";
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, newpass.toCharArray());
         int userid = Integer.parseInt(request.getParameter("id"));
-        UserModel.editPass(userid);
+        UserModel.editPass(userid, bcryptHashString);
 
         //mail
         final String username = "caulacbo3qcuhanh@gmail.com";
