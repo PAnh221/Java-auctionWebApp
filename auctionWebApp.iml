@@ -59,55 +59,5 @@
     <orderEntry type="library" name="Maven: org.glassfish:javax.json:1.1.4" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:google-recaptcha:1.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:debug:2.6.9" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:ms:2.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:request:2.88.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:aws4:1.11.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:performance-now:2.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:combined-stream:1.0.8" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:delayed-stream:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:safe-buffer:5.2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:aws-sign2:0.7.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:http-signature:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:assert-plus:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:jsprim:1.4.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:extsprintf:1.3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:json-schema:0.2.3" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:verror:1.10.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:core-util-is:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:sshpk:1.16.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:ecc-jsbn:0.1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:bcrypt-pbkdf:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:getpass:0.1.7" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:jsbn:0.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:asn1:0.2.6" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:tweetnacl:0.14.5" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:safer-buffer:2.1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:dashdash:1.14.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:is-typedarray:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:extend:3.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:caseless:0.12.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:har-validator:5.1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:ajv:7.0.0-rc.5" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:fast-deep-equal:3.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:json-schema-traverse:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:require-from-string:2.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:uri-js:4.4.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:har-schema:2.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:form-data:2.3.3" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:asynckit:0.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:isstream:0.1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:qs:6.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:oauth-sign:0.9.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:tough-cookie:2.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:psl:1.8.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:punycode:2.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:tunnel-agent:0.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:forever-agent:0.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:uuid:3.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:json-stringify-safe:5.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:mime-types:2.1.34" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.npm:mime-db:1.51.0" level="project" />
   </component>
 </module>
