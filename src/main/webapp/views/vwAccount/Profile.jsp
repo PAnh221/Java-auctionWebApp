@@ -246,11 +246,11 @@
                         <c:forEach items="${ListAuctioning}" var="c">
                             <div class="col-sm-3 mb-2">
                                 <div class="card h-100">
-                                        <%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" style="height: 230px; width: 230px" alt="${c.proName}" title="${c.proName}" class="card-img-top">
                                     <div class="card-body">
                                         <h6 class="card-title">${c.proName}</h6>
                                         <h5 class="card-title text-danger">
-                                            <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
+                                            <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                         </h5>
                                         <p class="font-weight-light mt-3">${c.uploadDate}</p>
                                     </div>
@@ -289,13 +289,17 @@
                         <c:forEach items="${ListAuctioned}" var="c">
                             <div class="col-sm-3 mb-2">
                                 <div class="card h-100">
-                                        <%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" alt="${c.proName}" title="${c.proName}" class="card-img-top" style="width: 230px;height: 230px;">
                                     <div class="card-body">
                                         <h6 class="card-title">${c.proName}</h6>
                                         <h5 class="card-title text-danger">
-                                            <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
+                                            <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                         </h5>
-                                        <p class="font-weight-light mt-3">${c.uploadDate}</p>
+                                        <c:if test="${c.currentBidderUsername != null}">
+                                            <p class="font-weight-light mt-3">Người giữ: <i>${c.currentBidderUsername}</i></p>
+                                        </c:if>
+                                        <p class="font-weight-light mt-3">Ngày đăng: <i>${c.uploadDate}</i></p>
+                                        <p class="font-weight-light mt-3">Ngày kết thúc: <i>${c.endDate}</i></p>
                                         <c:choose>
                                             <c:when test="${c.status == 1}">
                                         <p>Người thắng: <a href="${pageContext.request.contextPath}/Rating/Detail?Username=${c.currentBidderUsername}" style="color: #56baed">${c.currentBidderUsername}</a></p>
