@@ -30,7 +30,7 @@
                     <form action="" class="form_accounts" method="post" style="width: 100%">
                         <div class="input-form">
                             <span>#</span><br>
-                            <input type="text" name="userid" value="${user.userID}" >
+                            <input type="text" name="userid" value="${user.userID}" readonly>
                         </div>
                         <div class="input-form">
                             <span>User Name</span>

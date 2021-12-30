@@ -73,7 +73,7 @@
             </a>
         </div>
         <div class="collapse" id="4">
-            <a href="${pageContext.request.contextPath}/Admin/User/UpgradeBidder">Upgrade Bidder</a><br>
+            <a href="${pageContext.request.contextPath}/Admin/User/UpgradeSeller">Upgrade Bidder</a><br>
             <a href="${pageContext.request.contextPath}/Admin/User/Seller">Seller</a><br>
             <a href="${pageContext.request.contextPath}/Admin/User/Bidder">Bidder</a><br>
             <div>

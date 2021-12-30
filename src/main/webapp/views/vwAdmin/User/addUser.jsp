@@ -26,10 +26,10 @@
             <div class="row">
                 <div class="form" id="frmUser" style="width: 100%">
                     <form action="" class="form_accounts" method="post" style="width: 100%">
-                        <div class="input-form">
-                            <span>#</span> <br>
-                            <input type="text" name="userid">
-                        </div>
+<%--                        <div class="input-form">--%>
+<%--                            <span>#</span> <br>--%>
+<%--                            <input type="text" name="userid">--%>
+<%--                        </div>--%>
                         <div class="input-form">
                             <span>User Name</span>
                             <input type="text" name="username" id="username">

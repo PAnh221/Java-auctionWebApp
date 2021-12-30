@@ -44,6 +44,13 @@ public class RequestModel {
             return false;
         }
     }
-
+    public static void delete(int id) {
+        String sql = "delete from request where IdBidder = :IdBidder";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("IdBidder", id)
+                    .executeUpdate();
+        }
+    }
 
 }

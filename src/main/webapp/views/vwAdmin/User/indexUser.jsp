@@ -59,8 +59,8 @@
                             <td>
                                 <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${u.userID}">Edit |</a>
                                 <a href="${pageContext.request.contextPath}/Admin/User/SendMail?id=${u.userID}&email=${u.email}">Reset Pass |</a>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">UpBidder |</a>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Degrade?id=${u.userID}">DeSeller</a>
+                                <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">UpSeller |</a>
+                                <a href="${pageContext.request.contextPath}/Admin/User/Degrade?id=${u.userID}">DeBidder</a>
                             </td>
                         </tr>
                     </c:forEach>

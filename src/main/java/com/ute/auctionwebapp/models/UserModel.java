@@ -15,6 +15,13 @@ public class UserModel {
         .executeAndFetch(User.class);
     }
   }
+  public static List<User> findUserUpgrade() {
+    final String query = "SELECT UserID, UserName, Name, Password, Address, Email, Dob, Permission from user join request r on user.UserID = r.IdBidder\n";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .executeAndFetch(User.class);
+    }
+  }
   public static List<User> findByPermission(int id) {
     final String query = "select * from user where Permission = :Permission";
     try (Connection con = DbUtils.getConnection()) {
@@ -133,7 +140,7 @@ public class UserModel {
   }
 
   public static void upgradeBidder(int id) {
-    String sql = "UPDATE user SET  Permission = 2 WHERE UserID = :userid \n";
+    String sql = "UPDATE user SET  Permission = 1 WHERE UserID = :userid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", id)
@@ -141,7 +148,7 @@ public class UserModel {
     }
   }
   public static void degradeSeller(int id) {
-    String sql = "UPDATE user SET  Permission = 1 WHERE UserID = :userid \n";
+    String sql = "UPDATE user SET  Permission = 0 WHERE UserID = :userid \n";
     try (Connection con = DbUtils.getConnection()) {
       con.createQuery(sql)
               .addParameter("userid", id)

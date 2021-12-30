@@ -136,8 +136,8 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("users", listUser);
                 ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
                 break;
-            case "/User/UpgradeBidder":
-                List<User> listUpgrade = UserModel.findByPermission(0);
+            case "/User/UpgradeSeller":
+                List<User> listUpgrade = UserModel.findUserUpgrade();
                 if (listUpgrade == null)
                 {
                     request.setAttribute("users", null);
@@ -147,12 +147,12 @@ public class AdminServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAdmin/User/indexUpgradeUser.jsp", request, response);
                 break;
             case "/User/Seller":
-                List<User> listSeller = UserModel.findBy2Permission(1, 0);
+                List<User> listSeller = UserModel.findByPermission(1);
                 request.setAttribute("users", listSeller);
                 ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
                 break;
             case "/User/Bidder":
-                List<User> listBidder = UserModel.findByPermission(2);
+                List<User> listBidder = UserModel.findByPermission(0);
                 request.setAttribute("users", listBidder);
                 ServletUtils.forward("/views/vwAdmin/User/indexUser.jsp", request, response);
                 break;
@@ -172,6 +172,7 @@ public class AdminServlet extends HttpServlet {
             case "/User/Upgrade":
                 int useridu = Integer.parseInt(request.getParameter("id"));
                 UserModel.upgradeBidder(useridu);
+                RequestModel.delete(useridu);
                 ServletUtils.redirect("/Admin/User/Detail", request, response);
                 break;
             case "/User/Degrade":
@@ -371,7 +372,7 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userid = Integer.parseInt(request.getParameter("userid"));
+//        int userid = Integer.parseInt(request.getParameter("userid"));
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
 //        String bcryptHashString = BCrypt.withDefaults().hashToString(12, pass.toCharArray());
@@ -384,7 +385,7 @@ public class AdminServlet extends HttpServlet {
         int permission = Integer.parseInt(request.getParameter("permission"));
         //int rating = Integer.parseInt(request.getParameter("rating"));
 
-        User user = new User(userid, permission,/* rating,*/ username, name, pass, address, email, dob);
+        User user = new User(1, permission,/* rating,*/ username, name, pass, address, email, dob);
         UserModel.add(user);
         ServletUtils.forward("/views/vwAdmin/User/addUser.jsp", request, response);
     }
