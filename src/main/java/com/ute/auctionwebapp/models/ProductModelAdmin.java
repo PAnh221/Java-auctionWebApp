@@ -42,7 +42,7 @@ public class ProductModelAdmin {
   }
 
   public static Product checkCat(int CatID) {
-    final String query = "select * from product where CatID = :CatID";
+    final String query = "select product.ProID, ProName, product.SubCatID, SellerID, StartPrice, StepPrice, TinyDes, FullDes, Bin, UploadDate, EndDate, ImgIndex, Status from product join subcategory on product.subcatid = subcategory.subcatid where subcategory.CatID = :CatID";
     try (Connection con = DbUtils.getConnection()) {
       List<Product> list = con.createQuery(query)
               .addParameter("CatID", CatID)
@@ -66,6 +66,7 @@ public class ProductModelAdmin {
       return list.get(0);
     }
   }
+
 
   public static List<Product> findBySubCatId(int SubCatID) {
     final String query = "select * from product where SubCatID = :SubCatID";
