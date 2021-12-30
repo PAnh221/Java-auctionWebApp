@@ -40,7 +40,7 @@ public class MiscServlet extends HttpServlet {
     String path = request.getPathInfo();
     HttpSession session = request.getSession();
     User user = (User)session.getAttribute("authUser");
-    if(user.getPermission()==2){
+    if(user.getPermission()==1){
       switch (path) {
         case "/Editor":
           int proID = Integer.parseInt(request.getParameter("ProID"));

@@ -82,7 +82,7 @@
               <c:forEach items="${bidHistory}" var="h">
                 <tr>
                   <td>${h.time}</td>
-                  <td>${h.userName}</td>
+                  <td>${h.userName}<a href="${pageContext.request.contextPath}/Rating/Detail?Username=${h.userName}"> (${h.reputationOfBidder}%)</a></td>
                     <c:if test="${authUser.userID == product.sellerID && product.status == 0}">
                         <button class="btn btn-secondary" onclick="if (confirm('Bạn có muốn ban user: ${h.userName} khỏi sản phẩm hiện tại không?')) {
                           <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>

@@ -6,6 +6,7 @@
 <jsp:useBean id="ListAuctioning" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>"/>
 <jsp:useBean id="ListAuctioned" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>"/>
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
+<jsp:useBean id="reputation" scope="request" type="java.lang.Float"/>
 
 
 <html>
@@ -24,6 +25,7 @@
 
 <body>
 <jsp:include page="../../views/partials/nav.jsp" />
+<br>
 <div class="container mt-3">
     <div class="main-body">
         <div class="row">
@@ -32,7 +34,7 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin"
-                                 class="rounded-circle p-1 bg-primary" width="110">
+                                 class="rounded-circle p-1 bg-primary mt-4" width="110">
                             <div class="mt-3">
                                 <h4>${authUser.name}</h4>
                                 <p class="text-secondary mb-1">${authUser.email}</p>
@@ -43,6 +45,7 @@
                                 <c:if test="${authUser.permission == 1}">
                                     <span class="badge badge-info">Seller</span>
                                 </c:if>
+                                <a href="${pageContext.request.contextPath}/Rating/Detail?Username=${authUser.userName}"><h5 class="mt-3">Uy tín: ${reputation}%</h5></a>
                             </div>
                         </div>
                         <hr class="my-4">
@@ -293,17 +296,31 @@
                                             <u><small>đ</small></u><fmt:formatNumber value="${c.bin}" type="number" />
                                         </h5>
                                         <p class="font-weight-light mt-3">${c.uploadDate}</p>
+                                        <c:choose>
+                                            <c:when test="${c.status == 1}">
+                                        <p>Người thắng: <a href="${pageContext.request.contextPath}/Rating/Detail?Username=${c.currentBidderUsername}" style="color: #56baed">${c.currentBidderUsername}</a></p>
                                     </div>
-                                    <div class="card-footer text-muted">
-                                        <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
-                                            <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-
-                                        <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Product/Detail?id=${c.proID}" role="button">
-                                                <%--                        <i class="fa fa-eye" aria-hidden="true"></i>--%>
-                                            Chi tiết sản phẩm
-                                        </a>
+                                            <div class="card-footer text-muted">
+                                                <a class="btn btn-sm btn-outline-warning" href="${pageContext.request.contextPath}/Rating/AddRate?ProID=${c.proID}&RatedUsername=${c.currentBidderUsername}" role="button">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </a>
+                                                <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Product/Detail?id=${c.proID}" role="button">
+                                                        <%--                        <i class="fa fa-eye" aria-hidden="true"></i>--%>
+                                                    Chi tiết sản phẩm
+                                                </a>
+                                            </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <strong>Đấu giá thất bại</strong>
                                     </div>
+                                            <div class="card-footer text-muted">
+                                                <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Product/Detail?id=${c.proID}" role="button">
+                                                        <%--                        <i class="fa fa-eye" aria-hidden="true"></i>--%>
+                                                    Chi tiết sản phẩm
+                                                </a>
+                                            </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                 </div>
                             </div>
                         </c:forEach>

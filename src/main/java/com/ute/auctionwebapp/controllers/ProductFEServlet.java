@@ -125,6 +125,7 @@ public class ProductFEServlet extends HttpServlet {
         } else {
           request.setAttribute("product", product);
           request.setAttribute("relevantProducts", list_relevant);
+          list_bid.forEach(bid -> bid.setReputationOfBidder(RatingModel.getReputationOfUserID(bid.getBidderID())));
           request.setAttribute("bidHistory", list_bid);
           request.setAttribute("seller", s);
           request.setAttribute("isBanned", isBanned);

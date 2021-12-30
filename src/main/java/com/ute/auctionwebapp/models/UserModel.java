@@ -60,6 +60,9 @@ public class UserModel {
       return list.get(0);
     }
   }
+  public static String findUsernameByID(int userID){
+    return findById(userID).getUserName();
+  }
   public static User findByUsername(String username) {
     final String query = "select * from user where UserName = :UserName";
     try (Connection con = DbUtils.getConnection()) {

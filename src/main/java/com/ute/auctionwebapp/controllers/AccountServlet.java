@@ -5,9 +5,7 @@ import com.ute.auctionwebapp.Utils.GoogleRecaptcha;
 import com.ute.auctionwebapp.Utils.ServletUtils;
 import com.ute.auctionwebapp.beans.Product;
 import com.ute.auctionwebapp.beans.User;
-import com.ute.auctionwebapp.models.ProductModel;
-import com.ute.auctionwebapp.models.RequestModel;
-import com.ute.auctionwebapp.models.UserModel;
+import com.ute.auctionwebapp.models.*;
 import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
@@ -43,17 +41,23 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/ForgetPass.jsp", request, response);
                 break;
             case "/Profile":
-                if(state == "false") {
+                if(state.equals("true")) {
+                    User user = (User)session.getAttribute("authUser");
+                    int userID = user.getUserID();
+                    List<Product> ListAuctioning = ProductModel.findAuctioningBySellerID(userID);
+                    ListAuctioning.forEach(product -> {
+                        product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+                        product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
+                    List<Product> ListAuctioned = ProductModel.findAuctionedBySellerID(userID);
+                    ListAuctioned.forEach(product -> {
+                        product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+                        product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
+                    request.setAttribute("ListAuctioning",ListAuctioning);
+                    request.setAttribute("ListAuctioned",ListAuctioned);
+                    request.setAttribute("reputation", RatingModel.getReputationOfUserID(userID));
+                    ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
+                }else
                     ServletUtils.redirect("/Account/Login", request, response);
-                    return;
-                }
-                User user = (User)session.getAttribute("authUser");
-                int userID = user.getUserID();
-                List<Product> ListAuctioning = ProductModel.findAuctioningBySellerID(userID);
-                List<Product> ListAuctioned = ProductModel.findAuctionedBySellerID(userID);
-                request.setAttribute("ListAuctioning",ListAuctioning);
-                request.setAttribute("ListAuctioned",ListAuctioned);
-                ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
                 break;
             case "/Edit":
                 ServletUtils.forward("/views/vwAccount/Edit.jsp", request, response);

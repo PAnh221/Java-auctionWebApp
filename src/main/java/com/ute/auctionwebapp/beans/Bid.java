@@ -6,6 +6,7 @@ public class Bid {
     private LocalDateTime Time;
     private int MaxBid;
     private String UserName;
+    private float ReputationOfBidder;
 
     public Bid(){
     }
@@ -40,5 +41,9 @@ public class Bid {
     public String getUserName(){return UserName;}
 
     public void setUserName(String userName){UserName = userName;}
+
+    public float getReputationOfBidder(){return ReputationOfBidder;}
+
+    public void setReputationOfBidder(float reputationOfBidder){ReputationOfBidder = reputationOfBidder;}
 
 }

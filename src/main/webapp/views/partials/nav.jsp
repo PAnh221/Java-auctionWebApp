@@ -33,7 +33,7 @@
         <ul class="navbar-nav">
             <c:choose>
                 <c:when test="${auth}">
-                    <c:if test="${authUser.getPermission() == 2}">
+                    <c:if test="${authUser.getPermission() == 1}">
                         <a href="${pageContext.request.contextPath}/Misc/Upload"><button type="button" class="btn btn-outline-info mr-3">Post A Product</button></a>
                     </c:if>
                     <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post"></form>
