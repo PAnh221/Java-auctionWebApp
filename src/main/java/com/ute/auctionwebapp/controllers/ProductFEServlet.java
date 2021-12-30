@@ -114,6 +114,8 @@ public class ProductFEServlet extends HttpServlet {
         listByCat.forEach(product -> {
           product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
           product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
+        List<SubCategory> subCategories = SubCategoryModel.getSubbyIDCat(catId);
+        request.setAttribute("subcategoriesWithDetails",subCategories);
         request.setAttribute("products", listByCat);
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;

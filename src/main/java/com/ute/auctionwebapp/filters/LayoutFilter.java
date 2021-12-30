@@ -8,6 +8,7 @@ import com.ute.auctionwebapp.models.SubCategoryModel;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebFilter(filterName = "LayoutFilter", value = "/*")
@@ -21,7 +22,7 @@ public class LayoutFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
     List<Category> list = CategoryModel.findAll();
-    List<SubCategory> listsub = SubCategoryModel.findAllSubCat();
+    List<SubCategory> listsub = new ArrayList<>();
     request.setAttribute("categoriesWithDetails", list);
     request.setAttribute("subcategoriesWithDetails", listsub);
 

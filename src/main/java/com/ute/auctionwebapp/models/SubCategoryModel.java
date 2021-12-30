@@ -69,6 +69,14 @@ public class SubCategoryModel {
         .executeUpdate();
     }
   }
+  public static List<SubCategory> getSubbyIDCat(int id){
+    final String query = "select * from subcategory where CatID = :id ";
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("id",id)
+              .executeAndFetch(SubCategory.class);
+    }
+  }
 
 
 }
