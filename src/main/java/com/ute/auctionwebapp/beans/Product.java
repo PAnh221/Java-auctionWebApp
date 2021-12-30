@@ -1,10 +1,5 @@
 package com.ute.auctionwebapp.beans;
-
-//import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-
-import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Product {
   private int ProID;
@@ -38,6 +33,7 @@ public class Product {
     StepPrice = stepPrice;
     CurrentBidderUsername = null;
     CurrentPrice = startPrice;
+
   }
   public Product(String proName, String tinyDes, String fullDes, int subCatID, int sellerID, int imgIndex, LocalDateTime uploadDate, int bin, int startPrice, int stepPrice, int status /*, int catId */) {
     ProName = proName;
@@ -123,9 +119,11 @@ public class Product {
     ImgIndex = imgIndex;
   }
 
+
   public LocalDateTime getUploadDate() {
     return UploadDate;
   }
+
 
   public void setUploadDate(LocalDateTime uploadDate) {
     UploadDate = uploadDate;
