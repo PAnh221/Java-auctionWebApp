@@ -8,18 +8,6 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class CategoryModel {
-  // public static List<Category> findAll() {
-  //   return new ArrayList<>(
-  //     Arrays.asList(
-  //       new Category(1, "Sách"),
-  //       new Category(2, "Quần áo"),
-  //       new Category(3, "Điện thoại"),
-  //       new Category(4, "Laptop"),
-  //       new Category(5, "Loa")
-  //     )
-  //   );
-  // }
-
   public static List<Category> findAll() {
     final String query = "select * from category";
     try (Connection con = DbUtils.getConnection()) {

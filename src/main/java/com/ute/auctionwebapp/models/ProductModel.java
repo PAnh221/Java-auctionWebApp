@@ -51,12 +51,12 @@ public class ProductModel {
         //        ===================     debug ==================================================
 //        query += "HAVING DATE_SUB(:time_now,INTERVAL -11 DAY ) <= EndDate Order By EndDate ASC";
         break;
-      case "Price:Low to High":
-        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
-        break;
-      case "Price:High to Low":
-        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
-        break;
+//      case "Price:Low to High":
+//        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
+//        break;
+//      case "Price:High to Low":
+//        query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
+//        break;
       default:
         break;
     }

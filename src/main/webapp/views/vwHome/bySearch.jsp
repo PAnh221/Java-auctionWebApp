@@ -32,12 +32,12 @@
                         <a class="dropdown-item"
                            href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=Almost Over">Almost
                             Over</a>
-                        <a class="dropdown-item"
-                           href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=Price:Low to High">Price:
-                            Low to High</a>
-                        <a class="dropdown-item"
-                           href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=Price:High to Low">Price:
-                            High to Low</a>
+<%--                        <a class="dropdown-item"--%>
+<%--                           href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=Price:Low to High">Price:--%>
+<%--                            Low to High</a>--%>
+<%--                        <a class="dropdown-item"--%>
+<%--                           href="${pageContext.request.contextPath}/Home/bySearch?search_input=${keyword}&type_order=Price:High to Low">Price:--%>
+<%--                            High to Low</a>--%>
                     </div>
                 </div>
             </nav>
