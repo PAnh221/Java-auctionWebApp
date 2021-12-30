@@ -258,7 +258,7 @@ public class AccountServlet extends HttpServlet {
         {
             e.printStackTrace();
         }
-        ServletUtils.redirect("/Admin/Account/Login", request, response);
+        ServletUtils.redirect("/Account/Login", request, response);
     }
 
 }
