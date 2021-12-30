@@ -56,6 +56,7 @@ public class BidServlet extends HttpServlet {
             LocalDateTime now = LocalDateTime.now();
             Bid newBid = new Bid(user.getUserID(), productID, now, price);
             if(bidderID == user.getUserID() && ProductModel.findById(productID) != null && product.getStatus() == 0 && product.getEndDate().isAfter(now)) {
+                if(RatingModel.getReputationOfUserID(user.getUserID()) <= 80) return;
                 if (product.getBin() > 0) {
                     if(price > product.getBin()) {
                         newBid.setMaxBid(product.getBin());

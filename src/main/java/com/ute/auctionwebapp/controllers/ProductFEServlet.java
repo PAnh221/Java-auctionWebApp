@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet(name = "ProductFEServlet", value = "/Product/*")
 public class ProductFEServlet extends HttpServlet {
@@ -36,6 +38,21 @@ public class ProductFEServlet extends HttpServlet {
         }
         List<Product> bList = ProductModel.findBiddedProductbyUserID(Integer.parseInt(request.getParameter("UserID")));
         request.setAttribute("biddingProductDetails", bList);
+        int userId = Integer.parseInt(request.getParameter("UserID"));
+        if(userId!=((User)session.getAttribute("authUser")).getUserID()) return;
+        List<Bid> list = BidModel.getListBidByBidderID(userId);
+        List<Product> listProductBidding = new ArrayList<>();
+        List<Product> listWinProduct = new ArrayList<>();
+        for (Bid bid : list) {
+          Product product = ProductModel.findById(bid.getProductID());
+          if (product.getStatus()==0)
+            listProductBidding.add(product);
+          else if (Objects.equals(BidModel.getCurrentBidderUsernameByID(product.getProID()), ((User) session.getAttribute("authUser")).getUserName())){
+            listWinProduct.add(product);
+          }
+        }
+        request.setAttribute("biddingProductDetails", listProductBidding);
+        request.setAttribute("winProductDetails", listWinProduct);
         ServletUtils.forward("/views/vwProduct/BiddingList.jsp", request, response);
         break;
 
@@ -44,8 +61,8 @@ public class ProductFEServlet extends HttpServlet {
           ServletUtils.redirect("/Account/Login", request, response);
           break;
         }
-
         int UID = Integer.parseInt(request.getParameter("UserID"));
+        if(UID!=((User)session.getAttribute("authUser")).getUserID()) return;
         List<Product> wList = WatchlistModel.findAllbyUserID(UID);
         request.setAttribute("watchlistDetails", wList);
         ServletUtils.forward("/views/vwProduct/Watchlist.jsp", request, response);
@@ -56,6 +73,8 @@ public class ProductFEServlet extends HttpServlet {
           ServletUtils.redirect("/Account/Login", request, response);
           break;
         }
+        UID = Integer.parseInt(request.getParameter("UserID"));
+        if(UID!=((User)session.getAttribute("authUser")).getUserID()) return;
         addWatchlist(request, response);
         break;
 

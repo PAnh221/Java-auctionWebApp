@@ -133,7 +133,7 @@
             <span>Nhập giá tối đa </span>
           </div>
           <c:choose>
-            <c:when test="${product.status == 0 && authUser.userID != product.sellerID && !isBanned}">
+            <c:when test="${product.status == 0 && authUser.userID != product.sellerID && !isBanned && authUser.canAuction}">
               <div class="form-group mx-sm-3 mb-2">
                 <input type="number" class="form-control" min="${product.currentPrice + product.stepPrice}" id="price" value="${product.currentPrice + product.stepPrice}">
               </div>
@@ -151,6 +151,16 @@
               </button>
             </c:when>
             <c:otherwise>
+              <c:if test="${isBanned}">
+                <script>
+                  alert("Bạn đã bị ban khỏi sản phẩm này!");
+                </script>
+              </c:if>
+              <c:if test="${!authUser.canAuction && authUser.userID != product.sellerID}">
+                <script>
+                  alert("Bạn không đủ điểm uy tín để tham gia đấu giá!");
+                </script>
+              </c:if>
               <div class="form-group mx-sm-3 mb-2">
                 <input type="number" class="form-control" disabled>
               </div>

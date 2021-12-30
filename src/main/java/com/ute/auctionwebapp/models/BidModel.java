@@ -107,6 +107,15 @@ public class BidModel {
         }
     }
 
+    public static List<Bid> getListBidByBidderID(int bidderID){
+        final String query = "select * from bid where BidderID = :BidderID";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("BidderID", bidderID)
+                    .executeAndFetch(Bid.class);
+        }
+    }
+
     //tìm người ra gía cao nhất hiện tại cho ID sản phẩm nhập
     public static Bid getBestBiddingByProductID(int productID){
         final String query = "select * from bid where ProductID = :productID order by MaxBid DESC";

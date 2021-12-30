@@ -1,11 +1,14 @@
 package com.ute.auctionwebapp.beans;
 
+import com.ute.auctionwebapp.models.RatingModel;
+
 import java.time.LocalDateTime;
 
 public class User {
   private int UserID, Permission;
   private String UserName, Name, Password, Address, Email;
   private LocalDateTime Dob;
+  private Boolean CanAuction;
 
   public User() {
   }
@@ -18,6 +21,7 @@ public class User {
     Address = address;
     Email = email;
     Dob = dob;
+    CanAuction = true;
   }
 
   public User(int userID, int permission, String userName, String name, String password, String address, String email, LocalDateTime dob) {
@@ -29,6 +33,7 @@ public class User {
     Address = address;
     Email = email;
     Dob = dob;
+    CanAuction = true;
   }
 
   public int getUserID() {
@@ -102,4 +107,8 @@ public class User {
   public void setDob(LocalDateTime dob) {
     Dob = dob;
   }
+
+  public Boolean getCanAuction(){return CanAuction;}
+
+  public void setCanAuction(Boolean canAuction){CanAuction = canAuction;}
 }
