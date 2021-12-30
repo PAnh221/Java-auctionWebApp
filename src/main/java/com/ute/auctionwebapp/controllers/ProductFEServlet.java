@@ -54,6 +54,7 @@ public class ProductFEServlet extends HttpServlet {
           if (product.getStatus()==0)
             listProductBidding.add(product);
           else if (Objects.equals(BidModel.getCurrentBidderUsernameByID(product.getProID()), ((User) session.getAttribute("authUser")).getUserName())){
+            product.setSellerUsername(UserModel.findUsernameByID(product.getSellerID()));
             listWinProduct.add(product);
           }
         }
@@ -78,6 +79,10 @@ public class ProductFEServlet extends HttpServlet {
         int UID = Integer.parseInt(request.getParameter("UserID"));
         if(UID!=((User)session.getAttribute("authUser")).getUserID()) return;
         List<Product> wList = WatchlistModel.findAllbyUserID(UID);
+        for (Product product : wList) {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));
+        }
         request.setAttribute("watchlistDetails", wList);
         ServletUtils.forward("/views/vwProduct/Watchlist.jsp", request, response);
         break;
@@ -102,6 +107,10 @@ public class ProductFEServlet extends HttpServlet {
 
       case "/Index":
         List<Product> listP = ProductModel.findAll();
+        for (Product product : listP) {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));
+        }
         request.setAttribute("products", listP);
 
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
@@ -123,16 +132,11 @@ public class ProductFEServlet extends HttpServlet {
       case "/BySubCat":
         int subcatId = Integer.parseInt(request.getParameter("id"));
         List<Product> listsubcat = ProductModel.findBySubCatId(subcatId);
-        request.setAttribute("products", listsubcat);
-        ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
-        break;
-
-      case "/ByRank":
-        int rankingId = Integer.parseInt(request.getParameter("rankingid"));
-        if(rankingId == 1) { //by price
-          List<Product> top5HighestPrice = ProductModel.Top5HighestPrice();
-          request.setAttribute("products", top5HighestPrice);
+        for (Product product : listsubcat) {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));
         }
+        request.setAttribute("products", listsubcat);
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;
 

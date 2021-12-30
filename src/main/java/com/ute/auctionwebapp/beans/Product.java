@@ -10,7 +10,7 @@ public class Product {
   private int Bin, StartPrice, StepPrice;
   private int Status;
   private int CurrentPrice;
-  private String CurrentBidderUsername;
+  private String CurrentBidderUsername, SellerUsername;
   public Product() {}
 
 
@@ -32,6 +32,7 @@ public class Product {
     StartPrice = startPrice;
     StepPrice = stepPrice;
     CurrentBidderUsername = null;
+    SellerUsername = null;
     CurrentPrice = startPrice;
 
   }
@@ -52,6 +53,7 @@ public class Product {
     StartPrice = startPrice;
     StepPrice = stepPrice;
     CurrentBidderUsername = null;
+    SellerUsername = null;
     CurrentPrice = startPrice;
   }
 
@@ -163,5 +165,9 @@ public class Product {
   public String getCurrentBidderUsername() {return CurrentBidderUsername;}
 
   public void setCurrentBidderUsername(String currentBidderUsername){ CurrentBidderUsername = currentBidderUsername;}
+
+  public String getSellerUsername(){return SellerUsername;}
+
+  public void setSellerUsername(String sellerUsername){SellerUsername = sellerUsername;}
 
 }

@@ -59,7 +59,7 @@
                                 </c:forEach>
                                 <div class="col-sm-3 mb-2">
                                     <div class="card h-100">
-                                        <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" alt="${c.proName}" title="${c.proName}" class="card-img-top" style="width: 280px;height: 280px;">
+                                        <img src="/AuctionWebApp/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" alt="${c.proName}" title="${c.proName}" class="card-img-top" style="width: 280px;height: 280px;">
                                                 <div class="card-body">
                                                     <h6 class="card-title">${c.proName}
                                                         <c:choose>
