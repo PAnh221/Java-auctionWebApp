@@ -18,47 +18,57 @@
             <jsp:include page="../../partials/leftAdmin.jsp"/>
         </div>
 
+
         <div class="col l-10 admin_right">
             <div class="row admin_product_title">
                 <div>
                     List Upgrade User:
                 </div>
             </div>
-            <div class="row">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th> <br>
-                        <th scope="col">Username </th>
-<%--                        <th scope="col">Password</th>--%>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date of birth</th>
-                        <th scope="col">Permission</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${users}" var="u">
-                        <tr>
-                            <th scope="row">${u.userID}</th>
-                            <td>${u.userName}</td>
-<%--                            <td>${u.password}</td>--%>
-                            <td>${u.name}</td>
-                            <td>${u.address}</td>
-                            <td>${u.email}</td>
-                            <td>${u.dob}</td>
-                            <td>${u.permission}</td>
-                            <td>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${u.userID}">Edit |</a>
-                                <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">Accept </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+
+            <c:choose>
+                <c:when test="${users.size() == null}">
+                    <div class="card-body">
+                        <p class="card-text">Không có dữ liệu.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th> <br>
+                                <th scope="col">Username </th>
+                                    <%--                        <th scope="col">Password</th>--%>
+                                <th scope="col">Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Date of birth</th>
+                                <th scope="col">Permission</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${users}" var="u">
+                                <tr>
+                                    <th scope="row">${u.userID}</th>
+                                    <td>${u.userName}</td>
+                                        <%--                            <td>${u.password}</td>--%>
+                                    <td>${u.name}</td>
+                                    <td>${u.address}</td>
+                                    <td>${u.email}</td>
+                                    <td>${u.dob}</td>
+                                    <td>${u.permission}</td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">Accept </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         </div>
     </div>

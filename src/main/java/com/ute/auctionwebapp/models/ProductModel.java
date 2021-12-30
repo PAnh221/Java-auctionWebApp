@@ -41,20 +41,20 @@ public class ProductModel {
     String query = "select * from product where MATCH(ProName,TinyDes,FullDes) AGAINST(:keyword) ";
     LocalDateTime now = LocalDateTime.now();
     switch (order_by){
-      case "new_post":
+      case "New Post":
         query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
 //        ===================     debug ==================================================
 //        query += "HAVING (EndDate >= :time_now) Order By UploadDate desc";
         break;
-      case "almost_over":
+      case "Almost Over":
         query += "HAVING DATE_SUB(:time_now,INTERVAL -60 MINUTE ) <= EndDate Order By EndDate ASC";
         //        ===================     debug ==================================================
 //        query += "HAVING DATE_SUB(:time_now,INTERVAL -11 DAY ) <= EndDate Order By EndDate ASC";
         break;
-      case "asc_price":
+      case "Price:Low to High":
         query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
         break;
-      case "des_price":
+      case "Price:High to Low":
         query += "HAVING (EndDate >= :time_now) and (:time_now >= UploadDate) Order By UploadDate desc";
         break;
       default:
