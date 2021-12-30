@@ -170,6 +170,11 @@ public class AdminServlet extends HttpServlet {
                     ServletUtils.forward("/views/vwAdmin/User/editUser.jsp", request, response);
                 }
                 break;
+            case "/User/DenyUpgrade":
+                int useridi = Integer.parseInt(request.getParameter("id"));
+                RequestModel.delete(useridi);
+                ServletUtils.redirect("/Admin/User/Detail", request, response);
+                break;
             case "/User/Upgrade":
                 int useridu = Integer.parseInt(request.getParameter("id"));
                 UserModel.upgradeBidder(useridu);

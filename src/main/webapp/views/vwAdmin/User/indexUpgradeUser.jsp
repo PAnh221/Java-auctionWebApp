@@ -60,7 +60,8 @@
                                     <td>${u.dob}</td>
                                     <td>${u.permission}</td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}">Accept </a>
+                                        <a href="${pageContext.request.contextPath}/Admin/User/DenyUpgrade?id=${u.userID}">Deny |</a>
+                                        <a href="${pageContext.request.contextPath}/Admin/User/Upgrade?id=${u.userID}"> Accept </a>
                                     </td>
                                 </tr>
                             </c:forEach>
