@@ -4,7 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <jsp:useBean id="listSearchProduct" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>"/>
+<jsp:useBean id="newlistProduct" scope="request" type="java.util.List<com.ute.auctionwebapp.beans.Product>"/>
 <jsp:useBean id="authUser" scope="session" type="com.ute.auctionwebapp.beans.User"/>
+
 <t:main>
     <jsp:body>
         <div class="card">
@@ -49,11 +51,23 @@
                     <div class="card-body">
                         <div class="row">
                             <c:forEach items="${listSearchProduct}" var="c">
+                                <c:set var="contains" value="0" />
+                                <c:forEach var="item" items="${newlistProduct}">
+                                    <c:if test="${item.proID == c.proID}">
+                                        <c:set var="contains" value="1" />
+                                    </c:if>
+                                </c:forEach>
                                 <div class="col-sm-3 mb-2">
                                     <div class="card h-100">
                                         <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" alt="${c.proName}" title="${c.proName}" class="card-img-top" style="width: 280px;height: 280px;">
                                                 <div class="card-body">
-                                                    <h6 class="card-title">${c.proName}</h6>
+                                                    <h6 class="card-title">${c.proName}
+                                                        <c:choose>
+                                                            <c:when test="${contains == 1}">
+                                                                <span class="card-title badge badge-pill badge-primary">NEW!!!</span>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </h6>
                                                     <h5 class="card-title text-danger">
                                                         <u><small>đ</small></u><fmt:formatNumber value="${c.currentPrice}" type="number" />
                                                     </h5>

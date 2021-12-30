@@ -67,6 +67,18 @@ public class ProductModel {
               .executeAndFetch(Product.class);
     }
   }
+
+  public static List<Product> findAllNewProduct(String keyword){
+    final String query = "select * from product where MATCH(ProName,TinyDes,FullDes) AGAINST(:keyword) HAVING DATE_SUB(:time_now,INTERVAL 30 MINUTE ) <= UploadDate and UploadDate <= :time_now ORDER BY UploadDate ASC";
+    LocalDateTime now = LocalDateTime.now();
+    try (Connection con = DbUtils.getConnection()) {
+      return con.createQuery(query)
+              .addParameter("keyword", keyword)
+              .addParameter("time_now", now)
+              .executeAndFetch(Product.class);
+    }
+  }
+
   public static List<Product> findRelevantProductByProID(int ProID) {
     final String query = "select * from product where SubCatID = (select SubCatID from product where ProID = :ProID) and ProID != :ProID";
     try (Connection con = DbUtils.getConnection()) {

@@ -1,19 +1,15 @@
 package com.ute.auctionwebapp.controllers;
 
 import com.ute.auctionwebapp.Utils.ServletUtils;
-import com.ute.auctionwebapp.beans.Bid;
 import com.ute.auctionwebapp.beans.Product;
-import com.ute.auctionwebapp.beans.User;
 import com.ute.auctionwebapp.models.BidModel;
 import com.ute.auctionwebapp.models.ProductModel;
-import com.ute.auctionwebapp.models.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +69,8 @@ public class HomeServlet extends HttpServlet {
                     total_page = (int) Math.ceil(listSearchProduct.size()/product_inPage);
                 }
                 List<Product> showSearchProduct = new ArrayList<>();
+                List<Product> newProduct = ProductModel.findAllNewProduct(keyword);
+
                 int first_index = (int) (1 + product_inPage*(page_current-1));
                 for(int i = first_index-1;i< first_index+product_inPage-1;i++){
                     if(i<listSearchProduct.size()){
@@ -82,7 +80,7 @@ public class HomeServlet extends HttpServlet {
                         break;
                     }
                 }
-//                request.setAttribute("listSearchProduct", listSearchProduct);
+                request.setAttribute("newlistProduct",newProduct);
                 request.setAttribute("listSearchProduct", showSearchProduct);
                 request.setAttribute("keyword", keyword);
                 request.setAttribute("total_page",total_page);
