@@ -92,12 +92,14 @@
           <tr>
             <th scope="col"><i>Thời điểm</i></th>
             <th scope="col"><i>Người ra giá</i></th>
+            <th scope="col"><i>Kick người đấu giá</i></th>
           </tr>
           </thead>
           <tbody>
           <c:choose>
             <c:when test="${bidHistory.size()==0}">
               <tr>
+                <td>Chưa có</td>
                 <td>Chưa có</td>
                 <td>Chưa có</td>
               </tr>
@@ -107,21 +109,23 @@
                 <tr>
                   <td>${h.time}</td>
                   <td>${h.userName}<a href="${pageContext.request.contextPath}/Rating/Detail?Username=${h.userName}"> (${h.reputationOfBidder}%)</a></td>
+                  <td>
                     <c:if test="${authUser.userID == product.sellerID && product.status == 0}">
-                        <button class="btn btn-secondary" onclick="if (confirm('Bạn có muốn ban user: ${h.userName} khỏi sản phẩm hiện tại không?')) {
-                          <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
-                                const Http = new XMLHttpRequest();
-                                const url='${pageContext.request.contextPath}/Ban/AddBan?proid=${product.proID}&bidderusername=${h.userName}';
-                          <%--const url = '${pageContext.request.contextPath}/Product/AddWatchlist?proid=${product.proID}'--%>
-                                Http.open('POST', url);
-                                Http.send();
-                                console.log('Đã ban user');
-                                } else {
-                                console.log('Hủy thao tác ban user');}">
-                        <i class="fa fa-ban" aria-hidden="true"></i>
-                        Kick
-                      </button>
-                    </c:if>
+                    <button class="btn btn-secondary" onclick="if (confirm('Bạn có muốn ban user: ${h.userName} khỏi sản phẩm hiện tại không?')) {
+                      <%--window.location = '${pageContext.request.contextPath}/Bid/AddBid?proid=${product.proID}?price='+document.getElementById('price').value;--%>
+                            const Http = new XMLHttpRequest();
+                            const url='${pageContext.request.contextPath}/Ban/AddBan?proid=${product.proID}&bidderusername=${h.userName}';
+                      <%--const url = '${pageContext.request.contextPath}/Product/AddWatchlist?proid=${product.proID}'--%>
+                            Http.open('POST', url);
+                            Http.send();
+                            console.log('Đã ban user');
+                            } else {
+                            console.log('Hủy thao tác ban user');}">
+                      <i class="fa fa-ban" aria-hidden="true"></i>
+                      Kick
+                    </button>
+                  </c:if>
+                  </td>
                 </tr>
               </c:forEach>
             </c:otherwise>
