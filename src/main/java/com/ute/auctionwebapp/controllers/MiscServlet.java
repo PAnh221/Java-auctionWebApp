@@ -94,7 +94,7 @@ public class MiscServlet extends HttpServlet {
   private void postUpload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String proname = request.getParameter("ProName");
     int imgindex = ProductModel.getNewestProduct().getProID() + 1;
-    int bin = Integer.parseInt(request.getParameter("Bin"));
+    int bin = request.getParameter("Bin").equals("") ? 0:Integer.parseInt(request.getParameter("Bin"));
     int startprice = Integer.parseInt(request.getParameter("StartPrice"));
     int stepprice = Integer.parseInt(request.getParameter("StepPrice"));
     String fulldes = request.getParameter("FullDes");

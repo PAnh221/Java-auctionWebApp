@@ -29,6 +29,9 @@ public class HomeServlet extends HttpServlet {
         switch (path){
             case "/Index":
                 List<Product> listAll = ProductModel.findAll();
+                listAll.forEach(product -> {
+                product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+                product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
                 request.setAttribute("allProducts", listAll);
 
                 List<Product> listP1 = ProductModel.Top5AboutToEnd();

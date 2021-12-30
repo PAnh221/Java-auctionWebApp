@@ -55,8 +55,6 @@ CREATE TABLE IF NOT EXISTS `ban` (
 -- Đang đổ dữ liệu cho bảng `ban`
 --
 
-INSERT INTO `ban` (`BanID`, `BidderBannedID`, `ProductID`) VALUES
-(3, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -80,21 +78,6 @@ CREATE TABLE IF NOT EXISTS `bid` (
 -- Đang đổ dữ liệu cho bảng `bid`
 --
 
-INSERT INTO `bid` (`BidID`, `BidderID`, `ProductID`, `Time`, `MaxBid`) VALUES
-(1, 4, 5, '2021-12-27 15:08:01', 50000000),
-(2, 3, 5, '2021-12-27 09:09:18', 45000000),
-(3, 1, 5, '2021-12-27 09:12:59', 40000000),
-(4, 2, 5, '2021-12-27 09:14:25', 50300000),
-(6, 4, 17, '2021-12-29 17:53:30', 11),
-(7, 3, 17, '2021-12-29 17:56:02', 110),
-(10, 258, 17, '2021-12-29 18:05:00', 1000),
-(14, 258, 16, '2021-12-29 18:37:55', 213545),
-(15, 258, 3, '2021-12-29 18:39:09', 9500000),
-(16, 4, 3, '2021-12-29 18:40:18', 10000000),
-(17, 3, 14, '2021-12-29 23:58:16', 213215346),
-(18, 2, 6, '2021-12-30 00:08:05', 1000),
-(20, 4, 6, '2021-12-30 02:32:19', 100000000);
-
 -- --------------------------------------------------------
 
 --
@@ -112,14 +95,6 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Đang đổ dữ liệu cho bảng `category`
 --
 
-INSERT INTO `category` (`CatID`, `CatName`) VALUES
-(1, 'Đồ cổ'),
-(2, 'Đồ điện tử'),
-(3, 'Thời trang'),
-(4, 'Sách'),
-(5, 'Đồ gia dụng'),
-(6, 'Bất động sản'),
-(7, 'Phương tiện');
 
 -- --------------------------------------------------------
 
@@ -151,19 +126,6 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- Đang đổ dữ liệu cho bảng `product`
 --
 
-INSERT INTO `product` (`ProID`, `ProName`, `SubCatID`, `SellerID`, `StartPrice`, `StepPrice`, `TinyDes`, `FullDes`, `Bin`, `UploadDate`, `EndDate`, `ImgIndex`, `Status`) VALUES
-(1, 'Ấm cổ', 1, 1, 0, 0, 'Đồ cổ rất cổ', 'Đồ cổ này đã có từ thời Ai Cập cổ đại với những đường nét thiết kế rất đặc trưng', 100000000, '2022-01-26 00:00:00', '2022-02-02 00:00:00', 0, 0),
-(2, 'Xiaomi Redmi Note 10', 3, 1, 0, 0, 'Điện thoại hiện đại', 'Điện thoại mới được ra mắt với những tính năng mới', 5000000, '2022-02-15 00:00:00', '2021-12-29 07:00:00', 0, 2),
-(3, 'Quần siêu đẹp', 5, 1, 0, 1000000, 'Quần Gucci', 'Được may thủ công từ nhà thiết kế nổi tiếng hàng đầu thế giới', 10000000, '2021-12-30 00:00:00', '2021-12-29 22:11:00', 0, 1),
-(4, 'Cải thiện cuộc sống với thần số học', 7, 1, 0, 0, 'Một cuốn sách tuyệt vời', 'Sách nói về những bí mật của con số đối với vận mệnh con người', 50000, '2022-01-14 00:00:00', '2022-01-21 00:00:00', 0, 0),
-(5, 'Bếp thông minh', 9, 1, 15000000, 500000, 'Một chiếc bếp hiện đại', 'Tiết kiệm sức lực con người với một chiếc bếp thông minh hoàn toàn mới', 30000000, '2022-02-28 00:00:00', '2021-12-29 22:11:00', 0, 1),
-(6, 'Căn hộ Vinhome', 11, 1, 0, 0, 'Căn hộ hiện đại', 'Một cuộc sống hoàn toàn mới tại khu đô thị xa hoa bậc nhất TPHCM', 8000000000, '2022-01-03 00:00:00', '2022-01-10 00:00:00', 0, 0),
-(7, 'Honda Airblade', 13, 1, 0, 0, 'Honda Airblade 2020', 'Nâng tầm trải nghiệm với những công nghệ hoàn toàn mới', 32000000, '2022-02-11 00:00:00', '2022-02-18 00:00:00', 0, 0),
-(8, 'Chén cổ', 2, 1, 0, 0, 'Đồ cổ rất cổ', 'Đồ cổ này đã có từ thời Ai Cập cổ đại với những đường nét thiết kế rất đặc trưng', 100000000, '2022-01-26 00:00:00', '2022-02-02 00:00:00', 0, 0),
-(14, 'Bình Gốm', 1, 4, 12135, 21, 'Bình gốm víp pờ rồ đã sửa 123', '<p>asdasda dasd asd ASd ASd asd</p><p>&nbsp;</p> <p>✏️ 29-12-2021</p> <p>&nbsp;</p><p>sản phẩm đ&atilde; <strong><span style=\"color: #ba372a;\">hết h&agrave;ng</span></strong></p><p>&nbsp;</p> <p>✏️ 29-12-2021</p><p>alo <em>alo <span style=\"background-color: #e03e2d;\">123</span></em></p>', 213215346, '2021-12-28 16:51:01', '2022-01-04 16:51:01', 9, 1),
-(15, 'Bình Gốm', 1, 4, 121, 21, 'Bình gốm víp pờ rồ', '<p>asdasda dasd asd ASd ASd asd</p>', 213215346, '2021-12-28 16:52:17', '2021-12-29 22:00:00', 15, 2),
-(16, 'Bình Gốm', 1, 4, 1231, 2, 'Bình áhjdio ád', '<p>asdasdas das das&nbsp;</p>', 213545, '2021-12-28 16:55:50', '2022-01-04 16:55:50', 16, 1),
-(17, 'Bình Gốm Pha ke', 1, 4, 10, 1, 'bla', '<p>&nbsp; &nbsp; &nbsp;&nbsp;</p>\n<p>✏️ 31/10/2019</p>\n<p>&nbsp; &nbsp; &nbsp; &nbsp;</p>', 1000, '2021-12-29 13:08:07', '2022-01-05 13:08:07', 17, 1);
 
 -- --------------------------------------------------------
 
@@ -190,11 +152,6 @@ CREATE TABLE IF NOT EXISTS `rating` (
 -- Đang đổ dữ liệu cho bảng `rating`
 --
 
-INSERT INTO `rating` (`RateID`, `IdRated`, `IdRating`, `IdProduct`, `Vote`, `FeedBack`, `Time`) VALUES
-(1, 3, 4, 5, 0, 'alo alo', '2021-12-30 00:38:20'),
-(2, 3, 2, 15, 1, 'oke', '2021-12-30 00:38:43'),
-(3, 3, 1, 2, 1, 'very good', '2021-12-30 00:39:04');
-
 -- --------------------------------------------------------
 
 --
@@ -213,9 +170,6 @@ CREATE TABLE IF NOT EXISTS `request` (
 -- Đang đổ dữ liệu cho bảng `request`
 --
 
-INSERT INTO `request` (`IdRequest`, `IdBidder`) VALUES
-(1, 1),
-(2, 3);
 
 -- --------------------------------------------------------
 
@@ -236,21 +190,7 @@ CREATE TABLE IF NOT EXISTS `subcategory` (
 -- Đang đổ dữ liệu cho bảng `subcategory`
 --
 
-INSERT INTO `subcategory` (`SubCatID`, `SubCatName`, `CatID`) VALUES
-(1, 'Đồ cổ loại 1', 1),
-(2, 'Đồ cổ loại 2', 1),
-(3, 'Đồ điện tử loại 1', 2),
-(4, 'Đồ điện tử loại 2', 2),
-(5, 'Thời trang loại 1', 3),
-(6, 'Thời trang loại 2', 3),
-(7, 'Sách loại 1', 4),
-(8, 'Sách loại 2', 4),
-(9, 'Đồ gia dụng loại 1', 5),
-(10, 'Đồ gia dụng loại 2', 5),
-(11, 'Bất động sản loại 1', 6),
-(12, 'Bất động sản loại 2', 6),
-(13, 'Phương tiện loại 1', 7),
-(14, 'Phương tiện loại 2', 7);
+
 
 -- --------------------------------------------------------
 
@@ -275,12 +215,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`UserID`, `UserName`, `Name`, `Password`, `Address`, `Email`, `Dob`, `Permission`) VALUES
-(1, 'user1', 'Mylie Hodges', '$2a$12$mUVR9CRHpBiXfESZuu/4QeRRNw.AxEmt2ZZ1uXZXtu2bAKEHtgViK\n', '', 'user1@gmail.com', '1995-09-01 00:00:00', 0),
-(2, 'user2', 'Maiya Bannister', '$2a$12$flU9aE1ez0EAE2fMyjCq9O1IzefrsEImjlpLfraaDOkLnXVHdnTsK\n', '', 'user2@gmail.com', '1999-03-13 00:00:00', 0),
-(3, 'doanhovy', 'Doan Ho Vi', '$2a$12$xjveCD1BhcAw3S67ESSOROGQuj97a4Lh58FtsxsEMmyfF8VyTrBIi\n', 'Binh Duong', 'doanhovy188@gmail.com', '2001-08-18 00:00:00', 0),
-(4, 'testlogin', 'test1', '$2a$12$FKL10g5ajOvu0r54pDMGXuuVvwEs9irLMsiTvqZL638wHkeQd2MbG\n', 'BD', 'mothaiba@gmail.com', '2021-12-26 17:23:38', 1),
-(258, 'testregister', 'alo', '$2a$12$WP8gKbYGGaVde9NS7EwK1u4ZvScc1h6rcs1s3myKWCElL30NK8o3e', 'TP HCM', 'test@gmail.com', '2001-12-11 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -300,14 +234,6 @@ CREATE TABLE IF NOT EXISTS `watchlist` (
 -- Đang đổ dữ liệu cho bảng `watchlist`
 --
 
-INSERT INTO `watchlist` (`UserID`, `ProID`) VALUES
-(4, 6),
-(4, 7),
-(4, 3),
-(3, 1),
-(3, 2),
-(258, 14),
-(258, 3);
 
 --
 -- Các ràng buộc cho các bảng đã đổ

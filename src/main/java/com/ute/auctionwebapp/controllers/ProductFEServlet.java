@@ -103,6 +103,7 @@ public class ProductFEServlet extends HttpServlet {
       case "/Index":
         List<Product> listP = ProductModel.findAll();
         request.setAttribute("products", listP);
+
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;
 

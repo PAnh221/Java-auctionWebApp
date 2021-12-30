@@ -41,13 +41,13 @@
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/main.jpg" alt="First slide">
+                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.imgIndex}/${product.imgIndex}_main.png" style="width: 450px; height: 520px;" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/1.jpg" alt="Second slide">
+                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.imgIndex}/${product.imgIndex}_sub1.png" style="width: 450px; height: 520px;" alt="Second slide">
               </div>
               <div class="carousel-item">
-                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/2.jpg" alt="Third slide">
+                <img class="d-inline w-100" src="${pageContext.request.contextPath}/public/imgs/sp/${product.imgIndex}/${product.imgIndex}_sub2.png" style="width: 450px; height: 520px;" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev h-100 w-10" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -60,7 +60,7 @@
             </a>
           </div>
         </div>
-<%--        <img src="${pageContext.request.contextPath}/public/imgs/sp/1/main.jpg" alt="${product.proName}" title="${product.proName}">--%>
+        <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" alt="${c.proName}" title="${c.proName}" class="card-img-top">
         <div class="mt-3">
           <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${product.proID}&UserID=${authUser.userID}" role="button">
             <i class="fa fa-heart" aria-hidden="true"></i>
@@ -199,7 +199,7 @@
               <c:forEach items="${relevantProducts}" var="c">
                 <div class="col-sm-3 mb-2">
                   <div class="card h-100">
-                      <%--                      <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main_thumbs.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">--%>
+                  <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.imgIndex}/${c.imgIndex}_main.png" alt="${c.proName}" title="${c.proName}" class="card-img-top">
                     <div class="card-body">
                       <h6 class="card-title">${c.proName}</h6>
                       <h5 class="card-title text-danger">
