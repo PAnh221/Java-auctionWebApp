@@ -38,7 +38,7 @@
                                                 </div>
                                                 <div class="card-footer text-muted">
                                                     <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/Product/AddWatchlist?ProID=${c.proID}&UserID=${authUser.userID}" role="button">
-                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </a>
 
                                                     <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/Product/Detail?id=${c.proID}" role="button">
