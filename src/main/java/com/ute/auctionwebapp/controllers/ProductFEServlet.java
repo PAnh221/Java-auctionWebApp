@@ -36,7 +36,13 @@ public class ProductFEServlet extends HttpServlet {
           ServletUtils.redirect("/Account/Login", request, response);
           break;
         }
+
         List<Product> bList = ProductModel.findBiddedProductbyUserID(Integer.parseInt(request.getParameter("UserID")));
+
+        bList.forEach(product -> {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
+
         request.setAttribute("biddingProductDetails", bList);
         int userId = Integer.parseInt(request.getParameter("UserID"));
         if(userId!=((User)session.getAttribute("authUser")).getUserID()) return;
@@ -95,6 +101,10 @@ public class ProductFEServlet extends HttpServlet {
       case "/ByCat":
         int catId = Integer.parseInt(request.getParameter("id"));
         List<Product> list = ProductModel.findByCatId(catId);
+
+        list.forEach(product -> {
+          product.setCurrentPrice(BidModel.getCurrentPriceByID(product.getProID()));
+          product.setCurrentBidderUsername(BidModel.getCurrentBidderUsernameByID(product.getProID()));});
         request.setAttribute("products", list);
         ServletUtils.forward("/views/vwProduct/ByCat.jsp", request, response);
         break;
@@ -181,7 +191,7 @@ public class ProductFEServlet extends HttpServlet {
         int id_product = Integer.parseInt(request.getParameter("ProID"));
         Watchlist w = new Watchlist(id_product, id_user);
         WatchlistModel.add(w);
-        ServletUtils.redirect("/Product/Index", request, response);
+        ServletUtils.redirect("/Home/Index", request, response);
   }
 
   private void deleteWatchlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
