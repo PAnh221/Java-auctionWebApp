@@ -138,7 +138,7 @@ public class AccountServlet extends HttpServlet {
         LocalDateTime dob = LocalDateTime.parse(Strdob, df);
         int permission = 0;
         //int rating = 0;
-        User c = new User(257,permission,/* rating,*/ username, name, bcryptHashString, address, email, dob);
+        User c = new User(permission,/* rating,*/ username, name, bcryptHashString, address, email, dob);
         UserModel.add(c);
         HttpSession session = request.getSession();
         session.setAttribute("auth", true);
